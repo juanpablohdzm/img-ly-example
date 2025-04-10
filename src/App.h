@@ -3,6 +3,9 @@
 //
 #pragma once
 #include <memory>
+#include <entt/entt.hpp>
+
+#include "components/Window.h"
 
 class Command;
 class SDL_Window;
@@ -25,17 +28,18 @@ private:
     void initialize();
     // Main loop
     void mainLoop();
-    void clearRender() const;
-    bool shouldStop() const;
+    [[nodiscard]] bool shouldStop() const;
 
     // End the program
     void destroy() const;
 
     bool isRunning = false;
 
-    SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
+    // Dependencies
+    std::unique_ptr<Window> window = nullptr;
     std::unique_ptr<PlayerController> playerController = nullptr;
+    std::unique_ptr<entt::registry> registry = nullptr;
 
+    // Commands
     std::unique_ptr<Command> quitCommand = nullptr;
 };

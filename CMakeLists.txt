@@ -11,7 +11,11 @@ add_executable(img_ly main.cpp
         src/components/PlayerController.h
         src/components/commands/Command.h
         src/components/commands/QuitCommand.cpp
-        src/components/commands/QuitCommand.h)
+        src/components/commands/QuitCommand.h
+        src/components/Window.cpp
+        src/components/Window.h
+        src/components/WindowBackground.cpp
+        src/components/WindowBackground.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 
