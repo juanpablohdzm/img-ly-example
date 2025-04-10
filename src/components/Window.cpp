@@ -10,7 +10,7 @@
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
 
-Window::Window(const char *title, int width, int height, WindowColor color) : color(color) {
+Window::Window(const char *title, int width, int height, WindowColor color) : color(color), width(width), height(height) {
 
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";

@@ -5,10 +5,10 @@
 #include <memory>
 #include <entt/entt.hpp>
 
-#include "components/Window.h"
-
 class Command;
 class SDL_Window;
+class Window;
+class WindowBackground;
 class SDL_Renderer;
 class PlayerController;
 
@@ -39,6 +39,7 @@ private:
     std::unique_ptr<Window> window = nullptr;
     std::unique_ptr<PlayerController> playerController = nullptr;
     std::unique_ptr<entt::registry> registry = nullptr;
+    std::unique_ptr<WindowBackground> windowBackground = nullptr;
 
     // Commands
     std::unique_ptr<Command> quitCommand = nullptr;

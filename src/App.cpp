@@ -7,6 +7,8 @@
 #include <SDL3/SDL.h>
 
 #include "components/PlayerController.h"
+#include "components/Window.h"
+#include "components/WindowBackground.h"
 #include "components/commands/QuitCommand.h"
 
 int App::run() {
@@ -24,6 +26,7 @@ void App::initialize() {
     registry = std::make_unique<entt::registry>();
 
     window = std::make_unique<Window>("Example", 800, 600);
+    windowBackground = std::make_unique<WindowBackground>(registry.get(), window.get());
 
     quitCommand = std::make_unique<QuitCommand>(*this);
 
@@ -37,15 +40,21 @@ void App::mainLoop() {
     // Main event and render loop
     isRunning = true;
 
+    Uint64 currentTime = SDL_GetTicks();
+    Uint64 lastTime = 0.0f;
+    float deltaTime = 0.0f;
+
     while (!shouldStop()) {
+
+        lastTime = currentTime;
+        currentTime = SDL_GetTicks();
+
+        deltaTime =(currentTime - lastTime)/1000.0f;
+
+
         playerController->run();
         window->clearWindow();
-        // Set the drawing color to red and draw a filled rectangle
-        /*window->executeRendererAction([](SDL_Renderer* renderer) {
-            SDL_FRect rect = { 100, 100, 200, 150 };
-            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-            SDL_RenderFillRect(renderer, &rect);
-        });*/
+        windowBackground->update(deltaTime);
 
         window->presentRender();
     }

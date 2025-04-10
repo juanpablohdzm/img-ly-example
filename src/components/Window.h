@@ -26,10 +26,15 @@ public:
     template <typename T, typename RetValue, typename ...Args>
     RetValue executeRendererAction(T* ptr, RetValue(T::*action)(SDL_Renderer*, Args...), Args&&... args) const;
     void presentRender() const;
+
+    [[nodiscard]] int getWidth() const { return width; }
+    [[nodiscard]] int getHeight() const { return height; }
 private:
     WindowColor color;
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
+
+    int width, height;
 };
 
 template<typename T, typename RetValue, typename ...Args>
