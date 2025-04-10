@@ -15,12 +15,19 @@ add_executable(img_ly main.cpp
         src/components/Window.cpp
         src/components/Window.h
         src/components/WindowBackground.cpp
-        src/components/WindowBackground.h)
+        src/components/WindowBackground.h
+        src/components/GameManager.cpp
+        src/components/GameManager.h
+        src/utils/common.h
+        src/ui/Button.cpp
+        src/ui/Button.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 
 # Find SDL3 package
 find_package(SDL3 REQUIRED)
+find_package(SDL3_image REQUIRED)
 
 # Link SDL3 to the target
 target_link_libraries(img_ly PRIVATE SDL3::SDL3)
+target_link_libraries(img_ly PRIVATE SDL3_image::SDL3_image)

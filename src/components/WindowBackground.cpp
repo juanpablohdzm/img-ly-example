@@ -7,7 +7,7 @@
 #include <random>
 #include <SDL3/SDL_render.h>
 #include <__random/random_device.h>
-
+#include "../utils/common.h"
 #include "Window.h"
 
 WindowBackground::WindowBackground(entt::registry* registry, Window* window)

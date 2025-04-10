@@ -5,21 +5,16 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 #include <functional>
+#include "../utils/common.h"
 
 
 class SDL_Window;
 class SDL_Renderer;
 
-struct WindowColor {
-    int r;
-    int g;
-    int b;
-    int a;
-};
 
 class Window {
 public:
-    Window(const char* title, int width, int height, WindowColor color = {0, 0, 0, 255});
+    Window(const char* title, int width, int height, Color color = {0, 0, 0, 255});
     virtual ~Window();
 
     void clearWindow() const;
@@ -30,7 +25,7 @@ public:
     [[nodiscard]] int getWidth() const { return width; }
     [[nodiscard]] int getHeight() const { return height; }
 private:
-    WindowColor color;
+    Color color;
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
 

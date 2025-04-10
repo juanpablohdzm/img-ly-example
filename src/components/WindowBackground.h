@@ -10,16 +10,8 @@
 
 class Window;
 class SDL_Renderer;
-
-struct Position {
-    float x;
-    float y;
-};
-
-struct Velocity {
-    float dx;
-    float dy;
-};
+struct Position;
+struct Velocity;
 
 struct Star {
     float size;         // The drawn size of the star (in pixels)

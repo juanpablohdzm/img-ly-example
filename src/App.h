@@ -11,6 +11,7 @@ class Window;
 class WindowBackground;
 class SDL_Renderer;
 class PlayerController;
+class GameManager;
 
 class App {
     App() = default;
@@ -40,6 +41,7 @@ private:
     std::unique_ptr<PlayerController> playerController = nullptr;
     std::unique_ptr<entt::registry> registry = nullptr;
     std::unique_ptr<WindowBackground> windowBackground = nullptr;
+    std::unique_ptr<GameManager> gameManager = nullptr;
 
     // Commands
     std::unique_ptr<Command> quitCommand = nullptr;

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 
+#include "components/GameManager.h"
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
@@ -33,6 +34,8 @@ void App::initialize() {
     playerController = std::make_unique<PlayerController>();
     playerController->addQuitEvent(this, &App::quit);
     playerController->addKeyCommand(SDLK_ESCAPE, quitCommand.get());
+
+    gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
 }
 
 void App::mainLoop() {
@@ -55,6 +58,7 @@ void App::mainLoop() {
         playerController->run();
         window->clearWindow();
         windowBackground->update(deltaTime);
+        gameManager->update(deltaTime);
 
         window->presentRender();
     }
