@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "Window.h"
-#include "../ui/Button.h"
+#include "./ui/Button.h"
 
 GameManager::GameManager(entt::registry *registry, Window *window, PlayerController *pc)
     : window(window), registry(registry), playerController(pc), currentState(GameState::DEFAULT) {

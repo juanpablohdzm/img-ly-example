@@ -9,9 +9,6 @@ add_executable(img_ly main.cpp
         src/App.h
         src/components/PlayerController.cpp
         src/components/PlayerController.h
-        src/components/commands/Command.h
-        src/components/commands/QuitCommand.cpp
-        src/components/commands/QuitCommand.h
         src/components/Window.cpp
         src/components/Window.h
         src/components/WindowBackground.cpp
@@ -28,9 +25,7 @@ add_executable(img_ly main.cpp
         src/components/ui/Canvas.cpp
         src/components/ui/Canvas.h
         src/components/ui/Widget.cpp
-        src/components/ui/Widget.h
-        src/components/ui/commands/ClickUiCommand.cpp
-        src/components/ui/commands/ClickUiCommand.h)
+        src/components/ui/Widget.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

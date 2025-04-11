@@ -10,7 +10,6 @@
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
-#include "components/commands/QuitCommand.h"
 
 int App::run() {
 
@@ -29,11 +28,10 @@ void App::initialize() {
     window = std::make_unique<Window>("Example", 800, 600);
     windowBackground = std::make_unique<WindowBackground>(registry.get(), window.get());
 
-    quitCommand = std::make_unique<QuitCommand>(*this);
 
     playerController = std::make_unique<PlayerController>();
     playerController->addQuitEvent(this, &App::quit);
-    playerController->addKeyCommand(SDLK_ESCAPE, quitCommand.get());
+    playerController->addKeyCallback(SDLK_ESCAPE, this, &App::quit);
 
     gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
 }

@@ -5,7 +5,6 @@
 #include <memory>
 #include <entt/entt.hpp>
 
-class Command;
 class SDL_Window;
 class Window;
 class WindowBackground;
@@ -42,7 +41,4 @@ private:
     std::unique_ptr<entt::registry> registry = nullptr;
     std::unique_ptr<WindowBackground> windowBackground = nullptr;
     std::unique_ptr<GameManager> gameManager = nullptr;
-
-    // Commands
-    std::unique_ptr<Command> quitCommand = nullptr;
 };
