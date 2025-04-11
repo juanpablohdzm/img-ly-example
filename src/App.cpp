@@ -11,6 +11,9 @@
 #include "components/Window.h"
 #include "components/WindowBackground.h"
 
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
 int App::run() {
 
     App instance;
@@ -25,7 +28,7 @@ int App::run() {
 void App::initialize() {
     registry = std::make_unique<entt::registry>();
 
-    window = std::make_unique<Window>("Example", 800, 600);
+    window = std::make_unique<Window>("Example", WINDOW_WIDTH, WINDOW_HEIGHT);
     windowBackground = std::make_unique<WindowBackground>(registry.get(), window.get());
 
 

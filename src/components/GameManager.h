@@ -11,7 +11,8 @@
 class Button;
 class PlayerController;
 class Window;
-class Canvas;
+class MainMenu;
+class Sprite;
 
 enum class GameState {
     DEFAULT,
@@ -39,9 +40,8 @@ private:
 
     GameState currentState;
 
-    std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
-    std::unique_ptr<Button> playButton = nullptr;
-    std::unique_ptr<Button> quitButton = nullptr;
+    std::unique_ptr<MainMenu> mainMenuCanvas = nullptr;
+
 };
 
 

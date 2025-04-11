@@ -15,7 +15,7 @@ class Window;
 class Canvas {
 public:
     Canvas(Window* window, PlayerController* playerController);
-    ~Canvas();
+    virtual ~Canvas();
 
     void update(float dt);
     void addChild(Widget* widget);

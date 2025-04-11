@@ -13,6 +13,8 @@
 
 namespace fs = std::filesystem;
 
+#define CLICK_DELAY_MS 200
+
 Button::Button(
         SDL_Renderer *renderer,
         const char *defaultImagePath,
@@ -84,7 +86,7 @@ void Button::onClick() {
         if (clickedImageTexture) {
                 currentTexture = clickedImageTexture;
         }
-        clickTimer.start(200, [&]() {
+        clickTimer.start(CLICK_DELAY_MS, [&]() {
                 currentTexture = defaultImageTexture;
                 if (onClickCallback) {
                         onClickCallback();

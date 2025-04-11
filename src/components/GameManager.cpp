@@ -7,8 +7,8 @@
 #include <iostream>
 
 #include "Window.h"
-#include "ui/Button.h"
 #include "ui/Canvas.h"
+#include "ui/menus/MainMenu.h"
 
 GameManager::GameManager(entt::registry *registry, Window *window, PlayerController *pc)
     : window(window), registry(registry), playerController(pc), currentState(GameState::DEFAULT) {
@@ -24,30 +24,8 @@ GameManager::GameManager(entt::registry *registry, Window *window, PlayerControl
 
     setCurrentState(GameState::MAIN_MENU);
 
-    playButton = std::make_unique<Button>(
-        window->getRenderer(),
-        "resource/Buttons/BTNs/Play_BTN.png",
-        "resource/Buttons/BTNs_Active/Play_BTN.png",
-        nullptr,
-        Position(100, 100),
-        210*0.33f, 210*0.33f,
-        [this]() {
-            std::cout << "Play button clicked" << std::endl;
-        }
-    );
-    quitButton = std::make_unique<Button>(
-        window->getRenderer(),
-        "resource/Buttons/BTNs/Close_BTN.png",
-        "resource/Buttons/BTNs_Active/Close_BTN.png",
-        nullptr,
-        Position(100, 300),
-        210* 0.33f, 210 * 0.33f,
-        [this]() {
-            std::cout << "Quit button clicked" << std::endl;
-        });
-    mainMenuCanvas = std::make_unique<Canvas>(window, playerController);
-    mainMenuCanvas->addChild(playButton.get());
-    mainMenuCanvas->addChild(quitButton.get());
+
+    mainMenuCanvas = std::make_unique<MainMenu>(window, playerController);
 }
 
 GameManager::~GameManager() {
