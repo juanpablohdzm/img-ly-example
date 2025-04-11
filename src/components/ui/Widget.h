@@ -6,10 +6,12 @@
 #define WIDGET_H
 #include <SDL3/SDL_rect.h>
 
+#include "../../utils/common.h"
+
 
 class Widget {
 public:
-    Widget(int x, int y, int width, int height);
+    Widget(const Position& position, int width, int height);
     virtual ~Widget() = default;
 
     virtual void render() = 0;
@@ -17,8 +19,7 @@ public:
     virtual void onHoverExit() = 0;
 
     [[nodiscard]] SDL_Rect getRect() const { return rect; }
-    [[nodiscard]] int getX() const { return rect.x; }
-    [[nodiscard]] int getY() const { return rect.y; }
+    [[nodiscard]] Position getPosition() const { return {rect.x * 1.0f, rect.y * 1.0f}; }
     [[nodiscard]] int getWidth() const { return rect.w; }
     [[nodiscard]] int getHeight() const { return rect.h; }
     [[nodiscard]] bool isMouseOver(int mouseX, int mouseY) const;

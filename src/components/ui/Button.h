@@ -4,8 +4,6 @@
 
 #ifndef BUTTON_H
 #define BUTTON_H
-#include <string>
-#include <SDL3/SDL_rect.h>
 
 #include "interfaces/Clickable.h"
 #include "Widget.h"
@@ -21,7 +19,7 @@ public:
         const char* defaultImagePath,
         const char* hoverImagePath,
         const char* clickedImagePath,
-        int x, int y,
+        const Position& position,
         int width, int height,
         const std::function<void()>& onClickCallback = nullptr);
 

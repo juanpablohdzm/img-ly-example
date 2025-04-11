@@ -18,9 +18,10 @@ Button::Button(
         const char *defaultImagePath,
         const char *hoverImagePath,
         const char *clickedImagePath,
-        int x, int y, int width, int height,
+        const Position& position,
+        int width, int height,
         const std::function<void()> &onClickCallback)
-        : Widget(x, y, width, height), renderer(renderer),
+        : Widget(position, width, height), renderer(renderer),
         onClickCallback(onClickCallback){
 
         if (!renderer) {
@@ -58,8 +59,8 @@ Button::~Button(){
 void Button::render(){
 
         const SDL_FRect fButtonRect = {
-                static_cast<float>(getX()),
-                static_cast<float>(getY()),
+                static_cast<float>(rect.x),
+                static_cast<float>(rect.y),
                 static_cast<float>(getWidth()),
                 static_cast<float>(getHeight())
         };
@@ -83,7 +84,7 @@ void Button::onClick() {
         if (clickedImageTexture) {
                 currentTexture = clickedImageTexture;
         }
-        clickTimer.start(1000, [&]() {
+        clickTimer.start(200, [&]() {
                 currentTexture = defaultImageTexture;
                 if (onClickCallback) {
                         onClickCallback();

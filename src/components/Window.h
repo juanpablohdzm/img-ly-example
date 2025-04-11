@@ -13,8 +13,6 @@ class SDL_Renderer;
 
 
 class Window {
-    friend class Canvas;
-
 public:
     Window(const char* title, int width, int height, Color color = {0, 0, 0, 255});
     virtual ~Window();
@@ -27,6 +25,7 @@ public:
 
     [[nodiscard]] int getWidth() const { return width; }
     [[nodiscard]] int getHeight() const { return height; }
+    [[nodiscard]] SDL_Renderer* getRenderer() const { return renderer; }
 private:
     Color color;
     SDL_Window* window = nullptr;

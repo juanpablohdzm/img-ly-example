@@ -4,15 +4,18 @@
 #pragma once
 #include <unordered_map>
 #include <unordered_set>
+#include <SDL3/SDL_events.h>
 #include <SDL3/SDL_stdinc.h>
+
+#include "../utils/common.h"
 
 
 class PlayerController {
 public:
     template <typename T>
-    void addKeyCallback(Uint32 key, T* ptr, void(T::*func)());
+    void addKeyCallback(Uint32 key, T* ptr, void(T::*func)(const SDL_Event&));
     template <typename T>
-    bool clearKeyCallback(Uint32 key, const T* ptr);
+    bool clearKeyCallback(Uint32 key, T* ptr);
 
     template <typename T>
     void addQuitEvent(T* ptr, void(T::*func)());
@@ -20,20 +23,22 @@ public:
     void removeQuitEvent(const T* ptr);
 
     void run();
-private:
-    void executeKeyCommand(Uint32 key);
 
-    std::unordered_map<Uint32, std::unordered_map<void*, std::function<void()>>> keyEvents;
+    static Position getMousePosition();
+private:
+    void executeKeyCommand(const SDL_Event& event);
+
+    std::unordered_map<Uint32, std::unordered_map<void*, std::function<void(const SDL_Event&)>>> keyEvents;
     std::unordered_map<void*, std::function<void()>> quitEvent;
 };
 
 template<typename T>
-void PlayerController::addKeyCallback(Uint32 key, T *ptr, void(T::*func)()) {
-    keyEvents[key].insert({ptr, [ptr, func]() {(ptr->*func)();}});
+void PlayerController::addKeyCallback(Uint32 key, T *ptr, void(T::*func)(const SDL_Event&)) {
+    keyEvents[key].insert({ptr, [ptr, func](const SDL_Event& event) {(ptr->*func)(event);}});
 }
 
 template<typename T>
-bool PlayerController::clearKeyCallback(Uint32 key, const T *ptr) {
+bool PlayerController::clearKeyCallback(Uint32 key, T *ptr) {
     if (auto it = keyEvents.find(key); it != keyEvents.end()) {
         auto& callbacks = it->second;
         callbacks.erase(ptr);

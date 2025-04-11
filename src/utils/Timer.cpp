@@ -15,6 +15,10 @@ void Timer::start(int milliseconds, const std::function<void()> &callback) {
     if (running) return; // Prevent multiple timers from running simultaneously
     running = true;
 
+    if (timerThread.joinable()) {
+        timerThread.join();
+    }
+
     timerThread = std::thread([=]() {
         std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
         if (running) {

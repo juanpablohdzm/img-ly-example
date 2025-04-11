@@ -66,12 +66,15 @@ bool App::shouldStop() const {
     return !isRunning;
 }
 
+void App::quit(const SDL_Event& event) {
+    quit();
+}
+
 void App::quit() {
     isRunning = false;
 }
 
 void App::destroy() const {
-    // Clean up resources
     SDL_Quit();
 }
 

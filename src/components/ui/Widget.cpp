@@ -6,7 +6,7 @@
 
 #include <SDL3/SDL_rect.h>
 
-Widget::Widget(int x, int y, int width, int height): rect(x, y, width, height) {
+Widget::Widget(const Position& position, int width, int height): rect(position.x, position.y, width, height) {
 }
 
 bool Widget::isMouseOver(int mouseX, int mouseY) const {

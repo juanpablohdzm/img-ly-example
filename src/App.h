@@ -4,6 +4,7 @@
 #pragma once
 #include <memory>
 #include <entt/entt.hpp>
+#include <SDL3/SDL_events.h>
 
 class SDL_Window;
 class Window;
@@ -22,6 +23,7 @@ public:
 
     static int run();
     void quit();
+    void quit(const SDL_Event& event);
 private:
 
     //Init dependencies
