@@ -19,8 +19,18 @@ add_executable(img_ly main.cpp
         src/components/GameManager.cpp
         src/components/GameManager.h
         src/utils/common.h
-        src/ui/Button.cpp
-        src/ui/Button.h)
+        src/components/ui/Button.cpp
+        src/components/ui/Button.h
+        src/components/ui/interfaces/Clickable.cpp
+        src/components/ui/interfaces/Clickable.h
+        src/utils/Timer.cpp
+        src/utils/Timer.h
+        src/components/ui/Canvas.cpp
+        src/components/ui/Canvas.h
+        src/components/ui/Widget.cpp
+        src/components/ui/Widget.h
+        src/components/ui/commands/ClickUiCommand.cpp
+        src/components/ui/commands/ClickUiCommand.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

@@ -6,6 +6,9 @@
 
 #include <iostream>
 
+#include "Window.h"
+#include "../ui/Button.h"
+
 GameManager::GameManager(entt::registry *registry, Window *window, PlayerController *pc)
     : window(window), registry(registry), playerController(pc), currentState(GameState::DEFAULT) {
     if (!window) {
@@ -22,6 +25,21 @@ GameManager::GameManager(entt::registry *registry, Window *window, PlayerControl
 }
 
 void GameManager::update(float dt) {
+    window->executeRendererAction([](SDL_Renderer* renderer) {
+
+        const std::string defaultPath = "resource/Buttons/BTNs/Play_BTN.png";
+        const std::string hoverPath = "resource/Buttons/BTNs_Active/Play_BTN.png";
+
+        Button button(
+            renderer,
+            defaultPath.c_str(),
+            hoverPath.c_str(),
+            nullptr,
+            100, 100,
+            200, 50
+        );
+        button.render();
+    });
 }
 
 void GameManager::setCurrentState(GameState state) {

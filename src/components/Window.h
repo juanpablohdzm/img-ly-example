@@ -13,6 +13,8 @@ class SDL_Renderer;
 
 
 class Window {
+    friend class Canvas;
+
 public:
     Window(const char* title, int width, int height, Color color = {0, 0, 0, 255});
     virtual ~Window();
@@ -20,6 +22,7 @@ public:
     void clearWindow() const;
     template <typename T, typename RetValue, typename ...Args>
     RetValue executeRendererAction(T* ptr, RetValue(T::*action)(SDL_Renderer*, Args...), Args&&... args) const;
+    void executeRendererAction(const std::function<void(SDL_Renderer*)>& action) const;
     void presentRender() const;
 
     [[nodiscard]] int getWidth() const { return width; }

@@ -1,0 +1,108 @@
+//
+// Created by Juan Pablo Hernandez Mosti on 10/04/25.
+//
+
+#include "Button.h"
+
+#include <stdexcept>
+#include <string>
+#include <SDL3/SDL_render.h>
+#include <SDL3/SDL_surface.h>
+#include <SDL3_image/SDL_image.h>
+#include <__filesystem/operations.h>
+
+namespace fs = std::filesystem;
+
+Button::Button(
+        SDL_Renderer *renderer,
+        const char *defaultImagePath,
+        const char *hoverImagePath,
+        const char *clickedImagePath,
+        int x, int y, int width, int height,
+        const std::function<void()> &onClickCallback)
+        : Widget(x, y, width, height), renderer(renderer),
+        onClickCallback(onClickCallback){
+
+        if (!renderer) {
+                throw std::invalid_argument("Renderer is null");
+        }
+        if (!defaultImagePath) {
+                throw std::invalid_argument("Default image path is null");
+        }
+
+        defaultImageTexture = loadTexture(defaultImagePath);
+
+        if (hoverImagePath) {
+            hoverImageTexture = loadTexture(hoverImagePath);
+        }
+        if (clickedImagePath) {
+            clickedImageTexture = loadTexture(clickedImagePath);
+        }
+
+        currentTexture = defaultImageTexture;
+}
+
+Button::~Button(){
+
+        if (defaultImageTexture) {
+                SDL_DestroyTexture(defaultImageTexture);
+        }
+        if (hoverImageTexture) {
+                SDL_DestroyTexture(hoverImageTexture);
+        }
+        if (clickedImageTexture) {
+                SDL_DestroyTexture(clickedImageTexture);
+        }
+}
+
+void Button::render(){
+
+        const SDL_FRect fButtonRect = {
+                static_cast<float>(getX()),
+                static_cast<float>(getY()),
+                static_cast<float>(getWidth()),
+                static_cast<float>(getHeight())
+        };
+        SDL_RenderTexture(renderer, currentTexture, nullptr, &fButtonRect);
+}
+
+void Button::onHoverEnter() {
+
+        if (hoverImageTexture) {
+                currentTexture = hoverImageTexture;
+        }
+}
+
+void Button::onHoverExit() {
+
+        currentTexture = defaultImageTexture;
+}
+
+void Button::onClick() {
+
+        if (clickedImageTexture) {
+                currentTexture = clickedImageTexture;
+        }
+        clickTimer.start(1000, [&]() {
+                currentTexture = defaultImageTexture;
+                if (onClickCallback) {
+                        onClickCallback();
+                }
+        });
+}
+
+SDL_Texture* Button::loadTexture(const char *path) const{
+        const fs::path currentPath = fs::current_path();
+        const fs::path imagePath = currentPath / path;
+
+        SDL_Surface* surface = IMG_Load(imagePath.c_str());
+        if (!surface) {
+                throw std::runtime_error("Failed to load image: " + std::string(SDL_GetError()));
+        }
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_DestroySurface(surface);
+        if (!texture) {
+                throw std::runtime_error("Failed to create texture: " + std::string(SDL_GetError()));
+        }
+        return texture;
+}
