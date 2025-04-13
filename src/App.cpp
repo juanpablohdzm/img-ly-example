@@ -14,15 +14,25 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+
+App & App::getInstance() {
+    static App instance;
+    return instance;
+}
+
 int App::run() {
 
-    App instance;
+    App& instance = getInstance();
 
     instance.initialize();
     instance.mainLoop();
-    instance.destroy();
 
     return 0;
+}
+
+void App::exit() {
+    App& instance = getInstance();
+    instance.quit();
 }
 
 void App::initialize() {
@@ -37,47 +47,43 @@ void App::initialize() {
     playerController->addKeyCallback(SDLK_ESCAPE, this, &App::quit);
 
     gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
+    gameManager->initialize();
 }
 
-void App::mainLoop() {
+void App::mainLoop(){
 
     // Main event and render loop
-    isRunning = true;
 
     Uint64 currentTime = SDL_GetTicks();
     Uint64 lastTime = 0.0f;
     float deltaTime = 0.0f;
 
-    while (!shouldStop()) {
+    isRunning = true;
+
+    while (isRunning) {
 
         lastTime = currentTime;
         currentTime = SDL_GetTicks();
 
-        deltaTime =(currentTime - lastTime)/1000.0f;
+        deltaTime = (currentTime - lastTime)/1000.0f;
 
+        window->clearWindow();
 
         playerController->run();
-        window->clearWindow();
         windowBackground->update(deltaTime);
         gameManager->update(deltaTime);
 
         window->presentRender();
     }
-}
 
-bool App::shouldStop() const {
-    return !isRunning;
+    SDL_Quit();
 }
 
 void App::quit(const SDL_Event& event) {
     quit();
 }
 
-void App::quit() {
+void App::quit(){
     isRunning = false;
-}
-
-void App::destroy() const {
-    SDL_Quit();
 }
 

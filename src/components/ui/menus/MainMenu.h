@@ -10,11 +10,14 @@
 
 class Button;
 class Sprite;
+class GameManager;
 
 class MainMenu : public Canvas {
 public:
-    MainMenu(Window* window, PlayerController* playerController);
+    MainMenu(Window* window, PlayerController* playerController, GameManager* gameManager);
     ~MainMenu() override;
+
+    void initialize() override;
 
 private:
     std::unique_ptr<Button> playButton = nullptr;

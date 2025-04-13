@@ -20,15 +20,16 @@ public:
         const char* hoverImagePath,
         const char* clickedImagePath,
         const Position& position,
-        int width, int height,
-        const std::function<void()>& onClickCallback = nullptr);
+        int width, int height);
 
     ~Button() override;
 
     void render() override;
     void onHoverEnter() override;
     void onHoverExit() override;
-    void onClick() override;
+    void click() override;
+
+    virtual void setOnClickCallback(std::function<void()> onClickCallback);
 
 private:
     SDL_Texture* loadTexture(const char* path) const;

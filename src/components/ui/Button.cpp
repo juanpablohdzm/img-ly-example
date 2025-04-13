@@ -21,10 +21,8 @@ Button::Button(
         const char *hoverImagePath,
         const char *clickedImagePath,
         const Position& position,
-        int width, int height,
-        const std::function<void()> &onClickCallback)
-        : Widget(position, width, height), renderer(renderer),
-        onClickCallback(onClickCallback){
+        int width, int height)
+        : Widget(position, width, height), renderer(renderer){
 
         if (!renderer) {
                 throw std::invalid_argument("Renderer is null");
@@ -81,7 +79,7 @@ void Button::onHoverExit() {
         currentTexture = defaultImageTexture;
 }
 
-void Button::onClick() {
+void Button::click() {
 
         if (clickedImageTexture) {
                 currentTexture = clickedImageTexture;
@@ -92,6 +90,10 @@ void Button::onClick() {
                         onClickCallback();
                 }
         });
+}
+
+void Button::setOnClickCallback(std::function<void()> onClickCallback) {
+        this->onClickCallback = onClickCallback;
 }
 
 SDL_Texture* Button::loadTexture(const char *path) const{

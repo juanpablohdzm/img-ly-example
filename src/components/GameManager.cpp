@@ -24,8 +24,7 @@ GameManager::GameManager(entt::registry *registry, Window *window, PlayerControl
 
     setCurrentState(GameState::MAIN_MENU);
 
-
-    mainMenuCanvas = std::make_unique<MainMenu>(window, playerController);
+    mainMenuCanvas = std::make_unique<MainMenu>(window, playerController, this);
 }
 
 GameManager::~GameManager() {
@@ -33,30 +32,16 @@ GameManager::~GameManager() {
 }
 
 void GameManager::update(float dt) {
-    window->executeRendererAction([&, dt](SDL_Renderer* renderer) {
+    std::cout << (int)currentState << std::endl;
+    if (currentState == GameState::MAIN_MENU) {
         mainMenuCanvas->update(dt);
-    });
+    }
+}
+
+void GameManager::initialize() {
+    mainMenuCanvas->initialize();
 }
 
 void GameManager::setCurrentState(GameState state) {
-    if (currentState == state) {
-        return;
-    }
-
     currentState = state;
-    switch (currentState) {
-        case GameState::DEFAULT:
-            std::cout << "GameManager: State changed to DEFAULT" << std::endl;
-            break;
-        case GameState::MAIN_MENU:
-            initMainMenu();
-            break;
-        case GameState::PLAYING:
-            break;
-        default: ;
-    }
-}
-
-void GameManager::initMainMenu() {
-
 }

@@ -11,11 +11,11 @@
 class Button;
 class PlayerController;
 class Window;
-class MainMenu;
+class Canvas;
 class Sprite;
 
 enum class GameState {
-    DEFAULT,
+    DEFAULT = 0,
     MAIN_MENU,
     PLAYING,
 };
@@ -26,12 +26,13 @@ public:
     ~GameManager();
 
     void update(float dt);
+    void initialize();
 
     void setCurrentState(GameState state);
-    GameState getCurrentState() { return currentState; }
+    GameState getCurrentState() const { return currentState; }
+
 
 private:
-    void initMainMenu();
 
 
     Window* window;
@@ -40,7 +41,7 @@ private:
 
     GameState currentState;
 
-    std::unique_ptr<MainMenu> mainMenuCanvas = nullptr;
+    std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
 
 };
 

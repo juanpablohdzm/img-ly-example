@@ -10,7 +10,10 @@
 #include "../Button.h"
 #include <iostream>
 
-MainMenu::MainMenu(Window *window, PlayerController *playerController) : Canvas(window, playerController) {
+#include "../../GameManager.h"
+#include "../../../App.h"
+
+MainMenu::MainMenu(Window *window, PlayerController *playerController, GameManager* gameManager) : Canvas(window, playerController, gameManager) {
 
     constexpr int bannerWidth = 978 * 0.5;
     constexpr int bannerHeight = 380 * 0.5;
@@ -37,10 +40,7 @@ MainMenu::MainMenu(Window *window, PlayerController *playerController) : Canvas(
         nullptr,
         nullptr,
         playButtonPostion,
-        buttonWidth, buttonHeight,
-        [this]() {
-            std::cout << "Play button clicked" << std::endl;
-        }
+        buttonWidth, buttonHeight
     );
 
     const float quitButtonPosX = window->getWidth() * (2.0f / 3.0f) - (buttonWidth / 2.0f);
@@ -52,16 +52,27 @@ MainMenu::MainMenu(Window *window, PlayerController *playerController) : Canvas(
         nullptr,
         nullptr,
         quitButtonPosition,
-        buttonWidth, buttonHeight,
-        [this]() {
-            std::cout << "Quit button clicked" << std::endl;
-        }
+        buttonWidth, buttonHeight
     );
 
     addChild(banner.get());
     addChild(playButton.get());
     addChild(quitButton.get());
+
 }
 
 MainMenu::~MainMenu() {
+}
+
+void MainMenu::initialize() {
+    Canvas::initialize();
+
+    playButton->setOnClickCallback([&]() {
+            std::cout << "Play clicked" << std::endl;
+            gameManager->setCurrentState(GameState::PLAYING);
+        });
+
+    quitButton->setOnClickCallback([]() {
+            App::exit();
+        });
 }

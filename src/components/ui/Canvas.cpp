@@ -8,12 +8,21 @@
 #include <SDL3/SDL_mouse.h>
 
 #include "Widget.h"
+#include "../GameManager.h"
 #include "../PlayerController.h"
 #include "interfaces/Clickable.h"
 
-Canvas::Canvas(Window *window, PlayerController* playerController) : window(window), playerController(playerController) {
+Canvas::Canvas(Window *window, PlayerController* playerController, GameManager* gameManager) : window(window), playerController(playerController), gameManager(gameManager) {
     if (!window) {
         throw std::runtime_error("Window is null");
+    }
+
+    if (!playerController) {
+        throw std::runtime_error("PlayerController is null");
+    }
+
+    if (!gameManager) {
+        throw std::runtime_error("GameManager is null");
     }
 
     playerController->addKeyCallback(SDL_BUTTON_LEFT, this, &Canvas::onMouseClicked);
@@ -50,6 +59,9 @@ void Canvas::removeChild(Widget *widget) {
     widgets.erase(widget);
 }
 
+void Canvas::initialize() {
+}
+
 void Canvas::onMouseClicked(const SDL_Event& event) {
 
     if (!focusedWidget) {
@@ -59,7 +71,7 @@ void Canvas::onMouseClicked(const SDL_Event& event) {
     // if we have a widget and the mouse is over it, we can click
     if (focusedWidget && focusedWidget->isMouseOver(event.button.x, event.button.y)) {
         if (auto clickable = dynamic_cast<Clickable*>(focusedWidget)) {
-            clickable->onClick();
+            clickable->click();
         }
         return;
     } else {

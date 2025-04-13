@@ -11,7 +11,7 @@ class Clickable {
 public:
     virtual ~Clickable() = default;
 
-    virtual void onClick() = 0;
+    virtual void click() = 0;
 };
 
 
