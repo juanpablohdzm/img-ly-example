@@ -53,8 +53,8 @@ void WindowBackground::update(float dt) {
             pos.x = static_cast<float>(disWidth(gen));
         }
 
-        window->executeRendererAction<WindowBackground, void, const Position&, const Star&>(
-            this, &WindowBackground::drawParticle, pos, star);
+        auto* renderer = window->getRenderer();
+        drawParticle(renderer, pos, star);
     }
 }
 

@@ -45,10 +45,6 @@ void Window::clearWindow() const {
     SDL_RenderClear(renderer);
 }
 
-void Window::executeRendererAction(const std::function<void(SDL_Renderer *)>& action) const {
-    action(renderer);
-}
-
 void Window::presentRender() const {
     // Present the rendered frame to the window
     SDL_RenderPresent(renderer);

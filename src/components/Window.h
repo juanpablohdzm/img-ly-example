@@ -18,9 +18,6 @@ public:
     virtual ~Window();
 
     void clearWindow() const;
-    template <typename T, typename RetValue, typename ...Args>
-    RetValue executeRendererAction(T* ptr, RetValue(T::*action)(SDL_Renderer*, Args...), Args&&... args) const;
-    void executeRendererAction(const std::function<void(SDL_Renderer*)>& action) const;
     void presentRender() const;
 
     [[nodiscard]] int getWidth() const { return width; }
@@ -33,11 +30,4 @@ private:
 
     int width, height;
 };
-
-template<typename T, typename RetValue, typename ...Args>
-RetValue Window::executeRendererAction(T *ptr, RetValue(T::*action)(SDL_Renderer *, Args...), Args&&... args) const {
-    return (ptr->*action)(renderer, std::forward<Args>(args)...);
-}
-
-
 #endif //WINDOW_H

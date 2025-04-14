@@ -26,7 +26,7 @@ public:
 
 private:
 
-    void drawParticle(SDL_Renderer *renderer, const Position &pos, const Star& star);
+    static void drawParticle(SDL_Renderer *renderer, const Position &pos, const Star& star);
 
     Window* window;
     entt::registry* registry;

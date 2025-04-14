@@ -15,38 +15,37 @@
 #define WINDOW_HEIGHT 600
 
 
-App & App::getInstance() {
-    static App instance;
-    return instance;
-}
-
-int App::run() {
-
-    App& instance = getInstance();
-
-    instance.initialize();
-    instance.mainLoop();
-
-    return 0;
-}
-
-void App::exit() {
-    App& instance = getInstance();
-    instance.quit();
-}
-
-void App::initialize() {
+App::App() : Singleton<App>() {
     registry = std::make_unique<entt::registry>();
 
     window = std::make_unique<Window>("Example", WINDOW_WIDTH, WINDOW_HEIGHT);
     windowBackground = std::make_unique<WindowBackground>(registry.get(), window.get());
 
-
     playerController = std::make_unique<PlayerController>();
+
+    gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
+}
+
+int App::run() {
+
+    App* instance = getInstance();
+
+    instance->initialize();
+    instance->mainLoop();
+
+    return 0;
+}
+
+void App::exit() {
+    App* instance = getInstance();
+    instance->quit();
+}
+
+void App::initialize() {
+
     playerController->addQuitEvent(this, &App::quit);
     playerController->addKeyCallback(SDLK_ESCAPE, this, &App::quit);
 
-    gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
     gameManager->initialize();
 }
 

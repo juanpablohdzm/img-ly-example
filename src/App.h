@@ -6,6 +6,8 @@
 #include <entt/entt.hpp>
 #include <SDL3/SDL_events.h>
 
+#include "utils/Singleton.h"
+
 class SDL_Window;
 class Window;
 class WindowBackground;
@@ -13,15 +15,11 @@ class SDL_Renderer;
 class PlayerController;
 class GameManager;
 
-class App {
-    App() = default;
+class App final : public Singleton<App> {
+    friend Singleton<App>;
+    App();
 public:
-    App(const App&) = delete;
-    App(App&&) = delete;
-    App& operator=(const App&) = delete;
-    App& operator=(App&&) = delete;
 
-    static App& getInstance();
     static int run();
     static void exit();
 
