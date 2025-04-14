@@ -7,53 +7,52 @@
 #include <random>
 #include <SDL3/SDL_render.h>
 #include <__random/random_device.h>
+
+#include "ECSManager.h"
 #include "../utils/common.h"
 #include "Window.h"
 
-WindowBackground::WindowBackground(entt::registry* registry, Window* window)
-    : window(window), registry(registry), gen(std::random_device{}()) {
+WindowBackground::WindowBackground() :  gen(std::random_device{}()){
+}
 
-    if (!window) {
-        throw std::runtime_error("Window is null");
-    }
-    if (!registry) {
-        throw std::runtime_error("Registry is null");
-    }
+void WindowBackground::initialize() {
 
-    std::uniform_int_distribution disWidth(0, window->getWidth());
-    std::uniform_int_distribution disHeight(0, window->getHeight());
+    auto* instance = getInstance();
+
+    std::uniform_int_distribution disWidth(0, Window::getWidth());
+    std::uniform_int_distribution disHeight(0, Window::getHeight());
     std::uniform_real_distribution disSpeed(2.0f, 6.0f);
     std::uniform_real_distribution disSize(1.5f, 3.5f);
     std::uniform_int_distribution disBrightness(150, 255);
 
     constexpr uint32_t starCount = 500;
     for (uint32_t i = 0; i < starCount; ++i) {
-        const auto entity = registry->create();
+        const auto entity = ECSManager::create();
 
-        float speed = disSpeed(gen);
-        registry->emplace<Velocity>(entity, 0.0f, speed);
+        float speed = disSpeed(instance->gen);
+        ECSManager::emplace<Velocity>(entity, 0.0f, speed);
 
-        registry->emplace<Position>(entity,
-                                    static_cast<float>(disWidth(gen)),
-                                    static_cast<float>(disHeight(gen)));
+        ECSManager::emplace<Position>(entity,
+                                    static_cast<float>(disWidth(instance->gen)),
+                                    static_cast<float>(disHeight(instance->gen)));
 
-        registry->emplace<Star>(entity, disSize(gen), static_cast<Uint8>(disBrightness(gen)));
+        ECSManager::emplace<Star>(entity, disSize(instance->gen), static_cast<Uint8>(disBrightness(instance->gen)));
     }
 }
 
 void WindowBackground::update(float dt) {
-    auto view = registry->view<Position, Velocity, Star>();
-    for (auto [entity, pos, vel, star] : view.each()) {
+    auto* instance = getInstance();
+    for (auto [entity, pos, vel, star] : ECSManager::view<Position, Velocity, Star>().each()) {
 
         pos.y += vel.dy * dt;
 
-        if (pos.y > window->getHeight()) {
+        if (pos.y > Window::getHeight()) {
             pos.y = -star.size;
-            std::uniform_int_distribution disWidth(0, window->getWidth());
-            pos.x = static_cast<float>(disWidth(gen));
+            std::uniform_int_distribution disWidth(0, Window::getWidth());
+            pos.x = static_cast<float>(disWidth(instance->gen));
         }
 
-        auto* renderer = window->getRenderer();
+        auto* renderer = Window::getRenderer();
         drawParticle(renderer, pos, star);
     }
 }

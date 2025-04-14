@@ -12,17 +12,10 @@
 #include "../PlayerController.h"
 #include "interfaces/Clickable.h"
 
-Canvas::Canvas(Window *window, PlayerController* playerController, GameManager* gameManager) : window(window), playerController(playerController), gameManager(gameManager) {
-    if (!window) {
-        throw std::runtime_error("Window is null");
-    }
+Canvas::Canvas(PlayerController* playerController) : playerController(playerController) {
 
     if (!playerController) {
         throw std::runtime_error("PlayerController is null");
-    }
-
-    if (!gameManager) {
-        throw std::runtime_error("GameManager is null");
     }
 
     playerController->addKeyCallback(SDL_BUTTON_LEFT, this, &Canvas::onMouseClicked);
@@ -69,7 +62,7 @@ void Canvas::onMouseClicked(const SDL_Event& event) {
     }
 
     // if we have a widget and the mouse is over it, we can click
-    if (focusedWidget && focusedWidget->isMouseOver(event.button.x, event.button.y)) {
+    if (focusedWidget->isMouseOver(event.button.x, event.button.y)) {
         if (auto clickable = dynamic_cast<Clickable*>(focusedWidget)) {
             clickable->click();
         }

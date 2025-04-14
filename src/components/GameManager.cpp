@@ -10,21 +10,22 @@
 #include "ui/Canvas.h"
 #include "ui/menus/MainMenu.h"
 
-GameManager::GameManager(entt::registry *registry, Window *window, PlayerController *pc)
-    : window(window), registry(registry), playerController(pc), currentState(GameState::DEFAULT) {
-    if (!window) {
-        throw std::runtime_error("Window is null");
-    }
-    if (!registry) {
-        throw std::runtime_error("Registry is null");
-    }
+
+GameManager::GameManager() : playerController(nullptr), mainMenuCanvas(nullptr), currentState(GameState::DEFAULT) {
+}
+
+void GameManager::initialize(PlayerController *pc) {
     if (!pc) {
         throw std::runtime_error("PlayerController is null");
     }
 
-    setCurrentState(GameState::MAIN_MENU);
+    auto* instance = getInstance();
+    instance->playerController = pc;
 
-    mainMenuCanvas = std::make_unique<MainMenu>(window, playerController, this);
+    instance->setCurrentState(GameState::MAIN_MENU);
+    instance->mainMenuCanvas = std::make_unique<MainMenu>(instance->playerController);
+    instance->mainMenuCanvas->initialize();
+
 }
 
 GameManager::~GameManager() {
@@ -32,16 +33,13 @@ GameManager::~GameManager() {
 }
 
 void GameManager::update(float dt) {
-    std::cout << (int)currentState << std::endl;
-    if (currentState == GameState::MAIN_MENU) {
-        mainMenuCanvas->update(dt);
+    auto* instance = getInstance();
+    if (getCurrentState() == GameState::MAIN_MENU) {
+        instance->mainMenuCanvas->update(dt);
     }
 }
 
-void GameManager::initialize() {
-    mainMenuCanvas->initialize();
-}
-
 void GameManager::setCurrentState(GameState state) {
-    currentState = state;
+    auto* instance = getInstance();
+    instance->currentState = state;
 }

@@ -22,7 +22,7 @@ public:
     template <typename T>
     void removeQuitEvent(const T* ptr);
 
-    void run();
+    void update(float dt);
 
     static Position getMousePosition();
 private:

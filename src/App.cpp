@@ -16,14 +16,8 @@
 
 
 App::App() : Singleton<App>() {
-    registry = std::make_unique<entt::registry>();
-
-    window = std::make_unique<Window>("Example", WINDOW_WIDTH, WINDOW_HEIGHT);
-    windowBackground = std::make_unique<WindowBackground>(registry.get(), window.get());
 
     playerController = std::make_unique<PlayerController>();
-
-    gameManager = std::make_unique<GameManager>(registry.get(), window.get(), playerController.get());
 }
 
 int App::run() {
@@ -43,10 +37,12 @@ void App::exit() {
 
 void App::initialize() {
 
+    Window::initialize("Example", WINDOW_WIDTH, WINDOW_HEIGHT);
+    WindowBackground::initialize();
+    GameManager::initialize(playerController.get());
+
     playerController->addQuitEvent(this, &App::quit);
     playerController->addKeyCallback(SDLK_ESCAPE, this, &App::quit);
-
-    gameManager->initialize();
 }
 
 void App::mainLoop(){
@@ -66,13 +62,13 @@ void App::mainLoop(){
 
         deltaTime = (currentTime - lastTime)/1000.0f;
 
-        window->clearWindow();
+        Window::clearWindow();
 
-        playerController->run();
-        windowBackground->update(deltaTime);
-        gameManager->update(deltaTime);
+        playerController->update(deltaTime);
+        WindowBackground::update(deltaTime);
+        GameManager::update(deltaTime);
 
-        window->presentRender();
+        Window::presentRender();
     }
 
     SDL_Quit();

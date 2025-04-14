@@ -16,7 +16,7 @@ class PlayerController;
 class GameManager;
 
 class App final : public Singleton<App> {
-    friend Singleton<App>;
+    friend class Singleton<App>;
     App();
 public:
 
@@ -34,9 +34,5 @@ private:
     void mainLoop();
 
     // Dependencies
-    std::unique_ptr<Window> window = nullptr;
     std::unique_ptr<PlayerController> playerController = nullptr;
-    std::unique_ptr<entt::registry> registry = nullptr;
-    std::unique_ptr<WindowBackground> windowBackground = nullptr;
-    std::unique_ptr<GameManager> gameManager = nullptr;
 };

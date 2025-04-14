@@ -8,6 +8,8 @@
 #include <memory>
 #include <entt/entity/registry.hpp>
 
+#include "../utils/Singleton.h"
+
 class Button;
 class PlayerController;
 class Window;
@@ -20,23 +22,21 @@ enum class GameState {
     PLAYING,
 };
 
-class GameManager {
+class GameManager : public Singleton<GameManager> {
+    friend class Singleton<GameManager>;
+    GameManager();
 public:
-    GameManager(entt::registry* registry, Window* window, PlayerController* pc);
+    static void initialize( PlayerController* pc);
     ~GameManager();
 
-    void update(float dt);
-    void initialize();
+    static void update(float dt);
 
-    void setCurrentState(GameState state);
-    GameState getCurrentState() const { return currentState; }
+    static void setCurrentState(GameState state);
+    static GameState getCurrentState() { return getInstance()->currentState; }
 
 
 private:
 
-
-    Window* window;
-    entt::registry* registry;
     PlayerController* playerController;
 
     GameState currentState;

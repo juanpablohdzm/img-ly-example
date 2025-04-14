@@ -14,7 +14,7 @@ class GameManager;
 
 class MainMenu : public Canvas {
 public:
-    MainMenu(Window* window, PlayerController* playerController, GameManager* gameManager);
+    MainMenu(PlayerController* playerController);
     ~MainMenu() override;
 
     void initialize() override;

@@ -30,7 +30,9 @@ add_executable(img_ly main.cpp
         src/components/ui/Sprite.h
         src/components/ui/menus/MainMenu.cpp
         src/components/ui/menus/MainMenu.h
-        src/utils/Singleton.h)
+        src/utils/Singleton.h
+        src/components/ECSManager.cpp
+        src/components/ECSManager.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

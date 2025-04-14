@@ -6,23 +6,25 @@
 #define WINDOW_H
 #include <functional>
 #include "../utils/common.h"
+#include "../utils/Singleton.h"
 
 
 class SDL_Window;
 class SDL_Renderer;
 
 
-class Window {
+class Window final : public Singleton<Window> {
+    friend class Singleton<Window>;
+    Window();
 public:
-    Window(const char* title, int width, int height, Color color = {0, 0, 0, 255});
-    virtual ~Window();
+    static void initialize(const char* title, int width, int height,const Color& color = {0, 0, 0, 255});
+    static void clearWindow();
+    static void presentRender();
+    ~Window();
 
-    void clearWindow() const;
-    void presentRender() const;
-
-    [[nodiscard]] int getWidth() const { return width; }
-    [[nodiscard]] int getHeight() const { return height; }
-    [[nodiscard]] SDL_Renderer* getRenderer() const { return renderer; }
+    [[nodiscard]] static int getWidth() { return getInstance()->width; }
+    [[nodiscard]] static int getHeight() { return getInstance()->height; }
+    [[nodiscard]] static SDL_Renderer* getRenderer() { return getInstance()->renderer; }
 private:
     Color color;
     SDL_Window* window = nullptr;

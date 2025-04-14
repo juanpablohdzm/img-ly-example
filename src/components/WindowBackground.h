@@ -8,6 +8,8 @@
 #include <entt/entt.hpp>
 #include <SDL3/SDL_stdinc.h>
 
+#include "../utils/Singleton.h"
+
 class Window;
 class SDL_Renderer;
 struct Position;
@@ -18,21 +20,18 @@ struct Star {
     Uint8 brightness;   // Brightness for color intensity (0-255)
 };
 
-class WindowBackground {
+class WindowBackground final : public Singleton<WindowBackground> {
+    friend class Singleton<WindowBackground>;
+    WindowBackground();
 public:
-    WindowBackground(entt::registry* registry, Window* window);
+    static void initialize();
 
-    void update(float dt);
+    static void update(float dt);
 
 private:
 
     static void drawParticle(SDL_Renderer *renderer, const Position &pos, const Star& star);
 
-    Window* window;
-    entt::registry* registry;
     std::mt19937 gen;
 };
-
-
-
 #endif //WINDOWBACKGROUND_H
