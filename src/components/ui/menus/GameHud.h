@@ -6,13 +6,20 @@
 #define GAMEHUD_H
 #include "../Canvas.h"
 
+class Widget;
 
 class GameHud : public Canvas{
 
 public:
     GameHud(PlayerController* playerController);
+    ~GameHud() override;
 
     void initialize() override;
+    void update(float deltaTime) override;
+
+private:
+    std::unique_ptr<Widget> scoreLabel;
+    std::unique_ptr<Widget> scoreValue;
 
 };
 

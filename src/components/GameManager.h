@@ -42,6 +42,7 @@ private:
     GameState currentState;
 
     std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
+    std::unique_ptr<Canvas> gameHud = nullptr;
 
 };
 

@@ -8,6 +8,7 @@
 
 #include "Window.h"
 #include "ui/Canvas.h"
+#include "ui/menus/GameHud.h"
 #include "ui/menus/MainMenu.h"
 
 
@@ -25,6 +26,8 @@ void GameManager::initialize(PlayerController *pc) {
     instance->setCurrentState(GameState::MAIN_MENU);
     instance->mainMenuCanvas = std::make_unique<MainMenu>(instance->playerController);
     instance->mainMenuCanvas->initialize();
+    instance->gameHud = std::make_unique<GameHud>(instance->playerController);
+    instance->gameHud->initialize();
 
 }
 
@@ -36,6 +39,8 @@ void GameManager::update(float dt) {
     auto* instance = getInstance();
     if (getCurrentState() == GameState::MAIN_MENU) {
         instance->mainMenuCanvas->update(dt);
+    } else if (getCurrentState() == GameState::PLAYING) {
+        instance->gameHud->update(dt);
     }
 }
 
