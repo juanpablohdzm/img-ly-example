@@ -12,7 +12,6 @@
 class Sprite : public Widget {
 public:
     Sprite(
-        SDL_Renderer* renderer,
         const char* imagePath,
         const Position& position,
         int width, int height);
@@ -25,8 +24,6 @@ public:
 
 private:
     SDL_Texture* loadTexture(const char* path) const;
-
-    SDL_Renderer* renderer;
 
     SDL_Texture* defaultImageTexture;
 };

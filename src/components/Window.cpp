@@ -9,6 +9,7 @@
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 
 Window::Window() : Singleton<Window>(), color({0,0,0,255}), width(800), height(600) {
@@ -23,6 +24,14 @@ void Window::initialize(const char *title, int width, int height,const Color& co
 
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
+        SDL_Quit();
+        return;
+    }
+
+    // Initialize SDL_ttf
+    if (!TTF_Init()) {
+        std::cerr << "TTF_Init Error: " << SDL_GetError() << "\n";
+        SDL_Quit();
         return;
     }
 
@@ -62,4 +71,5 @@ void Window::presentRender() {
 Window::~Window() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_Quit();
 }

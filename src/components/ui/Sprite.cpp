@@ -8,18 +8,16 @@
 #include <filesystem>
 #include <SDL3_image/SDL_image.h>
 
+#include "../Window.h"
+
 
 namespace  fs = std::filesystem;
 Sprite::Sprite(
-        SDL_Renderer *renderer,
         const char *imagePath,
         const Position& position,
         int width, int height)
-        : Widget(position, width, height), renderer(renderer){
+        : Widget(position, width, height){
 
-        if (!renderer) {
-                throw std::invalid_argument("Renderer is null");
-        }
         if (!imagePath) {
                 throw std::invalid_argument("Default image path is null");
         }
@@ -42,7 +40,7 @@ void Sprite::render(){
                 static_cast<float>(getWidth()),
                 static_cast<float>(getHeight())
         };
-        SDL_RenderTexture(renderer, defaultImageTexture, nullptr, &fButtonRect);
+        SDL_RenderTexture(Window::getRenderer(), defaultImageTexture, nullptr, &fButtonRect);
 }
 
 SDL_Texture* Sprite::loadTexture(const char *path) const {
@@ -53,7 +51,7 @@ SDL_Texture* Sprite::loadTexture(const char *path) const {
         if (!surface) {
                 throw std::runtime_error("Failed to load image: " + std::string(SDL_GetError()));
         }
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(Window::getRenderer(), surface);
         SDL_DestroySurface(surface);
         if (!texture) {
                 throw std::runtime_error("Failed to create texture: " + std::string(SDL_GetError()));

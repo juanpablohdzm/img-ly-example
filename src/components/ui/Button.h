@@ -15,7 +15,6 @@ class SDL_Texture;
 class Button :  public Widget, public Clickable {
 public:
     Button(
-        SDL_Renderer* renderer,
         const char* defaultImagePath,
         const char* hoverImagePath,
         const char* clickedImagePath,
@@ -33,8 +32,6 @@ public:
 
 private:
     SDL_Texture* loadTexture(const char* path) const;
-
-    SDL_Renderer* renderer;
 
     SDL_Texture* currentTexture;
 

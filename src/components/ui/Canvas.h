@@ -5,7 +5,6 @@
 #ifndef CANVAS_H
 #define CANVAS_H
 #include <unordered_set>
-#include <vector>
 #include <SDL3/SDL_events.h>
 
 class PlayerController;

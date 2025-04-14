@@ -21,7 +21,6 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
     const float bannerPosY = (Window::getHeight() * 0.4) - (bannerHeight / 2.0f);
     const Position bannerPosition{ bannerPosX, bannerPosY };
     banner = std::make_unique<Sprite>(
-        Window::getRenderer(),
         "resource/Main_Menu/Header.png",
         bannerPosition,
         bannerWidth,
@@ -35,7 +34,6 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
     const float playButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2);
     const Position playButtonPostion{ playButtonPosX, playButtonPosY };
     playButton = std::make_unique<Button>(
-        Window::getRenderer(),
         "resource/Main_Menu/Start_BTN.png",
         nullptr,
         nullptr,
@@ -47,7 +45,6 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
     const float quitButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2.0f);
     const Position quitButtonPosition{ quitButtonPosX, quitButtonPosY };
     quitButton = std::make_unique<Button>(
-        Window::getRenderer(),
         "resource/Main_Menu/Exit_BTN.png",
         nullptr,
         nullptr,

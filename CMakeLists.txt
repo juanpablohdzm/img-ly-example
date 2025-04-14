@@ -32,14 +32,20 @@ add_executable(img_ly main.cpp
         src/components/ui/menus/MainMenu.h
         src/utils/Singleton.h
         src/components/ECSManager.cpp
-        src/components/ECSManager.h)
+        src/components/ECSManager.h
+        src/components/ui/menus/GameHud.cpp
+        src/components/ui/menus/GameHud.h
+        src/components/ui/Label.cpp
+        src/components/ui/Label.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 
 # Find SDL3 package
 find_package(SDL3 REQUIRED)
 find_package(SDL3_image REQUIRED)
+find_package(SDL3_ttf REQUIRED)
 
 # Link SDL3 to the target
 target_link_libraries(img_ly PRIVATE SDL3::SDL3)
 target_link_libraries(img_ly PRIVATE SDL3_image::SDL3_image)
+target_link_libraries(img_ly PRIVATE SDL3_ttf::SDL3_ttf)

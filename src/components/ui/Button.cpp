@@ -11,22 +11,20 @@
 #include <SDL3_image/SDL_image.h>
 #include <__filesystem/operations.h>
 
+#include "../Window.h"
+
 namespace fs = std::filesystem;
 
 #define CLICK_DELAY_MS 200
 
 Button::Button(
-        SDL_Renderer *renderer,
         const char *defaultImagePath,
         const char *hoverImagePath,
         const char *clickedImagePath,
         const Position& position,
         int width, int height)
-        : Widget(position, width, height), renderer(renderer){
+        : Widget(position, width, height){
 
-        if (!renderer) {
-                throw std::invalid_argument("Renderer is null");
-        }
         if (!defaultImagePath) {
                 throw std::invalid_argument("Default image path is null");
         }
@@ -64,7 +62,7 @@ void Button::render(){
                 static_cast<float>(getWidth()),
                 static_cast<float>(getHeight())
         };
-        SDL_RenderTexture(renderer, currentTexture, nullptr, &fButtonRect);
+        SDL_RenderTexture(Window::getRenderer(), currentTexture, nullptr, &fButtonRect);
 }
 
 void Button::onHoverEnter() {
@@ -104,7 +102,7 @@ SDL_Texture* Button::loadTexture(const char *path) const{
         if (!surface) {
                 throw std::runtime_error("Failed to load image: " + std::string(SDL_GetError()));
         }
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(Window::getRenderer(), surface);
         SDL_DestroySurface(surface);
         if (!texture) {
                 throw std::runtime_error("Failed to create texture: " + std::string(SDL_GetError()));
