@@ -103,7 +103,7 @@ SDL_Texture * Label::loadTexture(TTF_Font* font, const char *msg){
         }
     }
 
-    SDL_Color textColor(color.r, color.g, color.b, color.a);
+    const SDL_Color textColor(color.r, color.g, color.b, color.a);
 
     SDL_Surface* textSurface = TTF_RenderText_Blended(font, msg, std::strlen(msg), textColor);
 
