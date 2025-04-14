@@ -11,7 +11,7 @@
 #include "ui/menus/MainMenu.h"
 
 
-GameManager::GameManager() : playerController(nullptr), mainMenuCanvas(nullptr), currentState(GameState::DEFAULT) {
+GameManager::GameManager() : playerController(nullptr), currentState(GameState::DEFAULT), mainMenuCanvas(nullptr) {
 }
 
 void GameManager::initialize(PlayerController *pc) {

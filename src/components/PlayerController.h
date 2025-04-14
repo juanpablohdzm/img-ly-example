@@ -15,10 +15,14 @@ public:
     template <typename T>
     void addKeyCallback(Uint32 key, T* ptr, void(T::*func)(const SDL_Event&));
     template <typename T>
+    void addKeyCallback(Uint32 key, T* ptr, std::function<void(const SDL_Event&)> func);
+    template <typename T>
     bool clearKeyCallback(Uint32 key, T* ptr);
 
     template <typename T>
     void addQuitEvent(T* ptr, void(T::*func)());
+    template <typename T>
+    void addQuitEvent(T* ptr, std::function<void()> func);
     template <typename T>
     void removeQuitEvent(const T* ptr);
 
@@ -38,6 +42,11 @@ void PlayerController::addKeyCallback(Uint32 key, T *ptr, void(T::*func)(const S
 }
 
 template<typename T>
+void PlayerController::addKeyCallback(Uint32 key, T *ptr, std::function<void(const SDL_Event&)> func) {
+    keyEvents[key].insert({ptr, func});
+}
+
+template<typename T>
 bool PlayerController::clearKeyCallback(Uint32 key, T *ptr) {
     if (auto it = keyEvents.find(key); it != keyEvents.end()) {
         auto& callbacks = it->second;
@@ -50,6 +59,11 @@ bool PlayerController::clearKeyCallback(Uint32 key, T *ptr) {
 template<typename T>
 void PlayerController::addQuitEvent(T *ptr, void(T::*func)()) {
     quitEvent.insert({ptr, [ptr, func](){(ptr->*func)();}});
+}
+
+template<typename T>
+void PlayerController::addQuitEvent(T *ptr, std::function<void()> func) {
+    quitEvent.insert({ptr, func});
 }
 
 template<typename T>

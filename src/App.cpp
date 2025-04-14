@@ -16,7 +16,6 @@
 
 
 App::App() : Singleton<App>() {
-
     playerController = std::make_unique<PlayerController>();
 }
 
@@ -41,8 +40,8 @@ void App::initialize() {
     WindowBackground::initialize();
     GameManager::initialize(playerController.get());
 
-    playerController->addQuitEvent(this, &App::quit);
-    playerController->addKeyCallback(SDLK_ESCAPE, this, &App::quit);
+    playerController->addQuitEvent(this, exit);
+    playerController->addKeyCallback(SDLK_ESCAPE, this, [](const SDL_Event&){exit();});
 }
 
 void App::mainLoop(){
@@ -72,10 +71,6 @@ void App::mainLoop(){
     }
 
     SDL_Quit();
-}
-
-void App::quit(const SDL_Event& event) {
-    quit();
 }
 
 void App::quit(){

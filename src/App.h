@@ -23,15 +23,14 @@ public:
     static int run();
     static void exit();
 
-    void quit();
-    void quit(const SDL_Event& event);
 private:
-
     bool isRunning = false;
     //Init dependencies
     void initialize();
     // Main loop
     void mainLoop();
+
+    void quit();
 
     // Dependencies
     std::unique_ptr<PlayerController> playerController = nullptr;
