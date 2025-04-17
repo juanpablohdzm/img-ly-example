@@ -35,7 +35,7 @@ void GameManager::initialize(PlayerController *pc) {
         65,
         65,
         Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
-        100.0f,
+        200.0f,
         instance->playerController
     );
     instance->playerCharacter->initialize();

@@ -27,16 +27,16 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
         bannerHeight
     );
 
-    constexpr float buttonWidth = 410 * 0.33f;
-    constexpr float buttonHeight = 121 * 0.33f;
+    constexpr float buttonWidth = 210 * 0.33f;
+    constexpr float buttonHeight = 210 * 0.33f;
 
     const float playButtonPosX = Window::getWidth() * 0.33f - (buttonWidth / 2);
     const float playButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2);
     const Position playButtonPostion{ playButtonPosX, playButtonPosY };
     playButton = std::make_unique<Button>(
-        "resource/Main_Menu/Start_BTN.png",
-        nullptr,
-        nullptr,
+        "resource/Buttons/BTNs/Play_BTN.png",
+        "resource/Buttons/BTNs_Active/Play_BTN.png",
+        "resource/Buttons/BTNs/Play_BTN.png",
         playButtonPostion,
         buttonWidth, buttonHeight
     );
@@ -45,9 +45,9 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
     const float quitButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2.0f);
     const Position quitButtonPosition{ quitButtonPosX, quitButtonPosY };
     quitButton = std::make_unique<Button>(
-        "resource/Main_Menu/Exit_BTN.png",
-        nullptr,
-        nullptr,
+        "resource/Buttons/BTNs/Close_BTN.png",
+        "resource/Buttons/BTNs_Active/Close_BTN.png",
+        "resource/Buttons/BTNs/Close_BTN.png",
         quitButtonPosition,
         buttonWidth, buttonHeight
     );
