@@ -43,6 +43,7 @@ private:
     std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
     std::unique_ptr<Canvas> gameHud = nullptr;
     std::unique_ptr<Character> playerCharacter = nullptr;
+    std::unique_ptr<Character> enemy = nullptr;
 
 };
 

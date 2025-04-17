@@ -30,7 +30,8 @@ void WindowBackground::initialize() {
         const auto entity = ECSManager::create();
 
         float speed = disSpeed(instance->gen);
-        ECSManager::emplace<Velocity>(entity, 0.0f, speed);
+        ECSManager::emplace<Velocity>(entity, 0.0f, 1.0f);
+        ECSManager::emplace<Speed>(entity, speed);
 
         ECSManager::emplace<Position>(entity,
                                     static_cast<float>(disWidth(instance->gen)),

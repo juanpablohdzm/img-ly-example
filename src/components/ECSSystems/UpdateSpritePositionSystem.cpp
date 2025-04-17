@@ -4,6 +4,9 @@
 
 #include "UpdateSpritePositionSystem.h"
 
+#include <iostream>
+#include <ostream>
+
 #include "../ECSManager.h"
 #include "../../utils/common.h"
 #include "../ui/Sprite.h"

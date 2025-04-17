@@ -21,10 +21,20 @@ struct Velocity {
     float dy;
 };
 
+struct Speed {
+    float value;
+};
+
 struct Color {
     int r;
     int g;
     int b;
     int a;
+};
+
+struct EnemyTag {
+};
+
+struct PlayerTag {
 };
 #endif //COMMON_H

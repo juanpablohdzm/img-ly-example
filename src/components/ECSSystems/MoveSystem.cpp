@@ -9,8 +9,8 @@
 
 
 void MoveSystem::update(float dt) {
-    for (auto [entity, pos, vel] : ECSManager::view<Position, Velocity>().each()) {
-        pos.x += vel.dx * dt;
-        pos.y += vel.dy * dt;
+    for (auto [entity, pos, vel, speed] : ECSManager::view<Position, Velocity, Speed>().each()) {
+        pos.x += vel.dx * dt * speed.value;
+        pos.y += vel.dy * dt * speed.value;
     }
 }

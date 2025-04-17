@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "Window.h"
+#include "characters/Enemy.h"
 #include "characters/PlayerCharacter.h"
 #include "ui/Canvas.h"
 #include "ui/Sprite.h"
@@ -35,11 +36,21 @@ void GameManager::initialize(PlayerController *pc) {
         65,
         65,
         Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
-        200.0f,
+        10.0f,
         instance->playerController
     );
     instance->playerCharacter->initialize();
     instance->gameHud->addChild(instance->playerCharacter->getSprite());
+
+    instance->enemy = std::make_unique<Enemy>(
+        "resource/Hangar/Dot_02.png",
+        65,
+        65,
+        Position(65, 65),
+        30.0f
+    );
+    instance->enemy->initialize();
+    instance->gameHud->addChild(instance->enemy->getSprite());
 }
 
 GameManager::~GameManager() {
@@ -53,6 +64,7 @@ void GameManager::update(float dt) {
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
         instance->playerCharacter->update(dt);
+        instance->enemy->update(dt);
     }
 }
 

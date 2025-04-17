@@ -13,8 +13,7 @@
 #include "../ECSManager.h"
 #include "../GameManager.h"
 
-struct PlayerTag {
-};
+
 
 PlayerCharacter::PlayerCharacter(
     const char *spritePath,
@@ -32,6 +31,7 @@ PlayerCharacter::PlayerCharacter(
     ECSManager::emplace<PlayerTag>(getEntity(), PlayerTag());
     ECSManager::emplace<Velocity>(getEntity(), Velocity());
     ECSManager::emplace<WindowGuard>(getEntity(), width, height);
+    ECSManager::emplace<Speed>(getEntity(), speed);
 }
 
 PlayerCharacter::~PlayerCharacter() {
