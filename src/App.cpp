@@ -12,6 +12,7 @@
 #include "components/WindowBackground.h"
 #include "components/ECSSystems/MoveSystem.h"
 #include "components/ECSSystems/UpdateSpritePositionSystem.h"
+#include "components/ECSSystems/WindowGuardSystem.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -69,6 +70,7 @@ void App::mainLoop(){
 
         Window::clearWindow();
         MoveSystem::update(deltaTime);
+        WindowGuardSystem::update(deltaTime);
         UpdateSpritePositionSystem::update(deltaTime);
 
         playerController->update(deltaTime);

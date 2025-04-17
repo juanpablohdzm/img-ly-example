@@ -10,7 +10,7 @@
 class PlayerCharacter : public Character {
 
 public:
-    PlayerCharacter(const char* spritePath, int width, int height, const Position& position, float speed, PlayerController* controller);
+    PlayerCharacter(const char* spritePath, float width, float height, const Position& position, float speed, PlayerController* controller);
     ~PlayerCharacter() override;
     void update(float dt) override;
     void initialize() override;

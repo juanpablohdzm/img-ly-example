@@ -14,7 +14,7 @@ class Sprite;
 
 class Character {
 public:
-    Character(const char* spritePath, int width, int height, const Position& position = {0, 0});
+    Character(const char* spritePath, float width, float height, const Position& position = {0, 0});
 
     virtual ~Character();
     virtual void initialize() = 0;

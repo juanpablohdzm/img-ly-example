@@ -5,6 +5,12 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+// Tag used to identify entities that shouldn't pass beyond the window bounds
+struct WindowGuard {
+    float width;
+    float height;
+};
+
 struct Position {
     float x;
     float y;

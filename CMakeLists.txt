@@ -44,7 +44,9 @@ add_executable(img_ly main.cpp
         src/components/ECSSystems/MoveSystem.cpp
         src/components/ECSSystems/MoveSystem.h
         src/components/ECSSystems/UpdateSpritePositionSystem.cpp
-        src/components/ECSSystems/UpdateSpritePositionSystem.h)
+        src/components/ECSSystems/UpdateSpritePositionSystem.h
+        src/components/ECSSystems/WindowGuardSystem.cpp
+        src/components/ECSSystems/WindowGuardSystem.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

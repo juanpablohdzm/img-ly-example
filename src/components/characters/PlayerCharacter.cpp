@@ -18,8 +18,8 @@ struct PlayerTag {
 
 PlayerCharacter::PlayerCharacter(
     const char *spritePath,
-    int width,
-    int height,
+    float width,
+    float height,
     const Position &position,
     float speed,
     PlayerController* controller) :
@@ -31,6 +31,7 @@ PlayerCharacter::PlayerCharacter(
     setController(controller);
     ECSManager::emplace<PlayerTag>(getEntity(), PlayerTag());
     ECSManager::emplace<Velocity>(getEntity(), Velocity());
+    ECSManager::emplace<WindowGuard>(getEntity(), width, height);
 }
 
 PlayerCharacter::~PlayerCharacter() {
@@ -50,29 +51,34 @@ void PlayerCharacter::initialize() {
 
     controller->addKeyCallback(SDLK_W, this, [this](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
-            velocity.dy = event.type == SDL_EVENT_KEY_DOWN ? speed : 0;
+            velocity.dy = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
         }
     });
     controller->addKeyCallback(SDLK_S, this, [this](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
-            velocity.dy = event.type == SDL_EVENT_KEY_DOWN ? -speed : 0;
+            velocity.dy = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
        }
     });
     controller->addKeyCallback(SDLK_A, this, [this](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
-            velocity.dx = event.type == SDL_EVENT_KEY_DOWN ? speed : 0;
+            velocity.dx = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
        }
     });
     controller->addKeyCallback(SDLK_D, this, [this](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
-            velocity.dx = event.type == SDL_EVENT_KEY_DOWN ? -speed : 0;
+            velocity.dx = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
        }
     });
 }
 
 void PlayerCharacter::update(float dt) {
     for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
-        vel.dx = velocity.dx;
-        vel.dy = velocity.dy;
+        const float magnitude = sqrt(velocity.dx * velocity.dx + velocity.dy * velocity.dy);
+        if (magnitude > 0) {
+            velocity.dx /= magnitude;
+            velocity.dy /= magnitude;
+        }
+        vel.dx = velocity.dx * speed;
+        vel.dy = velocity.dy * speed;
     }
 }

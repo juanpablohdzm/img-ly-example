@@ -7,7 +7,7 @@
 #include "../ECSManager.h"
 #include "../ui/Sprite.h"
 
-Character::Character(const char* path, int width, int height, const Position& position) {
+Character::Character(const char* path, float width, float height, const Position& position) {
     sprite = std::make_unique<Sprite>(
         path,
         position,
