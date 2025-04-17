@@ -36,7 +36,15 @@ add_executable(img_ly main.cpp
         src/components/ui/menus/GameHud.cpp
         src/components/ui/menus/GameHud.h
         src/components/ui/Label.cpp
-        src/components/ui/Label.h)
+        src/components/ui/Label.h
+        src/components/characters/Character.cpp
+        src/components/characters/Character.h
+        src/components/characters/PlayerCharacter.cpp
+        src/components/characters/PlayerCharacter.h
+        src/components/ECSSystems/MoveSystem.cpp
+        src/components/ECSSystems/MoveSystem.h
+        src/components/ECSSystems/UpdateSpritePositionSystem.cpp
+        src/components/ECSSystems/UpdateSpritePositionSystem.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

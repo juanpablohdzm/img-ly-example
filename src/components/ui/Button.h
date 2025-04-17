@@ -19,7 +19,7 @@ public:
         const char* hoverImagePath,
         const char* clickedImagePath,
         const Position& position,
-        int width, int height);
+        float width, float height);
 
     ~Button() override;
 

@@ -30,6 +30,7 @@ GameHud::GameHud(PlayerController *playerController) : Canvas(playerController) 
         true
         );
 
+
     addChild(scoreLabel.get());
     addChild(scoreValue.get());
 }
@@ -39,13 +40,6 @@ GameHud::~GameHud() {
 
 void GameHud::initialize() {
     Canvas::initialize();
-    playerController->addKeyCallback(SDLK_W, this, [scoreValue = scoreValue.get()](const SDL_Event& event) {
-        static int count  = 0;
-        if (auto* label = dynamic_cast<Label*>(scoreValue)) {
-            label->updateMessage(std::to_string(count).c_str());
-            count++;
-        }
-    });
 }
 
 void GameHud::update(float deltaTime) {

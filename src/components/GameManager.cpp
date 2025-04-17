@@ -7,7 +7,9 @@
 #include <iostream>
 
 #include "Window.h"
+#include "characters/PlayerCharacter.h"
 #include "ui/Canvas.h"
+#include "ui/Sprite.h"
 #include "ui/menus/GameHud.h"
 #include "ui/menus/MainMenu.h"
 
@@ -28,7 +30,16 @@ void GameManager::initialize(PlayerController *pc) {
     instance->mainMenuCanvas->initialize();
     instance->gameHud = std::make_unique<GameHud>(instance->playerController);
     instance->gameHud->initialize();
-
+    instance->playerCharacter = std::make_unique<PlayerCharacter>(
+        "resource/Hangar/Armor_Icon.png",
+        65,
+        65,
+        Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
+        50.0f,
+        instance->playerController
+    );
+    instance->playerCharacter->initialize();
+    instance->gameHud->addChild(instance->playerCharacter->getSprite());
 }
 
 GameManager::~GameManager() {
@@ -41,6 +52,7 @@ void GameManager::update(float dt) {
         instance->mainMenuCanvas->update(dt);
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
+        instance->playerCharacter->update(dt);
     }
 }
 

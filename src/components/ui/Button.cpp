@@ -22,7 +22,7 @@ Button::Button(
         const char *hoverImagePath,
         const char *clickedImagePath,
         const Position& position,
-        int width, int height)
+        float width, float height)
         : Widget(position, width, height){
 
         if (!defaultImagePath) {

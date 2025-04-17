@@ -42,9 +42,7 @@ void WindowBackground::initialize() {
 
 void WindowBackground::update(float dt) {
     auto* instance = getInstance();
-    for (auto [entity, pos, vel, star] : ECSManager::view<Position, Velocity, Star>().each()) {
-
-        pos.y += vel.dy * dt;
+    for (auto [entity, pos, star] : ECSManager::view<Position, Star>().each()) {
 
         if (pos.y > Window::getHeight()) {
             pos.y = -star.size;

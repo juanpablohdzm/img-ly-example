@@ -15,7 +15,7 @@ namespace  fs = std::filesystem;
 Sprite::Sprite(
         const char *imagePath,
         const Position& position,
-        int width, int height)
+        float width, float height)
         : Widget(position, width, height){
 
         if (!imagePath) {
@@ -34,13 +34,12 @@ Sprite::~Sprite(){
 
 void Sprite::render(){
 
-        const SDL_FRect fButtonRect = {
-                static_cast<float>(rect.x),
-                static_cast<float>(rect.y),
-                static_cast<float>(getWidth()),
-                static_cast<float>(getHeight())
-        };
-        SDL_RenderTexture(Window::getRenderer(), defaultImageTexture, nullptr, &fButtonRect);
+        SDL_RenderTexture(Window::getRenderer(), defaultImageTexture, nullptr, &rect);
+}
+
+void Sprite::updatePosition(const Position &position) {
+        rect.x = position.x;
+        rect.y = position.y;
 }
 
 SDL_Texture* Sprite::loadTexture(const char *path) const {

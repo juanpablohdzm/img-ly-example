@@ -6,10 +6,9 @@
 #define GAMEMANAGER_H
 
 #include <memory>
-#include <entt/entity/registry.hpp>
-
 #include "../utils/Singleton.h"
 
+class Character;
 class Button;
 class PlayerController;
 class Window;
@@ -43,6 +42,7 @@ private:
 
     std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
     std::unique_ptr<Canvas> gameHud = nullptr;
+    std::unique_ptr<Character> playerCharacter = nullptr;
 
 };
 

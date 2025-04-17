@@ -10,6 +10,8 @@
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
+#include "components/ECSSystems/MoveSystem.h"
+#include "components/ECSSystems/UpdateSpritePositionSystem.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -41,7 +43,11 @@ void App::initialize() {
     GameManager::initialize(playerController.get());
 
     playerController->addQuitEvent(this, exit);
-    playerController->addKeyCallback(SDLK_ESCAPE, this, [](const SDL_Event&){exit();});
+    playerController->addKeyCallback(SDLK_ESCAPE, this, [](const SDL_Event& event) {
+        if (event.type == SDL_EVENT_KEY_DOWN) {
+            exit();
+        }
+    });
 }
 
 void App::mainLoop(){
@@ -62,6 +68,8 @@ void App::mainLoop(){
         deltaTime = (currentTime - lastTime)/1000.0f;
 
         Window::clearWindow();
+        MoveSystem::update(deltaTime);
+        UpdateSpritePositionSystem::update(deltaTime);
 
         playerController->update(deltaTime);
         WindowBackground::update(deltaTime);

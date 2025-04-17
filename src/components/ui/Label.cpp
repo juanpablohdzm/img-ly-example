@@ -15,8 +15,8 @@ namespace fs = std::filesystem;
 Label::Label(
     const char* msg,
     const Position& position,
-    int width,
-    int height,
+    float width,
+    float height,
     uint8_t fontSize,
     const Color& color,
     const char* pathToFont,

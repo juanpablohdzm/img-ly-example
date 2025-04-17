@@ -14,13 +14,14 @@ public:
     Sprite(
         const char* imagePath,
         const Position& position,
-        int width, int height);
+        float width, float height);
 
     ~Sprite() override;
 
     void render() override;
     void onHoverEnter() override {};
     void onHoverExit() override {};
+    void updatePosition(const Position& position);
 
 private:
     SDL_Texture* loadTexture(const char* path) const;

@@ -57,6 +57,10 @@ void Canvas::initialize() {
 
 void Canvas::onMouseClicked(const SDL_Event& event) {
 
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+        return;
+    }
+
     if (!focusedWidget) {
         return;
     }

@@ -18,7 +18,13 @@ void PlayerController::update(float dt) {
             }
         }
 
-        if (event.type & (SDL_EVENT_KEY_DOWN | SDL_EVENT_MOUSE_BUTTON_DOWN)) {
+        if (event.type &
+            (
+                SDL_EVENT_KEY_DOWN |
+                SDL_EVENT_MOUSE_BUTTON_DOWN |
+                SDL_EVENT_MOUSE_BUTTON_UP |
+                SDL_EVENT_KEY_UP)
+                ) {
             executeKeyCommand(event);
         }
     }
@@ -33,9 +39,9 @@ Position PlayerController::getMousePosition() {
 void PlayerController::executeKeyCommand(const SDL_Event& event) {
     Uint32 key = 0;
 
-    if (event.type == SDL_EVENT_KEY_DOWN) {
+    if (event.type & (SDL_EVENT_KEY_DOWN | SDL_EVENT_KEY_UP )) {
         key = event.key.key;
-    } else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+    } else if (event.type & (SDL_EVENT_MOUSE_BUTTON_DOWN | SDL_EVENT_MOUSE_BUTTON_UP) ) {
         key = event.button.button;
     }
 
