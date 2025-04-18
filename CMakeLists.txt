@@ -15,10 +15,8 @@ add_executable(img_ly main.cpp
         src/components/WindowBackground.h
         src/components/GameManager.cpp
         src/components/GameManager.h
-        src/utils/common.h
         src/components/ui/Button.cpp
         src/components/ui/Button.h
-        src/components/ui/interfaces/Clickable.cpp
         src/components/ui/interfaces/Clickable.h
         src/utils/Timer.cpp
         src/utils/Timer.h
@@ -41,16 +39,20 @@ add_executable(img_ly main.cpp
         src/components/characters/Character.h
         src/components/characters/PlayerCharacter.cpp
         src/components/characters/PlayerCharacter.h
-        src/components/ECSSystems/MoveSystem.cpp
         src/components/ECSSystems/MoveSystem.h
-        src/components/ECSSystems/UpdateSpritePositionSystem.cpp
         src/components/ECSSystems/UpdateSpritePositionSystem.h
-        src/components/ECSSystems/WindowGuardSystem.cpp
         src/components/ECSSystems/WindowGuardSystem.h
         src/components/characters/Enemy.cpp
         src/components/characters/Enemy.h
-        src/components/ECSSystems/EnemyVelocitySystem.cpp
-        src/components/ECSSystems/EnemyVelocitySystem.h)
+        src/components/ECSSystems/EnemyVelocitySystem.h
+        src/components/ECSComponents/PlayerTag.h
+        src/components/ECSComponents/EnemyTag.h
+        src/components/ECSComponents/SpeedComp.h
+        src/components/ECSComponents/VelocityComp.h
+        src/components/ECSComponents/WindowGuardComp.h
+        src/components/ECSComponents/PositionComp.h
+        src/utils/Color.h
+        src/components/ECSComponents/ECSComponentsGeneral.h)
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
 

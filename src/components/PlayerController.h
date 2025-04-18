@@ -7,7 +7,7 @@
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_stdinc.h>
 
-#include "../utils/common.h"
+#include "../components/ECSComponents/PositionComp.h"
 
 
 class PlayerController {

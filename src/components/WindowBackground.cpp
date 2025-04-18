@@ -9,7 +9,7 @@
 #include <__random/random_device.h>
 
 #include "ECSManager.h"
-#include "../utils/common.h"
+#include "../components/ECSComponents/ECSComponentsGeneral.h"
 #include "Window.h"
 
 WindowBackground::WindowBackground() :  gen(std::random_device{}()){

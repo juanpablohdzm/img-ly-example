@@ -6,7 +6,7 @@
 #define WIDGET_H
 #include <SDL3/SDL_rect.h>
 
-#include "../../utils/common.h"
+#include "../ECSComponents/PositionComp.h"
 
 
 class Widget {

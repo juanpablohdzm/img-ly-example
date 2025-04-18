@@ -3,15 +3,7 @@
 //
 
 #include "Enemy.h"
-
-#include <iostream>
-
-#include <SDL3/SDL_keycode.h>
-
 #include "../ECSManager.h"
-#include "../GameManager.h"
-
-
 
 Enemy::Enemy(
     const char *spritePath,

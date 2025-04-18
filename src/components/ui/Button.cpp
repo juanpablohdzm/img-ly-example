@@ -55,14 +55,7 @@ Button::~Button(){
 }
 
 void Button::render(){
-
-        const SDL_FRect fButtonRect = {
-                static_cast<float>(rect.x),
-                static_cast<float>(rect.y),
-                static_cast<float>(getWidth()),
-                static_cast<float>(getHeight())
-        };
-        SDL_RenderTexture(Window::getRenderer(), currentTexture, nullptr, &fButtonRect);
+        SDL_RenderTexture(Window::getRenderer(), currentTexture, nullptr, &rect);
 }
 
 void Button::onHoverEnter() {

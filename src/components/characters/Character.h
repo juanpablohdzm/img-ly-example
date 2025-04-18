@@ -7,7 +7,7 @@
 #include <memory>
 #include <entt/entt.hpp>
 
-#include "../../utils/common.h"
+#include "../ECSComponents/PositionComp.h"
 
 class PlayerController;
 class Sprite;

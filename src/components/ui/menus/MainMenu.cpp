@@ -4,11 +4,9 @@
 
 #include "MainMenu.h"
 
-#include "../../../utils/common.h"
 #include "../../Window.h"
 #include "../Sprite.h"
 #include "../Button.h"
-#include <iostream>
 
 #include "../../GameManager.h"
 #include "../../../App.h"

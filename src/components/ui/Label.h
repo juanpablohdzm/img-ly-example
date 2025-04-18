@@ -9,6 +9,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 
 #include "Widget.h"
+#include "../../utils/Color.h"
 
 class SDL_Texture;
 class TTF_Font;

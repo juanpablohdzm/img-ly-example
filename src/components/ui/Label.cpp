@@ -57,15 +57,7 @@ Label::~Label() {
 }
 
 void Label::render() {
-
-    const SDL_FRect fButtonRect = {
-        static_cast<float>(rect.x),
-        static_cast<float>(rect.y),
-        static_cast<float>(getWidth()),
-        static_cast<float>(getHeight())
-    };
-    SDL_RenderTexture(Window::getRenderer(), texture, nullptr, &fButtonRect);
-
+    SDL_RenderTexture(Window::getRenderer(), texture, nullptr, &rect);
 }
 
 void Label::onHoverEnter() {

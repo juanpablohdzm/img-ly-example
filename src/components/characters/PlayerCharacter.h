@@ -5,6 +5,7 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 #include "Character.h"
+#include "../ECSComponents/ECSComponentsGeneral.h"
 
 
 class PlayerCharacter : public Character {

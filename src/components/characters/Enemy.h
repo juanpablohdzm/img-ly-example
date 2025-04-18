@@ -5,6 +5,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 #include "Character.h"
+#include "../ECSComponents/ECSComponentsGeneral.h"
 
 
 class Enemy : public Character {

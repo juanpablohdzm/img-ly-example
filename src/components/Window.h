@@ -5,7 +5,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 #include <functional>
-#include "../utils/common.h"
+#include "../utils/Color.h"
 #include "../utils/Singleton.h"
 
 
