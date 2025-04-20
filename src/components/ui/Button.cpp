@@ -6,6 +6,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_surface.h>
 #include <SDL3_image/SDL_image.h>
@@ -83,8 +84,8 @@ void Button::click() {
         });
 }
 
-void Button::setOnClickCallback(std::function<void()> onClickCallback) {
-        this->onClickCallback = onClickCallback;
+void Button::setOnClickCallback(std::function<void()>&& onClickCallback) {
+        this->onClickCallback = std::move(onClickCallback);
 }
 
 SDL_Texture* Button::loadTexture(const char *path) const{

@@ -8,7 +8,7 @@
 #include <memory>
 #include "../utils/Singleton.h"
 
-class Character;
+class PlayerCharacter;
 class Button;
 class PlayerController;
 class Window;
@@ -24,6 +24,8 @@ enum class GameState {
 class GameManager : public Singleton<GameManager> {
     friend class Singleton<GameManager>;
     GameManager();
+
+
 public:
     static void initialize( PlayerController* pc);
     ~GameManager();
@@ -35,6 +37,7 @@ public:
 
 
 private:
+    void setupPlayState();
 
     PlayerController* playerController;
 
@@ -42,8 +45,7 @@ private:
 
     std::unique_ptr<Canvas> mainMenuCanvas = nullptr;
     std::unique_ptr<Canvas> gameHud = nullptr;
-    std::unique_ptr<Character> playerCharacter = nullptr;
-    std::unique_ptr<Character> enemy = nullptr;
+    std::unique_ptr<PlayerCharacter> playerCharacter = nullptr;
 
 };
 

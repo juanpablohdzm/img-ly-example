@@ -5,8 +5,10 @@
 #include "GameHud.h"
 
 #include "../Label.h"
+#include "../../ECSManager.h"
 #include "../../PlayerController.h"
 #include "../../Window.h"
+#include "../Sprite.h"
 
 GameHud::GameHud(PlayerController *playerController) : Canvas(playerController) {
     scoreLabel = std::make_unique<Label>(

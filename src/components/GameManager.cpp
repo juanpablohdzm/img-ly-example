@@ -7,16 +7,18 @@
 #include <iostream>
 
 #include "Window.h"
-#include "characters/Enemy.h"
-#include "characters/PlayerCharacter.h"
+#include "ECSEntities/Enemy.h"
+#include "ECSEntities/PlayerCharacter.h"
 #include "ui/Canvas.h"
 #include "ui/Sprite.h"
 #include "ui/menus/GameHud.h"
 #include "ui/menus/MainMenu.h"
 
 
-GameManager::GameManager() : playerController(nullptr), currentState(GameState::DEFAULT), mainMenuCanvas(nullptr) {
+GameManager::GameManager() : playerController(nullptr), currentState(GameState::DEFAULT){
 }
+
+
 
 void GameManager::initialize(PlayerController *pc) {
     if (!pc) {
@@ -26,31 +28,13 @@ void GameManager::initialize(PlayerController *pc) {
     auto* instance = getInstance();
     instance->playerController = pc;
 
-    instance->setCurrentState(GameState::MAIN_MENU);
     instance->mainMenuCanvas = std::make_unique<MainMenu>(instance->playerController);
     instance->mainMenuCanvas->initialize();
     instance->gameHud = std::make_unique<GameHud>(instance->playerController);
     instance->gameHud->initialize();
-    instance->playerCharacter = std::make_unique<PlayerCharacter>(
-        "resource/Hangar/Armor_Icon.png",
-        65,
-        65,
-        Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
-        10.0f,
-        instance->playerController
-    );
-    instance->playerCharacter->initialize();
-    instance->gameHud->addChild(instance->playerCharacter->getSprite());
 
-    instance->enemy = std::make_unique<Enemy>(
-        "resource/Hangar/Dot_02.png",
-        65,
-        65,
-        Position(65, 65),
-        30.0f
-    );
-    instance->enemy->initialize();
-    instance->gameHud->addChild(instance->enemy->getSprite());
+    GameManager::setCurrentState(GameState::MAIN_MENU);
+
 }
 
 GameManager::~GameManager() {
@@ -64,11 +48,45 @@ void GameManager::update(float dt) {
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
         instance->playerCharacter->update(dt);
-        instance->enemy->update(dt);
     }
 }
 
 void GameManager::setCurrentState(GameState state) {
     auto* instance = getInstance();
+
+    if (instance->currentState == state) {
+        return;
+    }
+
+    switch (state) {
+        case GameState::DEFAULT:
+            break;
+        case GameState::MAIN_MENU:
+            break;
+        case GameState::PLAYING:
+            instance->setupPlayState();
+            break;
+        default: ;
+    }
     instance->currentState = state;
+}
+
+void GameManager::setupPlayState() {
+    playerCharacter = std::make_unique<PlayerCharacter>(
+        "resource/Hangar/Armor_Icon.png",
+        65,
+        65,
+        Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
+        10.0f,
+        playerController
+    );
+    playerCharacter->initialize();
+
+    Enemy::CreateEnemy(
+        "resource/Hangar/Dot_02.png",
+        65,
+        65,
+        Position(65, 65),
+        30.0f
+    );
 }

@@ -28,7 +28,7 @@ public:
     void onHoverExit() override;
     void click() override;
 
-    virtual void setOnClickCallback(std::function<void()> onClickCallback);
+    virtual void setOnClickCallback(std::function<void()>&& onClickCallback);
 
 private:
     SDL_Texture* loadTexture(const char* path) const;

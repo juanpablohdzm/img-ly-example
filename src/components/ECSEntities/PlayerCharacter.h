@@ -4,21 +4,26 @@
 
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
-#include "Character.h"
+#include <entt/entity/entity.hpp>
 #include "../ECSComponents/ECSComponentsGeneral.h"
 
 
-class PlayerCharacter : public Character {
+class PlayerController;
+
+class PlayerCharacter {
 
 public:
     PlayerCharacter(const char* spritePath, float width, float height, const Position& position, float speed, PlayerController* controller);
-    ~PlayerCharacter() override;
-    void update(float dt) override;
-    void initialize() override;
+    ~PlayerCharacter();
+    void update(float dt);
+    void initialize();
 
 private:
-    float speed;
-    Velocity velocity;
+    void setController(PlayerController* controller);
+
+    entt::entity entity;
+    Velocity direction;
+    PlayerController* controller = nullptr;
 
 };
 

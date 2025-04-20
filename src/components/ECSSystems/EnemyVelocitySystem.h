@@ -18,21 +18,8 @@ struct EnemyVelocitySystem {
 
         for (auto [entity, pos, vel] : ECSManager::view<Position, Velocity, EnemyTag>().each()) {
 
-            if (pos.x < playerPos.x) {
-                vel.dx = 1;
-            } else if (pos.x > playerPos.x) {
-                vel.dx = -1;
-            } else {
-                vel.dx = 0;
-            }
-
-            if (pos.y < playerPos.y) {
-                vel.dy = 1;
-            } else if (pos.y > playerPos.y) {
-                vel.dy = -1;
-            } else {
-                vel.dy = 0;
-            }
+            vel.dx = playerPos.x - pos.x;
+            vel.dy = playerPos.y - pos.y;
 
             float magnitude = std::sqrt(vel.dx * vel.dx + vel.dy * vel.dy);
             if (magnitude > 0) {
