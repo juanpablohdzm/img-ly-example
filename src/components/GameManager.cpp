@@ -47,7 +47,6 @@ void GameManager::update(float dt) {
         instance->mainMenuCanvas->update(dt);
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
-        instance->playerCharacter->update(dt);
     }
 }
 
@@ -77,16 +76,15 @@ void GameManager::setupPlayState() {
         65,
         65,
         Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
-        10.0f,
+        100.0f,
         playerController
     );
-    playerCharacter->initialize();
 
     Enemy::CreateEnemy(
         "resource/Hangar/Dot_02.png",
         65,
         65,
         Position(65, 65),
-        30.0f
+        102.0f
     );
 }

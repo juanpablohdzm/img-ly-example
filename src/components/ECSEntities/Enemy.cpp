@@ -4,6 +4,7 @@
 
 #include "Enemy.h"
 #include "../ECSManager.h"
+#include "../ECSComponents/TargetPosition.h"
 #include "../ui/Sprite.h"
 
 
@@ -19,5 +20,6 @@ entt::entity Enemy::CreateEnemy(
     ECSManager::emplace<Position>(entity, position);
     ECSManager::emplace<Speed>(entity, speed);
     ECSManager::emplace<Velocity>(entity, Velocity());
+    ECSManager::emplace<TargetPosition>(entity, TargetPosition());
     return entity;
 }

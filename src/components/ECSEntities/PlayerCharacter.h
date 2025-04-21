@@ -15,16 +15,9 @@ class PlayerCharacter {
 public:
     PlayerCharacter(const char* spritePath, float width, float height, const Position& position, float speed, PlayerController* controller);
     ~PlayerCharacter();
-    void update(float dt);
-    void initialize();
 
 private:
-    void setController(PlayerController* controller);
-
-    entt::entity entity;
-    Velocity direction;
     PlayerController* controller = nullptr;
-
 };
 
 

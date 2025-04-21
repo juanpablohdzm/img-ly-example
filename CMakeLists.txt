@@ -42,7 +42,7 @@ add_executable(img_ly main.cpp
         src/components/ECSSystems/WindowGuardSystem.h
         src/components/ECSEntities/Enemy.cpp
         src/components/ECSEntities/Enemy.h
-        src/components/ECSSystems/EnemyVelocitySystem.h
+        src/components/ECSSystems/UpdateEnemyTargetSystem.h
         src/components/ECSComponents/PlayerTag.h
         src/components/ECSComponents/EnemyTag.h
         src/components/ECSComponents/SpeedComp.h
@@ -52,6 +52,8 @@ add_executable(img_ly main.cpp
         src/utils/Color.h
         src/components/ECSComponents/ECSComponentsGeneral.h
         src/components/ECSSystems/SpriteRenderSystem.h
+        src/components/ECSComponents/TargetPosition.h
+        src/components/ECSSystems/UpdateEnemyVelocitySystem.h
 )
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)

@@ -11,5 +11,6 @@
 #include "SpeedComp.h"
 #include "VelocityComp.h"
 #include "WindowGuardComp.h"
+#include "TargetPosition.h"
 
 #endif //ECSCOMPONENTSGENERAL_H

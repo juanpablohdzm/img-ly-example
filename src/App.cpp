@@ -10,9 +10,10 @@
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
-#include "components/ECSSystems/EnemyVelocitySystem.h"
+#include "components/ECSSystems/UpdateEnemyTargetSystem.h"
 #include "components/ECSSystems/MoveSystem.h"
 #include "components/ECSSystems/SpriteRenderSystem.h"
+#include "components/ECSSystems/UpdateEnemyVelocitySystem.h"
 #include "components/ECSSystems/UpdateSpritePositionSystem.h"
 #include "components/ECSSystems/WindowGuardSystem.h"
 
@@ -72,7 +73,8 @@ void App::mainLoop(){
 
         Window::clearWindow();
         WindowBackground::update(deltaTime);
-        EnemyVelocitySystem::update(deltaTime);
+        UpdateEnemyTargetSystem::update(deltaTime);
+        UpdateEnemyVelocitySystem::update(deltaTime);
         MoveSystem::update(deltaTime);
         WindowGuardSystem::update(deltaTime);
         UpdateSpritePositionSystem::update(deltaTime);

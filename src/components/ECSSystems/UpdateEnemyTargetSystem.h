@@ -8,7 +8,7 @@
 #include "../ECSManager.h"
 #include "../ECSComponents/ECSComponentsGeneral.h"
 
-struct EnemyVelocitySystem {
+struct UpdateEnemyTargetSystem {
     static void update(float dt) {
 
         Position playerPos {0, 0};
@@ -16,16 +16,9 @@ struct EnemyVelocitySystem {
             playerPos = pos;
         }
 
-        for (auto [entity, pos, vel] : ECSManager::view<Position, Velocity, EnemyTag>().each()) {
-
-            vel.dx = playerPos.x - pos.x;
-            vel.dy = playerPos.y - pos.y;
-
-            float magnitude = std::sqrt(vel.dx * vel.dx + vel.dy * vel.dy);
-            if (magnitude > 0) {
-                vel.dx /= magnitude;
-                vel.dy /= magnitude;
-            }
+        for (auto [entity, target] : ECSManager::view<TargetPosition>().each()) {
+            target.x = playerPos.x;
+            target.y = playerPos.y;
         }
     }
 };
