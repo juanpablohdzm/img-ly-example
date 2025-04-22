@@ -63,6 +63,20 @@ public:
     template<typename... Components, typename... Exclude>
     static auto view(entt::exclude_t<Exclude...> exclude = entt::exclude_t<Exclude...>{});
 
+    /**
+     * @brief Destroys entities in the specified range.
+     *
+     * This function destroys all entities in the provided iterator range [begin, end)
+     * within the ECS registry. The iterator's value type must be convertible to
+     * entt::entity.
+     *
+     * @tparam Iterator Iterator type with values convertible to entt::entity.
+     * @param begin Iterator pointing to the beginning of the range.
+     * @param end Iterator pointing to the end of the range.
+     */
+    template<typename Iterator>
+    static std::enable_if_t<std::is_convertible_v<typename std::iterator_traits<Iterator>::value_type, entt::entity>, void>
+    destroy(Iterator begin, Iterator end);
 private:
     std::unique_ptr<entt::registry> registry = nullptr; ///< The ECS registry instance.
 };
@@ -76,6 +90,12 @@ void ECSManager::emplace(Args &&...args) {
 template<typename ... Components, typename ... Exclude>
 auto ECSManager::view(entt::exclude_t<Exclude...> exclude) {
         return getInstance()->registry->view<Components...>(exclude);
+}
+
+template<typename Iterator>
+std::enable_if_t<std::is_convertible_v<typename std::iterator_traits<Iterator>::value_type, entt::entity>, void>
+ECSManager::destroy(Iterator begin, Iterator end) {
+        getInstance()->registry->destroy(begin, end);
 }
 
 #endif //ECSMANAGER_H

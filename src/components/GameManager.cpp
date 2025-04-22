@@ -8,6 +8,7 @@
 
 #include "Window.h"
 #include "ECSEntities/PlayerCharacter.h"
+#include "ECSSystems/DespawnBulletSystem.h"
 #include "ECSSystems/SpawnEnemySystem.h"
 #include "ECSSystems/UpdateEnemyTargetSystem.h"
 #include "ECSSystems/UpdateEnemyVelocitySystem.h"
@@ -56,6 +57,7 @@ void GameManager::update(float dt) {
         UpdateEnemyVelocitySystem::update(dt);
         WindowGuardSystem::update(dt);
         UpdateGunTransformSystem::update(dt);
+        DespawnBulletSystem::update(dt);
     }
 }
 

@@ -10,6 +10,7 @@
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
+#include "components/ECSSystems/DespawnEntitiesSystem.h"
 #include "components/ECSSystems/MoveSystem.h"
 #include "components/ECSSystems/SpriteRenderSystem.h"
 #include "components/ECSSystems/UpdateSpritePositionSystem.h"
@@ -78,6 +79,8 @@ void App::mainLoop(){
         SpriteRenderSystem::update(deltaTime);
 
         Window::presentRender();
+
+        DespawnEntitiesSystem::update(deltaTime);
     }
 
     SDL_Quit();
