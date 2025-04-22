@@ -12,6 +12,7 @@
 
 #include "../ECSManager.h"
 #include "../GameManager.h"
+#include "../ECSComponents/GunTag.h"
 #include "../ui/Sprite.h"
 
 
@@ -23,6 +24,8 @@ PlayerCharacter::PlayerCharacter(
     const Position &position,
     float speed,
     PlayerController* controller): controller(controller) {
+
+    //Create player character
     auto entity = ECSManager::create();
     ECSManager::emplace<PlayerTag>(entity, PlayerTag());
     ECSManager::emplace<Position>(entity, position);
@@ -30,6 +33,12 @@ PlayerCharacter::PlayerCharacter(
     ECSManager::emplace<WindowGuard>(entity, width, height);
     ECSManager::emplace<Speed>(entity, speed);
     ECSManager::emplace<Sprite>(entity, spritePath, position, width, height);
+
+    //Create gun pointer
+    auto gunEntity = ECSManager::create();
+    ECSManager::emplace<Position>(gunEntity, position);
+    ECSManager::emplace<Sprite>(gunEntity, "resource/Hangar/Speed_Icon.png", position, 53 * 0.5f, 64 * 0.5f);
+    ECSManager::emplace<GunTag>(gunEntity, GunTag());
 
     controller->addKeyCallback(SDLK_W, this, [this](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {

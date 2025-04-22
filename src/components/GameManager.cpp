@@ -7,11 +7,11 @@
 #include <iostream>
 
 #include "Window.h"
-#include "ECSEntities/Enemy.h"
 #include "ECSEntities/PlayerCharacter.h"
-#include "ECSSystems/MoveSystem.h"
+#include "ECSSystems/SpawnEnemySystem.h"
 #include "ECSSystems/UpdateEnemyTargetSystem.h"
 #include "ECSSystems/UpdateEnemyVelocitySystem.h"
+#include "ECSSystems/UpdateGunTransformSystem.h"
 #include "ECSSystems/WindowGuardSystem.h"
 #include "ui/Canvas.h"
 #include "ui/Sprite.h"
@@ -51,9 +51,11 @@ void GameManager::update(float dt) {
         instance->mainMenuCanvas->update(dt);
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
+        SpawnEnemySystem::update(dt);
         UpdateEnemyTargetSystem::update(dt);
         UpdateEnemyVelocitySystem::update(dt);
         WindowGuardSystem::update(dt);
+        UpdateGunTransformSystem::update(dt);
     }
 }
 
@@ -85,13 +87,5 @@ void GameManager::setupPlayState() {
         Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
         100.0f,
         playerController
-    );
-
-    Enemy::CreateEnemy(
-        "resource/Hangar/Dot_02.png",
-        65,
-        65,
-        Position(65, 65),
-        102.0f
     );
 }
