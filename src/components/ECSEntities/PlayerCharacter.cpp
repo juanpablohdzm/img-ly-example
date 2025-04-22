@@ -13,9 +13,8 @@
 #include "../ECSManager.h"
 #include "../GameManager.h"
 #include "../ECSComponents/GunTag.h"
+#include "../ECSComponents/BulletTag.h"
 #include "../ui/Sprite.h"
-
-
 
 PlayerCharacter::PlayerCharacter(
     const char *spritePath,
@@ -67,6 +66,26 @@ PlayerCharacter::PlayerCharacter(
                 vel.dx = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
             }
        }
+    });
+
+    controller->addKeyCallback(SDL_BUTTON_LEFT, this, [this](const SDL_Event& event) {
+        if (GameManager::getCurrentState() == GameState::PLAYING) {
+            if (event.type != SDL_EVENT_MOUSE_BUTTON_UP) {
+                return;
+            }
+            Position spawnPosition {0.0f,0.0f};
+            for (auto[entity, position] : ECSManager::view<Position, GunTag>().each()) {
+                spawnPosition = position;
+            }
+
+            auto [mouseX, mouseY] = PlayerController::getMousePosition();
+            auto entity = ECSManager::create();
+            ECSManager::emplace<Position>(entity, spawnPosition);
+            ECSManager::emplace<Velocity>(entity, Velocity{mouseX - spawnPosition.x, mouseY - spawnPosition.y});
+            ECSManager::emplace<Speed>(entity, 100.0f);
+            ECSManager::emplace<BulletTag>(entity, BulletTag());
+            ECSManager::emplace<Sprite>(entity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);
+        }
     });
 }
 

@@ -55,6 +55,7 @@ add_executable(img_ly main.cpp
         src/components/ECSSystems/SpawnEnemySystem.h
         src/components/ECSComponents/GunTag.h
         src/components/ECSSystems/UpdateGunTransformSystem.h
+        src/components/ECSComponents/BulletTag.h
 )
 
 target_include_directories(img_ly PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)
