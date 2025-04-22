@@ -10,12 +10,9 @@
 #include "components/PlayerController.h"
 #include "components/Window.h"
 #include "components/WindowBackground.h"
-#include "components/ECSSystems/UpdateEnemyTargetSystem.h"
 #include "components/ECSSystems/MoveSystem.h"
 #include "components/ECSSystems/SpriteRenderSystem.h"
-#include "components/ECSSystems/UpdateEnemyVelocitySystem.h"
 #include "components/ECSSystems/UpdateSpritePositionSystem.h"
-#include "components/ECSSystems/WindowGuardSystem.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -72,16 +69,13 @@ void App::mainLoop(){
         deltaTime = (currentTime - lastTime)/1000.0f;
 
         Window::clearWindow();
-        WindowBackground::update(deltaTime);
-        UpdateEnemyTargetSystem::update(deltaTime);
-        UpdateEnemyVelocitySystem::update(deltaTime);
-        MoveSystem::update(deltaTime);
-        WindowGuardSystem::update(deltaTime);
-        UpdateSpritePositionSystem::update(deltaTime);
-        SpriteRenderSystem::update(deltaTime);
 
+        WindowBackground::update(deltaTime);
         playerController->update(deltaTime);
         GameManager::update(deltaTime);
+        MoveSystem::update(deltaTime);
+        UpdateSpritePositionSystem::update(deltaTime);
+        SpriteRenderSystem::update(deltaTime);
 
         Window::presentRender();
     }

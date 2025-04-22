@@ -28,14 +28,12 @@ void Window::initialize(const char *title, int width, int height,const Color& co
         return;
     }
 
-    // Initialize SDL_ttf
     if (!TTF_Init()) {
         std::cerr << "TTF_Init Error: " << SDL_GetError() << "\n";
         SDL_Quit();
         return;
     }
 
-    // Create an SDL window
     instance->window = SDL_CreateWindow(title,width, height, SDL_WINDOW_OPENGL);
     if (!instance->window) {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << "\n";
@@ -43,7 +41,6 @@ void Window::initialize(const char *title, int width, int height,const Color& co
         return;
     }
 
-    // Create a renderer for the window
     instance->renderer = SDL_CreateRenderer(instance->window, nullptr);
     if (!instance->renderer) {
         std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << "\n";
@@ -53,15 +50,12 @@ void Window::initialize(const char *title, int width, int height,const Color& co
 }
 
 void Window::clearWindow() {
-    // Clear the screen to black
-
     const auto* instance = getInstance();
     SDL_SetRenderDrawColor(instance->renderer, instance->color.r, instance->color.g, instance->color.b, instance->color.a);
     SDL_RenderClear(instance->renderer);
 }
 
 void Window::presentRender() {
-    // Present the rendered frame to the window
     const auto* instance = getInstance();
     SDL_RenderPresent(instance->renderer);
     // Delay to cap the frame rate (approximately 60 FPS)

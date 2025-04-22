@@ -19,13 +19,13 @@ void Timer::start(int milliseconds, const std::function<void()> &callback) {
         timerThread.join();
     }
 
-    timerThread = std::thread([=]() {
+    timerThread = std::thread([callback, milliseconds](bool& running) {
         std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
         if (running) {
             callback();
             running = false;
         }
-    });
+    }, std::ref(running));
 }
 
 void Timer::stop() {

@@ -5,11 +5,14 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+/**
+ * @brief Represents a color with red, green, blue, and alpha components.
+ */
 struct Color {
-    int r;
-    int g;
-    int b;
-    int a;
+    int r; /**< Red component */
+    int g; /**< Green component */
+    int b; /**< Blue component */
+    int a; /**< Alpha component */
 };
 
 #endif //COLOR_H

@@ -3,17 +3,9 @@
 //
 #pragma once
 #include <memory>
-#include <entt/entt.hpp>
-#include <SDL3/SDL_events.h>
-
 #include "utils/Singleton.h"
 
-class SDL_Window;
-class Window;
-class WindowBackground;
-class SDL_Renderer;
 class PlayerController;
-class GameManager;
 
 class App final : public Singleton<App> {
     friend class Singleton<App>;

@@ -9,6 +9,10 @@
 #include "Window.h"
 #include "ECSEntities/Enemy.h"
 #include "ECSEntities/PlayerCharacter.h"
+#include "ECSSystems/MoveSystem.h"
+#include "ECSSystems/UpdateEnemyTargetSystem.h"
+#include "ECSSystems/UpdateEnemyVelocitySystem.h"
+#include "ECSSystems/WindowGuardSystem.h"
 #include "ui/Canvas.h"
 #include "ui/Sprite.h"
 #include "ui/menus/GameHud.h"
@@ -47,6 +51,9 @@ void GameManager::update(float dt) {
         instance->mainMenuCanvas->update(dt);
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update(dt);
+        UpdateEnemyTargetSystem::update(dt);
+        UpdateEnemyVelocitySystem::update(dt);
+        WindowGuardSystem::update(dt);
     }
 }
 
