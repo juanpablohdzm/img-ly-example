@@ -15,8 +15,9 @@ namespace  fs = std::filesystem;
 Sprite::Sprite(
         const char *imagePath,
         const Position& position,
-        float width, float height)
-        : Widget(position, width, height){
+        float width, float height,
+        float angle)
+        : Widget(position, width, height), currentAngle(angle){
 
         if (!imagePath) {
                 throw std::invalid_argument("Default image path is null");
@@ -33,14 +34,14 @@ Sprite::~Sprite(){
 }
 
 void Sprite::render(){
-
-        SDL_RenderTexture(Window::getRenderer(), defaultImageTexture, nullptr, &rect);
+        SDL_RenderTextureRotated(Window::getRenderer(), defaultImageTexture, nullptr, &rect, currentAngle, nullptr, SDL_FLIP_NONE);
 }
 
 void Sprite::updatePosition(const Position &position) {
         rect.x = position.x;
         rect.y = position.y;
 }
+
 
 SDL_Texture* Sprite::loadTexture(const char *path) const {
         const fs::path currentPath = fs::current_path();

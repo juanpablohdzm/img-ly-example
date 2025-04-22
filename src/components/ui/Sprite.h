@@ -25,11 +25,13 @@ public:
      * @param position The initial position of the sprite.
      * @param width The width of the sprite.
      * @param height The height of the sprite.
+     * @param angle The rotation angle of the sprite (default is 0.0f).
      */
     Sprite(
         const char* imagePath,
         const Position& position,
-        float width, float height);
+        float width, float height,
+        float angle = 0.0f);
 
     /**
      * @brief Destructor for the Sprite class.
@@ -66,6 +68,24 @@ public:
      */
     void updatePosition(const Position& position);
 
+    /**
+     * @brief Sets the rotation angle of the sprite.
+     *
+     * @param angle The new rotation angle in degrees.
+     */
+    void setAngleRotation(float angle) {
+        currentAngle = angle;
+    }
+
+    /**
+     * @brief Gets the current rotation angle of the sprite.
+     *
+     * @return The current rotation angle in degrees.
+     */
+    [[nodiscard]] float getCurrentAngleRotation () const {
+        return currentAngle;
+    }
+
 private:
     /**
      * @brief Loads a texture from the specified file path.
@@ -75,6 +95,7 @@ private:
      */
     SDL_Texture* loadTexture(const char* path) const;
 
+    float currentAngle; ///< The current rotation angle of the sprite.
     SDL_Texture* defaultImageTexture; ///< The texture representing the sprite's image.
 };
 
