@@ -5,9 +5,17 @@
 #ifndef WINDOWGUARDCOMP_H
 #define WINDOWGUARDCOMP_H
 
+/**
+ * @struct WindowGuard
+ * @brief A component that defines the boundaries of a sprite.
+ *
+ * The WindowGuard component is used to specify the width and height
+ * of a sprite, which can be used to constrain or manage
+ * entities within the boundaries of the window.
+ */
 struct WindowGuard {
-    float width;
-    float height;
+    float width;  ///< The width of the sprite.
+    float height; ///< The height of the sprite.
 };
 
 #endif //WINDOWGUARDCOMP_H

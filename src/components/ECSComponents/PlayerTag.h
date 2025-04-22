@@ -5,6 +5,14 @@
 #ifndef PLAYERTAG_H
 #define PLAYERTAG_H
 
+/**
+ * @struct PlayerTag
+ * @brief A marker component that identifies an entity as a player.
+ *
+ * The PlayerTag component is used as a tag to distinguish player-controlled
+ * entities from other entities in the system. It does not contain any data
+ * and is typically used for filtering or identification purposes.
+ */
 struct PlayerTag {
 };
 
