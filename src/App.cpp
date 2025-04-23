@@ -80,7 +80,7 @@ void App::mainLoop(){
 
         Window::presentRender();
 
-        DespawnEntitiesSystem::update(deltaTime);
+        //DespawnEntitiesSystem::update(deltaTime);
     }
 
     SDL_Quit();

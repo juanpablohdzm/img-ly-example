@@ -1,4 +1,4 @@
-# img-ly
+# Space-shooters-ecs
 
 A cross-platform C++ application that uses SDL3 and a modular design to build a game-like application. The project employs an entity-component system along with several custom systems to enable gameplay logic and rendering.
 
@@ -43,13 +43,13 @@ A cross-platform C++ application that uses SDL3 and a modular design to build a 
 After a successful build, run the generated executable (the name may vary):
 
 ```sh
-./img_ly   # or the appropriate executable name
+./space-shooters-ecs   # or the appropriate executable name
 ```
 
 ## Directory Structure
 
 ```
-img-ly/
+space-shooters-ecs/
 ├── [CMakeLists.txt](http://_vscodecontentref_/1)
 ├── [main.cpp](http://_vscodecontentref_/2)
 ├── [README.md](http://_vscodecontentref_/3)
