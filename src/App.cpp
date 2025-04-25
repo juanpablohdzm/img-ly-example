@@ -71,13 +71,13 @@ void App::mainLoop(){
 
         Window::clearWindow();
 
-        WindowBackground::update(deltaTime);
-        playerController->update(deltaTime);
+        WindowBackground::update();
+        playerController->update();
         GameManager::update(deltaTime);
         MoveSystem::update(deltaTime);
-        UpdateSpritePositionSystem::update(deltaTime);
-        SpriteRenderSystem::update(deltaTime);
-        DespawnEntitiesSystem::update(deltaTime);
+        UpdateSpritePositionSystem::update();
+        SpriteRenderSystem::update();
+        DespawnEntitiesSystem::update();
 
         Window::presentRender();
 

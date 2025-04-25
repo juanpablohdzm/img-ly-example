@@ -27,9 +27,8 @@ struct UpdateGunTransformSystem {
  * It calculates the player's position and dimensions, determines the angle between
  * the player and the mouse cursor, and adjusts the gun's position accordingly.
  *
- * @param dt The time elapsed since the last update (in seconds).
  */
-static void update(float dt) {
+static void update() {
 
     Position playerPos {0, 0}; ///< The position of the player.
     float playerWidth = 0.0f; ///< The width of the player's sprite.

@@ -9,7 +9,7 @@
 #include <ranges>
 
 
-void PlayerController::update(float dt) {
+void PlayerController::update() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {

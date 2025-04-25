@@ -46,7 +46,7 @@ struct SpawnEnemySystem {
         spawnTimer = 0.0f;
 
         auto enemyView = ECSManager::view<EnemyTag>();
-        if (enemyView.size<size_t>() >= ENEMY_SPAWN_LIMIT) {
+        if (enemyView.size() >= ENEMY_SPAWN_LIMIT) {
             return;
         }
 

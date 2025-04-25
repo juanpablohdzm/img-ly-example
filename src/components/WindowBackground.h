@@ -59,9 +59,8 @@ public:
      * This function updates the positions and properties of the stars
      * based on the elapsed time.
      *
-     * @param dt The time elapsed since the last update (in seconds).
      */
-    static void update(float dt);
+    static void update();
 
 private:
     /**

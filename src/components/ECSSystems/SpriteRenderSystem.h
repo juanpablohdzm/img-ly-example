@@ -18,12 +18,11 @@
 struct SpriteRenderSystem  {
     /**
      * @brief Renders all sprites associated with entities.
-     * @param dt The time elapsed since the last update, in seconds.
      *
      * This method iterates over all entities with a Sprite component
      * and invokes the render method of each sprite to draw it.
      */
-    static void update(float dt) {
+    static void update() {
         for (auto [entity, sprite] : ECSManager::view<Sprite>().each()) {
             sprite.render();
         }

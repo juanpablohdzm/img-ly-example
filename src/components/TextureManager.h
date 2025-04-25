@@ -10,10 +10,8 @@
 #include <SDL3_ttf/SDL_ttf.h>
 
 #include "../utils/Singleton.h"
-#include "../utils/Color.h"
 
 
-struct SDL_Texture;
 class TTF_Font;
 
 /**

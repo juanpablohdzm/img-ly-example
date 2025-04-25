@@ -20,12 +20,11 @@
 struct WindowGuardSystem {
     /**
      * @brief Updates the positions of entities to keep them within the window boundaries.
-     * @param dt The time elapsed since the last update, in seconds.
      *
      * This method iterates over all entities with Position and WindowGuard components
      * and adjusts their positions to ensure they remain within the window's width and height.
      */
-    static void update(float dt) {
+    static void update() {
         for (auto [entity, pos, windowGuard] : ECSManager::view<Position, WindowGuard>().each()) {
             if (pos.x < 0) {
                 pos.x = 0;

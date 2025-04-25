@@ -19,13 +19,12 @@
 struct UpdateEnemyTargetSystem {
     /**
      * @brief Updates the target positions of enemies to follow the player's position.
-     * @param dt The time elapsed since the last update, in seconds.
      *
      * This method first retrieves the player's position by iterating over entities
      * with Position and PlayerTag components. Then, it updates the target position
      * of all entities with a TargetPosition component to match the player's position.
      */
-    static void update(float dt) {
+    static void update() {
 
         // Retrieve the player's position
         Position playerPos {0, 0};

@@ -39,28 +39,28 @@ PlayerCharacter::PlayerCharacter(
     ECSManager::emplace<Sprite>(gunEntity, "resource/Hangar/Speed_Icon.png", position, 53 * 0.5f, 64 * 0.5f);
     ECSManager::emplace<GunTag>(gunEntity, GunTag());
 
-    controller->addKeyCallback(SDLK_W, this, [this](const SDL_Event& event) {
+    controller->addKeyCallback(SDLK_W, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
                 vel.dy = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
             }
         }
     });
-    controller->addKeyCallback(SDLK_S, this, [this](const SDL_Event& event) {
+    controller->addKeyCallback(SDLK_S, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
                 vel.dy = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
             }
        }
     });
-    controller->addKeyCallback(SDLK_A, this, [this](const SDL_Event& event) {
+    controller->addKeyCallback(SDLK_A, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
                 vel.dx = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
             }
        }
     });
-    controller->addKeyCallback(SDLK_D, this, [this](const SDL_Event& event) {
+    controller->addKeyCallback(SDLK_D, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
                 vel.dx = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
@@ -68,7 +68,7 @@ PlayerCharacter::PlayerCharacter(
        }
     });
 
-    controller->addKeyCallback(SDL_BUTTON_LEFT, this, [this](const SDL_Event& event) {
+    controller->addKeyCallback(SDL_BUTTON_LEFT, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             if (event.type != SDL_EVENT_MOUSE_BUTTON_UP) {
                 return;

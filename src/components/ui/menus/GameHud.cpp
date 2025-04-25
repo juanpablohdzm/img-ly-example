@@ -44,6 +44,6 @@ void GameHud::initialize() {
     Canvas::initialize();
 }
 
-void GameHud::update(float deltaTime) {
-    Canvas::update(deltaTime);
+void GameHud::update() {
+    Canvas::update();
 }

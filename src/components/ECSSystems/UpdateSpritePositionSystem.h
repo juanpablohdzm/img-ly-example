@@ -19,12 +19,11 @@
 struct UpdateSpritePositionSystem {
     /**
      * @brief Updates the positions of sprites to match their associated entity positions.
-     * @param dt The time elapsed since the last update, in seconds.
      *
      * This method iterates over all entities with Position and Sprite components
      * and updates the sprite's position to reflect the entity's current position.
      */
-    static void update(float dt) {
+    static void update() {
         for (auto [entity, pos, sprite] : ECSManager::view<Position, Sprite>().each()) {
                 sprite.updatePosition(pos);
         }

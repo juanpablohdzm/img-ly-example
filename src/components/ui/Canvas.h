@@ -39,9 +39,8 @@ public:
      *
      * This function is called periodically to update the canvas and its widgets.
      *
-     * @param dt The time elapsed since the last update (in seconds).
      */
-    virtual void update(float dt);
+    virtual void update();
 
     /**
      * @brief Adds a widget to the canvas.

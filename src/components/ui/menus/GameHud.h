@@ -40,12 +40,11 @@ public:
 
     /**
      * @brief Updates the HUD state.
-     * @param deltaTime The time elapsed since the last update, in seconds.
      *
      * This method is called every frame to update the HUD elements, such as
      * refreshing the score display.
      */
-    void update(float deltaTime) override;
+    void update() override;
 
 private:
     /**

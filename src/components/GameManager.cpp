@@ -15,7 +15,6 @@
 #include "ECSSystems/UpdateGunTransformSystem.h"
 #include "ECSSystems/WindowGuardSystem.h"
 #include "ui/Canvas.h"
-#include "ui/Sprite.h"
 #include "ui/menus/GameHud.h"
 #include "ui/menus/MainMenu.h"
 
@@ -49,15 +48,15 @@ GameManager::~GameManager() {
 void GameManager::update(float dt) {
     auto* instance = getInstance();
     if (getCurrentState() == GameState::MAIN_MENU) {
-        instance->mainMenuCanvas->update(dt);
+        instance->mainMenuCanvas->update();
     } else if (getCurrentState() == GameState::PLAYING) {
-        instance->gameHud->update(dt);
+        instance->gameHud->update();
         SpawnEnemySystem::update(dt);
-        UpdateEnemyTargetSystem::update(dt);
-        UpdateEnemyVelocitySystem::update(dt);
-        WindowGuardSystem::update(dt);
-        UpdateGunTransformSystem::update(dt);
-        DespawnBulletSystem::update(dt);
+        UpdateEnemyTargetSystem::update();
+        UpdateEnemyVelocitySystem::update();
+        WindowGuardSystem::update();
+        UpdateGunTransformSystem::update();
+        DespawnBulletSystem::update();
     }
 }
 

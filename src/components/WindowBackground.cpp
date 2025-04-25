@@ -41,7 +41,7 @@ void WindowBackground::initialize() {
     }
 }
 
-void WindowBackground::update(float dt) {
+void WindowBackground::update() {
     auto* instance = getInstance();
     for (auto [entity, pos, star] : ECSManager::view<Position, Star>().each()) {
 

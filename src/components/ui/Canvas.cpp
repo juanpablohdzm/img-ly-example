@@ -27,7 +27,7 @@ Canvas::~Canvas() {
     }
 }
 
-void Canvas::update(float dt) {
+void Canvas::update() {
     const auto [mouse_x, mouse_y] = PlayerController::getMousePosition();
 
     if (focusedWidget && !focusedWidget->isMouseOver(mouse_x, mouse_y)) {

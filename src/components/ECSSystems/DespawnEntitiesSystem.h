@@ -19,12 +19,11 @@ struct DespawnEntitiesSystem {
     /**
      * @brief Updates the system and removes entities with the DespawnTag component.
      *
-     * @param dt The delta time since the last update (unused in this system).
      *
      * This function retrieves all entities with the DespawnTag component
      * using the ECSManager's view function and destroys them in bulk.
      */
-    static void update(float dt) {
+    static void update() {
         auto view = ECSManager::view<DespawnTag>();
         ECSManager::destroy(view.begin(), view.end());
     }

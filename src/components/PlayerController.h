@@ -85,9 +85,8 @@ public:
      *
      * This function processes input events and executes the associated callbacks.
      *
-     * @param dt The time elapsed since the last update (in seconds).
      */
-    void update(float dt);
+    void update();
 
     /**
      * @brief Gets the current mouse position.

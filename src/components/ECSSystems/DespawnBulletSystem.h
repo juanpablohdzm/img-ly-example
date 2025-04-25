@@ -22,13 +22,11 @@ struct DespawnBulletSystem {
     /**
      * @brief Updates the system and marks bullets for despawning if they are out of bounds.
      *
-     * @param dt The delta time since the last update (unused in this system).
-     *
      * This function retrieves all entities with Position and BulletTag components,
      * checks their positions against the window boundaries, and adds a DespawnTag
      * component to entities that are out of bounds.
      */
-    static void update(float dt) {
+    static void update() {
         for (auto [entity, pos] : ECSManager::view<Position, BulletTag>(entt::exclude_t<DespawnTag>()).each()) {
             const float windowWidth = Window::getWidth();
             const float windowHeight = Window::getHeight();
