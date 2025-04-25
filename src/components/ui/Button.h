@@ -40,13 +40,6 @@ public:
         float width, float height);
 
     /**
-     * @brief Destructor for the Button class.
-     *
-     * Cleans up resources used by the button, including textures.
-     */
-    ~Button() override;
-
-    /**
      * @brief Renders the button.
      *
      * This function draws the button's current texture based on its state.
@@ -82,14 +75,6 @@ public:
     virtual void setOnClickCallback(std::function<void()>&& onClickCallback);
 
 private:
-    /**
-     * @brief Loads a texture from the specified file path.
-     *
-     * @param path The file path to the image.
-     * @return A pointer to the loaded SDL_Texture.
-     */
-    SDL_Texture* loadTexture(const char* path) const;
-
     SDL_Texture* currentTexture; ///< The texture currently being rendered.
 
     SDL_Texture* defaultImageTexture; ///< The texture for the default button state.

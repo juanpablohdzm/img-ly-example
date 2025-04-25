@@ -26,15 +26,7 @@ struct DespawnEntitiesSystem {
      */
     static void update(float dt) {
         auto view = ECSManager::view<DespawnTag>();
-        std::vector<entt::entity> toKill;
-        toKill.reserve( view.size<size_t>());
-
-        for (auto e : view) {
-            toKill.push_back(e);
-        }
-
-        // 2) destroy them one‑by‑one
-        ECSManager::destroy(toKill.begin(), toKill.end());
+        ECSManager::destroy(view.begin(), view.end());
     }
 };
 

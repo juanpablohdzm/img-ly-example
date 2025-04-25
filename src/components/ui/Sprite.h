@@ -34,13 +34,6 @@ public:
         float angle = 0.0f);
 
     /**
-     * @brief Destructor for the Sprite class.
-     *
-     * Cleans up the resources used by the sprite, including the loaded texture.
-     */
-    ~Sprite() override;
-
-    /**
      * @brief Renders the sprite.
      *
      * This function draws the sprite's image at its current position and size.
@@ -87,13 +80,6 @@ public:
     }
 
 private:
-    /**
-     * @brief Loads a texture from the specified file path.
-     *
-     * @param path The file path to the image.
-     * @return A pointer to the loaded SDL_Texture.
-     */
-    SDL_Texture* loadTexture(const char* path) const;
 
     float currentAngle; ///< The current rotation angle of the sprite.
     SDL_Texture* defaultImageTexture; ///< The texture representing the sprite's image.

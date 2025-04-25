@@ -77,10 +77,10 @@ void App::mainLoop(){
         MoveSystem::update(deltaTime);
         UpdateSpritePositionSystem::update(deltaTime);
         SpriteRenderSystem::update(deltaTime);
+        DespawnEntitiesSystem::update(deltaTime);
 
         Window::presentRender();
 
-        //DespawnEntitiesSystem::update(deltaTime);
     }
 
     SDL_Quit();

@@ -59,6 +59,8 @@ add_executable(space-shooters-ecs main.cpp
         src/components/ECSSystems/DespawnBulletSystem.h
         src/components/ECSComponents/DespawnTag.h
         src/components/ECSSystems/DespawnEntitiesSystem.h
+        src/components/TextureManager.cpp
+        src/components/TextureManager.h
 )
 
 target_include_directories(space-shooters-ecs PRIVATE ${CMAKE_SOURCE_DIR}/external/entt/src)

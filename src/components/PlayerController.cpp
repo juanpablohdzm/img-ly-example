@@ -31,7 +31,7 @@ void PlayerController::update(float dt) {
 }
 
 Position PlayerController::getMousePosition() {
-    Position mousePosition;
+    Position mousePosition{};
     SDL_GetMouseState(&mousePosition.x, &mousePosition.y);
     return mousePosition;
 }

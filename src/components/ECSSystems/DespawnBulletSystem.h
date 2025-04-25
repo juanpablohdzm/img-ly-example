@@ -35,7 +35,7 @@ struct DespawnBulletSystem {
 
 
             if (pos.x < 0 || pos.x > windowWidth || pos.y < 0 || pos.y > windowHeight) {
-                ECSManager::emplace<DespawnTag>(entity, DespawnTag());
+                    ECSManager::emplace<DespawnTag>(entity, DespawnTag());
             }
         }
     }

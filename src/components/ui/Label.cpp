@@ -82,6 +82,7 @@ TTF_Font* Label::loadFont(const char *fontPath) const {
     return font;
 }
 
+// TODO: BE handled by resource manager
 SDL_Texture * Label::loadTexture(TTF_Font* font, const char *msg){
 
     if ((automaticWidth || automaticHeight) && font) {

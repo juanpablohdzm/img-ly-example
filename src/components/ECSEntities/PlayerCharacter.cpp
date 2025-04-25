@@ -79,12 +79,12 @@ PlayerCharacter::PlayerCharacter(
             }
 
             auto [mouseX, mouseY] = PlayerController::getMousePosition();
-            auto entity = ECSManager::create();
-            ECSManager::emplace<Position>(entity, spawnPosition);
-            ECSManager::emplace<Velocity>(entity, Velocity{mouseX - spawnPosition.x, mouseY - spawnPosition.y});
-            ECSManager::emplace<Speed>(entity, 100.0f);
-            ECSManager::emplace<BulletTag>(entity, BulletTag());
-            ECSManager::emplace<Sprite>(entity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);
+            auto bulletEntity = ECSManager::create();
+            ECSManager::emplace<Position>(bulletEntity, spawnPosition);
+            ECSManager::emplace<Velocity>(bulletEntity, Velocity{mouseX - spawnPosition.x, mouseY - spawnPosition.y});
+            ECSManager::emplace<Speed>(bulletEntity, 100.0f);
+            ECSManager::emplace<BulletTag>(bulletEntity, BulletTag());
+            ECSManager::emplace<Sprite>(bulletEntity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);
         }
     });
 }
@@ -97,4 +97,5 @@ PlayerCharacter::~PlayerCharacter() {
     controller->clearKeyCallback(SDLK_S,this);
     controller->clearKeyCallback(SDLK_A,this);
     controller->clearKeyCallback(SDLK_D,this);
+    controller->clearKeyCallback(SDL_BUTTON_LEFT,this);
 }
