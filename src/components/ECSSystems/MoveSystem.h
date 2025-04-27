@@ -30,7 +30,7 @@ struct MoveSystem {
      */
     static void update(float dt) {
         for (auto [entity, pos, vel, speed] : ECSManager::view<Position, Velocity, Speed>().each()) {
-            const auto normalizedVelocity = normalize(vel.value);
+            const auto normalizedVelocity = length(vel.value)  == 0 ? glm::vec3(0.0f, 0.0f, 0.0f) : normalize(vel.value);
             pos.value += normalizedVelocity * dt * speed.value;
         }
     }
