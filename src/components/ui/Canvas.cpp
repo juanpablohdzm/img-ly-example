@@ -8,8 +8,8 @@
 #include <SDL3/SDL_mouse.h>
 
 #include "Widget.h"
-#include "../GameManager.h"
-#include "../PlayerController.h"
+#include "components/ECSComponents/Position.h"
+#include "components/PlayerController.h"
 #include "interfaces/Clickable.h"
 
 Canvas::Canvas(PlayerController* playerController) : playerController(playerController) {
@@ -28,16 +28,16 @@ Canvas::~Canvas() {
 }
 
 void Canvas::update() {
-    const auto [mouse_x, mouse_y] = PlayerController::getMousePosition();
+    const auto mousePosition = PlayerController::getMousePosition();
 
-    if (focusedWidget && !focusedWidget->isMouseOver(mouse_x, mouse_y)) {
+    if (focusedWidget && !focusedWidget->isMouseOver(mousePosition.value.x, mousePosition.value.y)) {
         focusedWidget->onHoverExit();
         focusedWidget = nullptr;
     }
 
     for (auto& widget : widgets) {
         widget->render();
-        if (widget->isMouseOver(mouse_x, mouse_y)) {
+        if (widget->isMouseOver(mousePosition.value.x, mousePosition.value.y)) {
             widget->onHoverEnter();
             focusedWidget = widget;
         }

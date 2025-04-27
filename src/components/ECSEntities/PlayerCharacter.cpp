@@ -3,18 +3,19 @@
 //
 
 #include "PlayerCharacter.h"
-
-#include <iostream>
-
-#include "../PlayerController.h"
-
 #include <SDL3/SDL_keycode.h>
 
-#include "../ECSManager.h"
-#include "../GameManager.h"
-#include "../ECSComponents/GunTag.h"
-#include "../ECSComponents/BulletTag.h"
-#include "../ui/Sprite.h"
+#include "components/PlayerController.h"
+#include "components/ECSManager.h"
+#include "components/GameManager.h"
+#include "components/ECSComponents/Tags/GunTag.h"
+#include "components/ECSComponents/Tags/BulletTag.h"
+#include "components/ECSComponents/Tags/PlayerTag.h"
+#include "components/ECSComponents/Velocity.h"
+#include "components/ECSComponents/WindowGuard.h"
+#include "components/ECSComponents/Speed.h"
+#include "components/ECSComponents/Position.h"
+#include "components/ui/Sprite.h"
 
 PlayerCharacter::PlayerCharacter(
     const char *spritePath,
@@ -42,28 +43,28 @@ PlayerCharacter::PlayerCharacter(
     controller->addKeyCallback(SDLK_W, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
-                vel.dy = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
+                vel.value.y = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
             }
         }
     });
     controller->addKeyCallback(SDLK_S, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
-                vel.dy = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
+                vel.value.y = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
             }
        }
     });
     controller->addKeyCallback(SDLK_A, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
-                vel.dx = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
+                vel.value.x = event.type == SDL_EVENT_KEY_DOWN ? -1 : 0;
             }
        }
     });
     controller->addKeyCallback(SDLK_D, this, [](const SDL_Event& event) {
         if (GameManager::getCurrentState() == GameState::PLAYING) {
             for (auto [entity, vel] : ECSManager::view<Velocity, PlayerTag>().each()) {
-                vel.dx = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
+                vel.value.x = event.type == SDL_EVENT_KEY_DOWN ? 1 : 0;
             }
        }
     });
@@ -73,15 +74,17 @@ PlayerCharacter::PlayerCharacter(
             if (event.type != SDL_EVENT_MOUSE_BUTTON_UP) {
                 return;
             }
-            Position spawnPosition {0.0f,0.0f};
+            Position spawnPosition {glm::vec3(0.0f, 0.0f, 0.0f)};
             for (auto[entity, position] : ECSManager::view<Position, GunTag>().each()) {
                 spawnPosition = position;
             }
 
-            auto [mouseX, mouseY] = PlayerController::getMousePosition();
+            const auto mousePosition = PlayerController::getMousePosition();
+            const auto mouseDirection  = mousePosition.value - spawnPosition.value;
+
             auto bulletEntity = ECSManager::create();
             ECSManager::emplace<Position>(bulletEntity, spawnPosition);
-            ECSManager::emplace<Velocity>(bulletEntity, Velocity{mouseX - spawnPosition.x, mouseY - spawnPosition.y});
+            ECSManager::emplace<Velocity>(bulletEntity, Velocity{mouseDirection});
             ECSManager::emplace<Speed>(bulletEntity, 100.0f);
             ECSManager::emplace<BulletTag>(bulletEntity, BulletTag());
             ECSManager::emplace<Sprite>(bulletEntity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);

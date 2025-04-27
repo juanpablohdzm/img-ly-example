@@ -7,8 +7,9 @@
 #include <stdexcept>
 #include <SDL3_image/SDL_image.h>
 
-#include "../TextureManager.h"
-#include "../Window.h"
+#include "components/ECSComponents/Position.h"
+#include "components/TextureManager.h"
+#include "components/Window.h"
 
 
 Sprite::Sprite(
@@ -30,6 +31,6 @@ void Sprite::render(){
 }
 
 void Sprite::updatePosition(const Position &position) {
-        rect.x = position.x;
-        rect.y = position.y;
+        rect.x = position.value.x;
+        rect.y = position.value.y;
 }

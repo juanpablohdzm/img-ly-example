@@ -1,8 +1,8 @@
 //
 // Created by Juan Pablo Hernandez Mosti on 18/04/25.
 //
-#ifndef SPEEDCOMP_H
-#define SPEEDCOMP_H
+
+#pragma once
 
 /**
  * @brief Structure for representing a speed component in the ECS.
@@ -12,5 +12,3 @@
 struct Speed {
     float value; ///< The current speed value.
 };
-
-#endif //SPEEDCOMP_H

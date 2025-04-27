@@ -2,8 +2,8 @@
 // Created by Juan Pablo Hernandez Mosti on 11/04/25.
 //
 
-#ifndef CANVAS_H
-#define CANVAS_H
+#pragma once
+
 #include <unordered_set>
 #include <SDL3/SDL_events.h>
 
@@ -78,5 +78,3 @@ protected:
     PlayerController* playerController = nullptr; ///< A pointer to the PlayerController for event handling.
     Widget* focusedWidget = nullptr; ///< A pointer to the currently focused widget.
 };
-
-#endif //CANVAS_H

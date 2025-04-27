@@ -2,11 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 17/04/25.
 //
 
-#ifndef UPDATESPRITEPOSITIONSYSTEM_H
-#define UPDATESPRITEPOSITIONSYSTEM_H
+#pragma once
 
-#include "../ECSManager.h"
-#include "../ui/Sprite.h"
+#include "components/ECSManager.h"
+#include "components/ui/Sprite.h"
 
 /**
  * @struct UpdateSpritePositionSystem
@@ -29,5 +28,3 @@ struct UpdateSpritePositionSystem {
         }
     }
 };
-
-#endif //UPDATESPRITEPOSITIONSYSTEM_H

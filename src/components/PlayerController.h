@@ -2,13 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 09/04/25.
 //
 #pragma once
+
 #include <unordered_map>
 #include <unordered_set>
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_stdinc.h>
 
-#include "../components/ECSComponents/PositionComp.h"
-
+struct Position;
 /**
  * @class PlayerController
  * @brief Manages player input and event handling.

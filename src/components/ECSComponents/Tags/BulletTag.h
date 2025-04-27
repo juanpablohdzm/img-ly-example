@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 22/04/25.
 //
 
-#ifndef BULLETTAG_H
-#define BULLETTAG_H
+#pragma once
 
 /**
  * @struct BulletTag
@@ -13,7 +12,4 @@
  * from other entities in the system. It does not contain any data and is
  * typically used for filtering or identification purposes.
  */
-struct BulletTag {
-};
-
-#endif //BULLETTAG_H
+struct BulletTag {};

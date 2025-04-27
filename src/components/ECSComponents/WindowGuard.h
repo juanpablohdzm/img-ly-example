@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 18/04/25.
 //
 
-#ifndef WINDOWGUARDCOMP_H
-#define WINDOWGUARDCOMP_H
+#pragma once
 
 /**
  * @struct WindowGuard
@@ -17,5 +16,3 @@ struct WindowGuard {
     float width;  ///< The width of the sprite.
     float height; ///< The height of the sprite.
 };
-
-#endif //WINDOWGUARDCOMP_H

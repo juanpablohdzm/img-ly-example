@@ -2,16 +2,16 @@
 // Created by Juan Pablo Hernandez Mosti on 10/04/25.
 //
 
-#ifndef WINDOWBACKGROUND_H
-#define WINDOWBACKGROUND_H
+#pragma once
+
 #include <random>
 #include <SDL3/SDL_stdinc.h>
 
-#include "../utils/Singleton.h"
+#include "utils/Singleton.h"
 
+struct Position;
 class Window;
 class SDL_Renderer;
-struct Position;
 struct Velocity;
 
 /**
@@ -77,5 +77,3 @@ private:
 
     std::mt19937 gen; ///< Random number generator for star properties.
 };
-
-#endif //WINDOWBACKGROUND_H

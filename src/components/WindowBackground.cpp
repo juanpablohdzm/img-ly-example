@@ -9,8 +9,10 @@
 #include <__random/random_device.h>
 
 #include "ECSManager.h"
-#include "../components/ECSComponents/ECSComponentsGeneral.h"
 #include "Window.h"
+#include "ECSComponents/Position.h"
+#include "ECSComponents/Speed.h"
+#include "ECSComponents/Velocity.h"
 
 WindowBackground::WindowBackground() :  gen(std::random_device{}()){
 }
@@ -30,12 +32,10 @@ void WindowBackground::initialize() {
         const auto entity = ECSManager::create();
 
         float speed = disSpeed(instance->gen);
-        ECSManager::emplace<Velocity>(entity, 0.0f, 1.0f);
+        ECSManager::emplace<Velocity>(entity, Velocity(glm::vec3(0.0f, 0.1f, 0.0f)));
         ECSManager::emplace<Speed>(entity, speed);
 
-        ECSManager::emplace<Position>(entity,
-                                    static_cast<float>(disWidth(instance->gen)),
-                                    static_cast<float>(disHeight(instance->gen)));
+        ECSManager::emplace<Position>(entity, Position(glm::vec3(static_cast<float>(disWidth(instance->gen)), static_cast<float>(disHeight(instance->gen)), 0.0f)));
 
         ECSManager::emplace<Star>(entity, disSize(instance->gen), static_cast<Uint8>(disBrightness(instance->gen)));
     }
@@ -45,10 +45,10 @@ void WindowBackground::update() {
     auto* instance = getInstance();
     for (auto [entity, pos, star] : ECSManager::view<Position, Star>().each()) {
 
-        if (pos.y > Window::getHeight()) {
-            pos.y = -star.size;
+        if (pos.value.y > Window::getHeight()) {
+            pos.value.y = -star.size;
             std::uniform_int_distribution disWidth(0, Window::getWidth());
-            pos.x = static_cast<float>(disWidth(instance->gen));
+            pos.value.x = static_cast<float>(disWidth(instance->gen));
         }
 
         auto* renderer = Window::getRenderer();
@@ -58,6 +58,6 @@ void WindowBackground::update() {
 
 void WindowBackground::drawParticle(SDL_Renderer* renderer, const Position& pos, const Star& star) {
     SDL_SetRenderDrawColor(renderer, star.brightness, star.brightness, star.brightness, 255);
-    const SDL_FRect rect { pos.x, pos.y, star.size, star.size };
+    const SDL_FRect rect { pos.value.x, pos.value.y, star.size, star.size };
     SDL_RenderFillRect(renderer, &rect);
 }

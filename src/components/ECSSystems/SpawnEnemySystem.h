@@ -2,13 +2,16 @@
 // Created by Juan Pablo Hernandez Mosti on 22/04/25.
 //
 
-#ifndef SPAWNENEMYSYSTEM_H
-#define SPAWNENEMYSYSTEM_H
+#pragma once
+
 #include <random>
 #include <__random/random_device.h>
 
-#include "../ECSManager.h"
-#include "../ECSComponents/EnemyTag.h"
+#include "components/ECSManager.h"
+#include "components/ECSComponents/Tags/EnemyTag.h"
+#include "components/ECSComponents/Speed.h"
+#include "components/ECSComponents/Target.h"
+#include "components/ECSComponents/Velocity.h"
 
 #define ENEMY_SPAWN_LIMIT 1000 ///< The maximum number of enemies that can be spawned.
 #define ENEMY_SPAWN_RATE 1.0f ///< The time interval (in seconds) between enemy spawns.
@@ -58,15 +61,13 @@ struct SpawnEnemySystem {
         const float radius = posDist(mt);
         const float angle = angleDist(mt);
 
-        const Position position(cos(angle) * radius, sin(angle) * radius);
+        const Position position(glm::vec3(cos(angle) * radius, sin(angle) * radius, 0.0f));
         //TODO: Factory pattern for diverse enemies
         ECSManager::emplace<EnemyTag>(entity, EnemyTag());
         ECSManager::emplace<Sprite>(entity, "resource/Hangar/Dot_02.png", position , 65, 65);
         ECSManager::emplace<Position>(entity, position);
         ECSManager::emplace<Speed>(entity, 100.0f);
         ECSManager::emplace<Velocity>(entity, Velocity());
-        ECSManager::emplace<TargetPosition>(entity, TargetPosition());
+        ECSManager::emplace<Target>(entity, Target());
     }
 };
-
-#endif //SPAWNENEMYSYSTEM_H

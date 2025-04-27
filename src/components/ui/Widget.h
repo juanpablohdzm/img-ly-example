@@ -2,11 +2,11 @@
 // Created by Juan Pablo Hernandez Mosti on 11/04/25.
 //
 
-#ifndef WIDGET_H
-#define WIDGET_H
+#pragma once
+
 #include <SDL3/SDL_rect.h>
 
-#include "../ECSComponents/PositionComp.h"
+struct Position;
 
 /**
  * @class Widget
@@ -67,7 +67,7 @@ public:
      *
      * @return A Position object representing the widget's position.
      */
-    [[nodiscard]] Position getPosition() const { return {rect.x * 1.0f, rect.y * 1.0f}; }
+    [[nodiscard]] Position getPosition() const;
 
     /**
      * @brief Gets the width of the widget.
@@ -95,5 +95,3 @@ public:
 protected:
     SDL_FRect rect; ///< The rectangle representing the widget's bounds.
 };
-
-#endif //WIDGET_H

@@ -2,13 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 10/04/25.
 //
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#pragma once
 
 #include "interfaces/Clickable.h"
 #include "Widget.h"
-#include "../../utils/Timer.h"
+#include "utils/Timer.h"
 
+struct Position;
 class SDL_Renderer;
 class SDL_Texture;
 
@@ -84,5 +84,3 @@ private:
     Timer clickTimer; ///< A timer to manage the button's click state duration.
     std::function<void()> onClickCallback; ///< The callback function executed on button click.
 };
-
-#endif //BUTTON_H

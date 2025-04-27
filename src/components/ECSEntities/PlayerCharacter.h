@@ -2,13 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 17/04/25.
 //
 
-#ifndef PLAYERCHARACTER_H
-#define PLAYERCHARACTER_H
-#include <entt/entity/entity.hpp>
-#include "../ECSComponents/ECSComponentsGeneral.h"
-
+#pragma once
 
 class PlayerController;
+struct Position;
 
 class PlayerCharacter {
 
@@ -19,7 +16,3 @@ public:
 private:
     PlayerController* controller = nullptr;
 };
-
-
-
-#endif //PLAYERCHARACTER_H

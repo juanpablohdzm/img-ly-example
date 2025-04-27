@@ -2,12 +2,11 @@
 // Created by Juan Pablo Hernandez Mosti on 17/04/25.
 //
 
-#ifndef WINDOWGUARDSYSTEM_H
-#define WINDOWGUARDSYSTEM_H
+#pragma once
 
-#include "../ECSManager.h"
-#include "../ECSComponents/ECSComponentsGeneral.h"
-#include "../Window.h"
+#include "components/ECSManager.h"
+#include "components/Window.h"
+#include "components/ECSComponents/WindowGuard.h"
 
 /**
  * @struct WindowGuardSystem
@@ -26,18 +25,16 @@ struct WindowGuardSystem {
      */
     static void update() {
         for (auto [entity, pos, windowGuard] : ECSManager::view<Position, WindowGuard>().each()) {
-            if (pos.x < 0) {
-                pos.x = 0;
-            } else if (pos.x + windowGuard.width > Window::getWidth()) {
-                pos.x = Window::getWidth() - windowGuard.width;
+            if (pos.value.x < 0) {
+                pos.value.x = 0;
+            } else if (pos.value.x + windowGuard.width > Window::getWidth()) {
+                pos.value.x = Window::getWidth() - windowGuard.width;
             }
-            if (pos.y < 0) {
-                pos.y = 0;
-            } else if (pos.y + windowGuard.height > Window::getHeight()) {
-                pos.y = Window::getHeight() - windowGuard.height;
+            if (pos.value.y < 0) {
+                pos.value.y = 0;
+            } else if (pos.value.y + windowGuard.height > Window::getHeight()) {
+                pos.value.y = Window::getHeight() - windowGuard.height;
             }
         }
     }
 };
-
-#endif //WINDOWGUARDSYSTEM_H

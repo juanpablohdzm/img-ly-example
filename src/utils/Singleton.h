@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 14/04/25.
 //
 
-#ifndef SINGLETON_H
-#define SINGLETON_H
+#pragma once
 
 /**
  * @class Singleton
@@ -62,5 +61,3 @@ public:
         return &instance;
     }
 };
-
-#endif //SINGLETON_H

@@ -2,11 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 10/04/25.
 //
 
-#ifndef GAMEMANAGER_H
-#define GAMEMANAGER_H
+#pragma once
 
 #include <memory>
-#include "../utils/Singleton.h"
+#include "utils/Singleton.h"
 
 class PlayerCharacter;
 class Button;
@@ -48,7 +47,3 @@ private:
     std::unique_ptr<PlayerCharacter> playerCharacter = nullptr;
 
 };
-
-
-
-#endif //GAMEMANAGER_H

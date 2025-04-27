@@ -2,10 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 22/04/25.
 //
 
-#ifndef DESPAWNENTITIESSYSTEM_H
-#define DESPAWNENTITIESSYSTEM_H
-#include "../ECSManager.h"
-#include "../ECSComponents/DespawnTag.h"
+#pragma once
+
+#include "components/ECSManager.h"
+#include "components/ECSComponents/Tags/DespawnTag.h"
 
 /**
 * @struct DespawnEntitiesSystem
@@ -28,5 +28,3 @@ struct DespawnEntitiesSystem {
         ECSManager::destroy(view.begin(), view.end());
     }
 };
-
-#endif //DESPAWNENTITIESSYSTEM_H

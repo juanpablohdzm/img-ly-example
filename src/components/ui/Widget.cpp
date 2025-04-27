@@ -5,8 +5,14 @@
 #include "Widget.h"
 
 #include <SDL3/SDL_rect.h>
+#include <glm/vec3.hpp>
+#include "components/ECSComponents/Position.h"
 
-Widget::Widget(const Position& position, float width, float height): rect(position.x, position.y, width, height) {
+Widget::Widget(const Position& position, float width, float height): rect(position.value.x, position.value.y, width, height) {
+}
+
+Position Widget::getPosition() const {
+     return {glm::vec3(rect.x * 1.0f, rect.y * 1.0f, 0.0f)};
 }
 
 bool Widget::isMouseOver(int mouseX, int mouseY) const {

@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 18/04/25.
 //
 
-#ifndef PLAYERTAG_H
-#define PLAYERTAG_H
+#pragma once
 
 /**
  * @struct PlayerTag
@@ -13,7 +12,4 @@
  * entities from other entities in the system. It does not contain any data
  * and is typically used for filtering or identification purposes.
  */
-struct PlayerTag {
-};
-
-#endif //PLAYERTAG_H
+struct PlayerTag {};

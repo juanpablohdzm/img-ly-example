@@ -8,7 +8,8 @@
 #include <iostream>
 #include <SDL3_ttf/SDL_ttf.h>
 
-#include "../Window.h"
+#include "components/Window.h"
+#include "components/ECSComponents/Position.h"
 
 namespace fs = std::filesystem;
 

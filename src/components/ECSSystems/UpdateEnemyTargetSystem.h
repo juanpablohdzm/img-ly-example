@@ -2,11 +2,12 @@
 // Created by Juan Pablo Hernandez Mosti on 17/04/25.
 //
 
-#ifndef ENEMYVELOCITYSYSTEM_H
-#define ENEMYVELOCITYSYSTEM_H
+#pragma once
 
-#include "../ECSManager.h"
-#include "../ECSComponents/ECSComponentsGeneral.h"
+#include "components/ECSManager.h"
+#include "components/ECSComponents/Tags/PlayerTag.h"
+#include "components/ECSComponents/Position.h"
+#include "components/ECSComponents/Target.h"
 
 /**
  * @struct UpdateEnemyTargetSystem
@@ -27,17 +28,14 @@ struct UpdateEnemyTargetSystem {
     static void update() {
 
         // Retrieve the player's position
-        Position playerPos {0, 0};
+        Position playerPos {};
         for (auto [entity, pos] : ECSManager::view<Position, PlayerTag>().each()) {
             playerPos = pos;
         }
 
         // Update the target position of all entities to the player's position
-        for (auto [entity, target] : ECSManager::view<TargetPosition>().each()) {
-            target.x = playerPos.x;
-            target.y = playerPos.y;
+        for (auto [entity, target] : ECSManager::view<Target>().each()) {
+            target.value = playerPos.value;
         }
     }
 };
-
-#endif //ENEMYVELOCITYSYSTEM_H

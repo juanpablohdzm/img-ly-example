@@ -2,13 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 22/04/25.
 //
 
-#ifndef DESPAWNBULLETSYSTEM_H
-#define DESPAWNBULLETSYSTEM_H
-#include "../ECSManager.h"
-#include "../Window.h"
-#include "../ECSComponents/BulletTag.h"
-#include "../ECSComponents/DespawnTag.h"
-#include "../ECSComponents/PositionComp.h"
+#pragma once
+
+#include "components/ECSManager.h"
+#include "components/Window.h"
+#include "components/ECSComponents/Tags/BulletTag.h"
+#include "components/ECSComponents/Tags/DespawnTag.h"
+#include "components/ECSComponents/Position.h"
 
 /**
  * @struct DespawnBulletSystem
@@ -32,11 +32,9 @@ struct DespawnBulletSystem {
             const float windowHeight = Window::getHeight();
 
 
-            if (pos.x < 0 || pos.x > windowWidth || pos.y < 0 || pos.y > windowHeight) {
+            if (pos.value.x < 0 || pos.value.x > windowWidth || pos.value.y < 0 || pos.value.y > windowHeight) {
                     ECSManager::emplace<DespawnTag>(entity, DespawnTag());
             }
         }
     }
 };
-
-#endif //DESPAWNBULLETSYSTEM_H

@@ -2,17 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 25/04/25.
 //
 
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
+#pragma once
 
 #include <string>
 #include <unordered_map>
-#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3_image/SDL_image.h>
+#include "utils/Singleton.h"
 
-#include "../utils/Singleton.h"
-
-
-class TTF_Font;
 
 /**
  * @class TextureManager
@@ -51,5 +47,3 @@ private:
      */
     std::unordered_map<std::string, SDL_Texture*> textures;
 };
-
-#endif // TEXTUREMANAGER_H

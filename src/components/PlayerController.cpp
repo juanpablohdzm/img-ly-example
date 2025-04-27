@@ -4,9 +4,10 @@
 
 #include "PlayerController.h"
 
-#include <iostream>
 #include <SDL3/SDL_events.h>
 #include <ranges>
+
+#include "ECSComponents/Position.h"
 
 
 void PlayerController::update() {
@@ -32,7 +33,7 @@ void PlayerController::update() {
 
 Position PlayerController::getMousePosition() {
     Position mousePosition{};
-    SDL_GetMouseState(&mousePosition.x, &mousePosition.y);
+    SDL_GetMouseState(&mousePosition.value.x, &mousePosition.value.y);
     return mousePosition;
 }
 

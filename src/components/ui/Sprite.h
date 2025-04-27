@@ -2,12 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 11/04/25.
 //
 
-#ifndef SPRITE_H
-#define SPRITE_H
+#pragma once
+
 #include <SDL3/SDL_render.h>
 
 #include "Widget.h"
 
+struct Position;
 /**
  * @class Sprite
  * @brief A UI widget that represents a drawable image.
@@ -84,5 +85,3 @@ private:
     float currentAngle; ///< The current rotation angle of the sprite.
     SDL_Texture* defaultImageTexture; ///< The texture representing the sprite's image.
 };
-
-#endif //SPRITE_H

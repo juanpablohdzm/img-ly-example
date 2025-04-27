@@ -25,7 +25,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(BUILD_TESTS "Build unit tests" OFF)
 
 # ——————————————————————————————————————————————
-# 3. Fetch EnTT automatically
+# 3. Fetch External libraries automatically
 # ——————————————————————————————————————————————
 include(FetchContent)
 FetchContent_Declare(
@@ -34,6 +34,14 @@ FetchContent_Declare(
         GIT_TAG        v3.12.0  # pin to a stable release
 )
 FetchContent_MakeAvailable(entt)
+
+FetchContent_Declare(
+        glm
+        GIT_REPOSITORY	https://github.com/g-truc/glm.git
+        GIT_TAG 	bf71a834948186f4097caa076cd2663c69a10e1e #refs/tags/1.0.1
+)
+
+FetchContent_MakeAvailable(glm)
 
 # ——————————————————————————————————————————————
 # 4. Collect your sources
@@ -89,6 +97,8 @@ target_link_libraries(space-shooters-ecs
         SDL3_image::SDL3_image
         SDL3_ttf::SDL3_ttf
 )
+
+target_link_libraries(space-shooters-ecs PRIVATE glm::glm)
 
 # ——————————————————————————————————————————————
 # 9. Install rules

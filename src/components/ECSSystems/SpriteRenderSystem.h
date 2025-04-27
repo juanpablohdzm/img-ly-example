@@ -2,11 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 20/04/25.
 //
 
-#ifndef SPRITERENDERSYSTEM_H
-#define SPRITERENDERSYSTEM_H
+#pragma once
 
-#include "../ECSManager.h"
-#include "../ui/Sprite.h"
+#include "components/ECSManager.h"
+#include "components/ui/Sprite.h"
 
 /**
  * @struct SpriteRenderSystem
@@ -28,5 +27,3 @@ struct SpriteRenderSystem  {
         }
     }
 };
-
-#endif //SPRITERENDERSYSTEM_H

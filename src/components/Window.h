@@ -2,11 +2,10 @@
 // Created by Juan Pablo Hernandez Mosti on 10/04/25.
 //
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
 
-#include "../utils/Color.h"
-#include "../utils/Singleton.h"
+#include "utils/Color.h"
+#include "utils/Singleton.h"
 
 // Forward declarations for SDL classes
 class SDL_Window;
@@ -82,5 +81,3 @@ private:
 
     int width, height; ///< Dimensions of the window in pixels.
 };
-
-#endif //WINDOW_H

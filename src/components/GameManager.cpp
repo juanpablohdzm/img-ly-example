@@ -6,17 +6,18 @@
 
 #include <iostream>
 
-#include "Window.h"
-#include "ECSEntities/PlayerCharacter.h"
-#include "ECSSystems/DespawnBulletSystem.h"
-#include "ECSSystems/SpawnEnemySystem.h"
-#include "ECSSystems/UpdateEnemyTargetSystem.h"
-#include "ECSSystems/UpdateEnemyVelocitySystem.h"
-#include "ECSSystems/UpdateGunTransformSystem.h"
-#include "ECSSystems/WindowGuardSystem.h"
-#include "ui/Canvas.h"
-#include "ui/menus/GameHud.h"
-#include "ui/menus/MainMenu.h"
+#include "components/Window.h"
+#include "components/ECSEntities/PlayerCharacter.h"
+#include "components/ECSSystems/DespawnBulletSystem.h"
+#include "components/ECSSystems/SpawnEnemySystem.h"
+#include "components/ECSSystems/UpdateEnemyTargetSystem.h"
+#include "components/ECSSystems/UpdateEnemyVelocitySystem.h"
+#include "components/ECSSystems/UpdateGunTransformSystem.h"
+#include "components/ECSSystems/WindowGuardSystem.h"
+#include "components/ECSComponents/Position.h"
+#include "components/ui/Canvas.h"
+#include "components/ui/menus/GameHud.h"
+#include "components/ui/menus/MainMenu.h"
 
 
 GameManager::GameManager() : playerController(nullptr), currentState(GameState::DEFAULT){
@@ -85,7 +86,7 @@ void GameManager::setupPlayState() {
         "resource/Hangar/Armor_Icon.png",
         65,
         65,
-        Position(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f),
+        Position(glm::vec3(Window::getWidth() * 0.5f, Window::getHeight() * 0.5f, 0.0f)),
         100.0f,
         playerController
     );

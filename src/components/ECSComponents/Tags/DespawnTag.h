@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 22/04/25.
 //
 
-#ifndef DESPAWNTAG_H
-#define DESPAWNTAG_H
+#pragma once
 
 /**
  * @struct DespawnTag
@@ -14,5 +13,3 @@
  * for filtering or identification purposes.
  */
 struct DespawnTag {};
-
-#endif //DESPAWNTAG_H

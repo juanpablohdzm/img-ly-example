@@ -2,8 +2,8 @@
 // Created by Juan Pablo Hernandez Mosti on 11/04/25.
 //
 
-#ifndef TIMER_H
-#define TIMER_H
+#pragma once
+
 #include <functional>
 #include <thread>
 
@@ -50,5 +50,3 @@ private:
     bool running; ///< Indicates whether the timer is currently running.
     std::thread timerThread; ///< The thread used to execute the timer callback.
 };
-
-#endif //TIMER_H

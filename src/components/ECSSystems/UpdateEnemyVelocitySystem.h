@@ -2,10 +2,13 @@
 // Created by Juan Pablo Hernandez Mosti on 21/04/25.
 //
 
-#ifndef UPDATEENEMYVELOCITYSYSTEM_H
-#define UPDATEENEMYVELOCITYSYSTEM_H
-#include "../ECSManager.h"
-#include "../ECSComponents/ECSComponentsGeneral.h"
+#pragma once
+
+#include "components/ECSManager.h"
+#include "components/ECSComponents/Velocity.h"
+#include "components/ECSComponents/Target.h"
+#include "components/ECSComponents/Position.h"
+
 
 /**
  * @struct UpdateEnemyVelocitySystem
@@ -24,11 +27,8 @@ struct UpdateEnemyVelocitySystem {
      * towards its target position.
      */
     static void update() {
-        for (auto [entity, vel, pos, targetPos] : ECSManager::view<Velocity, Position, TargetPosition>().each()) {
-            vel.dx = targetPos.x - pos.x;
-            vel.dy = targetPos.y - pos.y;
+        for (auto [entity, vel, pos, targetPos] : ECSManager::view<Velocity, Position, Target>().each()) {
+            vel.value = targetPos.value - pos.value;
         }
     }
 };
-
-#endif //UPDATEENEMYVELOCITYSYSTEM_H

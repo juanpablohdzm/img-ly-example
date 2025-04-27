@@ -2,12 +2,12 @@
 // Created by Juan Pablo Hernandez Mosti on 14/04/25.
 //
 
-#ifndef ECSMANAGER_H
-#define ECSMANAGER_H
+#pragma once
+
 #include <memory>
 #include <entt/entity/registry.hpp>
 
-#include "../utils/Singleton.h"
+#include "utils/Singleton.h"
 
 /**
  * @class ECSManager
@@ -97,5 +97,3 @@ std::enable_if_t<std::is_convertible_v<typename std::iterator_traits<Iterator>::
 ECSManager::destroy(Iterator begin, Iterator end) {
         getInstance()->registry->destroy(begin, end);
 }
-
-#endif //ECSMANAGER_H

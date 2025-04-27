@@ -2,9 +2,9 @@
 // Created by Juan Pablo Hernandez Mosti on 14/04/25.
 //
 
-#ifndef GAMEHUD_H
-#define GAMEHUD_H
-#include "../Canvas.h"
+#pragma once
+
+#include "components/ui/Canvas.h"
 
 class Widget;
 
@@ -57,5 +57,3 @@ private:
      */
     std::unique_ptr<Widget> scoreValue;
 };
-
-#endif //GAMEHUD_H

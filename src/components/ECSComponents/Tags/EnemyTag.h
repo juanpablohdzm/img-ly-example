@@ -2,8 +2,7 @@
 // Created by Juan Pablo Hernandez Mosti on 18/04/25.
 //
 
-#ifndef ENEMYTAG_H
-#define ENEMYTAG_H
+#pragma once
 
 /**
  * @struct EnemyTag
@@ -13,7 +12,4 @@
  * from other entities in the system. It does not contain any data and is
  * typically used for filtering or identification purposes.
  */
-struct EnemyTag {
-};
-
-#endif //ENEMYTAG_H
+struct EnemyTag {};

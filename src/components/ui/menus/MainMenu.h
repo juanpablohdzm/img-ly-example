@@ -2,11 +2,11 @@
 // Created by Juan Pablo Hernandez Mosti on 11/04/25.
 //
 
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#pragma once
+
 #include <memory>
 
-#include "../Canvas.h"
+#include "components/ui/Canvas.h"
 
 class Button;
 class Sprite;
@@ -49,5 +49,3 @@ private:
     std::unique_ptr<Button> quitButton = nullptr; ///< A button to quit the game.
     std::unique_ptr<Sprite> banner = nullptr; ///< A banner image displayed in the main menu.
 };
-
-#endif //MAINMENU_H

@@ -8,8 +8,9 @@
 #include <SDL3/SDL_render.h>
 #include <__filesystem/operations.h>
 
-#include "../TextureManager.h"
-#include "../Window.h"
+#include "components/TextureManager.h"
+#include "components/Window.h"
+#include "components/ECSComponents/Position.h"
 
 
 #define CLICK_DELAY_MS 200

@@ -2,12 +2,14 @@
 // Created by Juan Pablo Hernandez Mosti on 17/04/25.
 //
 
-#ifndef MOVESYSTEM_H
-#define MOVESYSTEM_H
+#pragma once
 
-#include "../ECSManager.h"
-#include "../ECSComponents/ECSComponentsGeneral.h"
-#include <cmath>
+#include <glm/glm.hpp>
+
+#include "components/ECSManager.h"
+#include "components/ECSComponents/Speed.h"
+#include "components/ECSComponents/Velocity.h"
+#include "components/ECSComponents/Position.h"
 
 /**
  * @struct MoveSystem
@@ -28,15 +30,8 @@ struct MoveSystem {
      */
     static void update(float dt) {
         for (auto [entity, pos, vel, speed] : ECSManager::view<Position, Velocity, Speed>().each()) {
-            const float magnitude = std::sqrt(vel.dx * vel.dx + vel.dy * vel.dy);
-            if (magnitude > 0) {
-                vel.dx /= magnitude;
-                vel.dy /= magnitude;
-            }
-            pos.x += vel.dx * dt * speed.value;
-            pos.y += vel.dy * dt * speed.value;
+            const auto normalizedVelocity = normalize(vel.value);
+            pos.value += normalizedVelocity * dt * speed.value;
         }
     }
 };
-
-#endif //MOVESYSTEM_H

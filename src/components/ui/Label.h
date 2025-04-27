@@ -2,15 +2,15 @@
 // Created by Juan Pablo Hernandez Mosti on 14/04/25.
 //
 
-#ifndef LABEL_H
-#define LABEL_H
+#pragma once
 
 #include <string>
 #include "Widget.h"
-#include "../../utils/Color.h"
+#include "utils/Color.h"
 
 class SDL_Texture;
 class TTF_Font;
+struct Position;
 
 /**
  * @class Label
@@ -108,5 +108,3 @@ private:
     bool automaticWidth; ///< Whether the width is set automatically based on the text.
     bool automaticHeight; ///< Whether the height is set automatically based on the text.
 };
-
-#endif //LABEL_H

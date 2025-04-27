@@ -4,12 +4,15 @@
 
 #include "MainMenu.h"
 
-#include "../../Window.h"
-#include "../Sprite.h"
-#include "../Button.h"
+#include <glm/vec3.hpp>
 
-#include "../../GameManager.h"
-#include "../../../App.h"
+#include "components/ECSComponents/Position.h"
+#include "components/Window.h"
+#include "components/ui/Sprite.h"
+#include "components/ui/Button.h"
+
+#include "components/GameManager.h"
+#include "App.h"
 
 MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController) {
 
@@ -17,7 +20,7 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
     constexpr int bannerHeight = 380 * 0.5;
     const float bannerPosX = (Window::getWidth() / 2.0f) - (bannerWidth / 2.0f);
     const float bannerPosY = (Window::getHeight() * 0.4) - (bannerHeight / 2.0f);
-    const Position bannerPosition{ bannerPosX, bannerPosY };
+    const Position bannerPosition(glm::vec3( bannerPosX, bannerPosY, 0.0f));
     banner = std::make_unique<Sprite>(
         "resource/Main_Menu/Header.png",
         bannerPosition,
@@ -30,7 +33,7 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
 
     const float playButtonPosX = Window::getWidth() * 0.33f - (buttonWidth / 2);
     const float playButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2);
-    const Position playButtonPostion{ playButtonPosX, playButtonPosY };
+    const Position playButtonPostion(glm::vec3(playButtonPosX, playButtonPosY, 0.0f));
     playButton = std::make_unique<Button>(
         "resource/Buttons/BTNs/Play_BTN.png",
         "resource/Buttons/BTNs_Active/Play_BTN.png",
@@ -41,7 +44,7 @@ MainMenu::MainMenu(PlayerController *playerController) : Canvas(playerController
 
     const float quitButtonPosX = Window::getWidth() * (2.0f / 3.0f) - (buttonWidth / 2.0f);
     const float quitButtonPosY = Window::getHeight() * 0.7f - (buttonHeight / 2.0f);
-    const Position quitButtonPosition{ quitButtonPosX, quitButtonPosY };
+    const Position quitButtonPosition(glm::vec3(quitButtonPosX, quitButtonPosY, 0.0f));
     quitButton = std::make_unique<Button>(
         "resource/Buttons/BTNs/Close_BTN.png",
         "resource/Buttons/BTNs_Active/Close_BTN.png",

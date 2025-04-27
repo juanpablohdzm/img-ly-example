@@ -4,16 +4,15 @@
 
 #include "GameHud.h"
 
-#include "../Label.h"
-#include "../../ECSManager.h"
-#include "../../PlayerController.h"
-#include "../../Window.h"
-#include "../Sprite.h"
+#include "components/ECSComponents/Position.h"
+#include "components/ui/Label.h"
+#include "components/ECSManager.h"
+#include "components/Window.h"
 
 GameHud::GameHud(PlayerController *playerController) : Canvas(playerController) {
     scoreLabel = std::make_unique<Label>(
         "Score:",
-        Position(Window::getWidth() * 0.03, Window::getHeight() * 0.85f),
+        Position(glm::vec3(Window::getWidth() * 0.03, Window::getHeight() * 0.85f, 0.0f)),
         Window::getWidth() * 0.25f,
         Window::getHeight() * 0.1f,
         52,
@@ -22,7 +21,7 @@ GameHud::GameHud(PlayerController *playerController) : Canvas(playerController) 
 
     scoreValue = std::make_unique<Label>(
         "0",
-        Position(Window::getWidth() * 0.3, Window::getHeight() * 0.85f),
+        Position(glm::vec3(Window::getWidth() * 0.3, Window::getHeight() * 0.85f, 0.0f)),
         Window::getWidth() * 0.05f,
         Window::getHeight() * 0.1f,
         52,
