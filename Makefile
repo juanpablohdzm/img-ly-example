@@ -65,6 +65,26 @@ CMAKE_BINARY_DIR = /Users/juanpablohernandezmosti/Programming/C++/space-shooters
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool..."
+	/opt/homebrew/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+.PHONY : package/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
+	/opt/homebrew/bin/cpack --config ./CPackSourceConfig.cmake /Users/juanpablohernandezmosti/Programming/C++/space-shooters-ecs/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+.PHONY : package_source/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
@@ -84,6 +104,51 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -272,6 +337,30 @@ src/components/PlayerController.s: src/components/PlayerController.cpp.s
 src/components/PlayerController.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/PlayerController.cpp.s
 .PHONY : src/components/PlayerController.cpp.s
+
+src/components/TextureManager.o: src/components/TextureManager.cpp.o
+.PHONY : src/components/TextureManager.o
+
+# target to build an object file
+src/components/TextureManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/TextureManager.cpp.o
+.PHONY : src/components/TextureManager.cpp.o
+
+src/components/TextureManager.i: src/components/TextureManager.cpp.i
+.PHONY : src/components/TextureManager.i
+
+# target to preprocess a source file
+src/components/TextureManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/TextureManager.cpp.i
+.PHONY : src/components/TextureManager.cpp.i
+
+src/components/TextureManager.s: src/components/TextureManager.cpp.s
+.PHONY : src/components/TextureManager.s
+
+# target to generate assembly for a file
+src/components/TextureManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/TextureManager.cpp.s
+.PHONY : src/components/TextureManager.cpp.s
 
 src/components/Window.o: src/components/Window.cpp.o
 .PHONY : src/components/Window.o
@@ -465,6 +554,30 @@ src/components/ui/menus/GameHud.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/ui/menus/GameHud.cpp.s
 .PHONY : src/components/ui/menus/GameHud.cpp.s
 
+src/components/ui/menus/GameOverMenu.o: src/components/ui/menus/GameOverMenu.cpp.o
+.PHONY : src/components/ui/menus/GameOverMenu.o
+
+# target to build an object file
+src/components/ui/menus/GameOverMenu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/ui/menus/GameOverMenu.cpp.o
+.PHONY : src/components/ui/menus/GameOverMenu.cpp.o
+
+src/components/ui/menus/GameOverMenu.i: src/components/ui/menus/GameOverMenu.cpp.i
+.PHONY : src/components/ui/menus/GameOverMenu.i
+
+# target to preprocess a source file
+src/components/ui/menus/GameOverMenu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/ui/menus/GameOverMenu.cpp.i
+.PHONY : src/components/ui/menus/GameOverMenu.cpp.i
+
+src/components/ui/menus/GameOverMenu.s: src/components/ui/menus/GameOverMenu.cpp.s
+.PHONY : src/components/ui/menus/GameOverMenu.s
+
+# target to generate assembly for a file
+src/components/ui/menus/GameOverMenu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/space-shooters-ecs.dir/build.make CMakeFiles/space-shooters-ecs.dir/src/components/ui/menus/GameOverMenu.cpp.s
+.PHONY : src/components/ui/menus/GameOverMenu.cpp.s
+
 src/components/ui/menus/MainMenu.o: src/components/ui/menus/MainMenu.cpp.o
 .PHONY : src/components/ui/menus/MainMenu.o
 
@@ -520,6 +633,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
+	@echo "... package"
+	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... space-shooters-ecs"
 	@echo "... main.o"
@@ -540,6 +659,9 @@ help:
 	@echo "... src/components/PlayerController.o"
 	@echo "... src/components/PlayerController.i"
 	@echo "... src/components/PlayerController.s"
+	@echo "... src/components/TextureManager.o"
+	@echo "... src/components/TextureManager.i"
+	@echo "... src/components/TextureManager.s"
 	@echo "... src/components/Window.o"
 	@echo "... src/components/Window.i"
 	@echo "... src/components/Window.s"
@@ -564,6 +686,9 @@ help:
 	@echo "... src/components/ui/menus/GameHud.o"
 	@echo "... src/components/ui/menus/GameHud.i"
 	@echo "... src/components/ui/menus/GameHud.s"
+	@echo "... src/components/ui/menus/GameOverMenu.o"
+	@echo "... src/components/ui/menus/GameOverMenu.i"
+	@echo "... src/components/ui/menus/GameOverMenu.s"
 	@echo "... src/components/ui/menus/MainMenu.o"
 	@echo "... src/components/ui/menus/MainMenu.i"
 	@echo "... src/components/ui/menus/MainMenu.s"

@@ -20,6 +20,7 @@
 #include "components/ui/Canvas.h"
 #include "components/ui/menus/GameHud.h"
 #include "components/ui/menus/MainMenu.h"
+#include "components/ui/menus/GameOverMenu.h"
 
 
 GameManager::GameManager() : playerController(nullptr), currentState(GameState::DEFAULT){
@@ -41,7 +42,7 @@ void GameManager::initialize(PlayerController *pc) {
     instance->gameHud = std::make_unique<GameHud>(instance->playerController);
     instance->gameHud->initialize();
 
-    instance->gameOverCanvas = std::make_unique<Canvas>(instance->playerController);
+    instance->gameOverCanvas = std::make_unique<GameOverMenu>(instance->playerController);
     instance->gameOverCanvas->initialize();
 
     GameManager::setCurrentState(GameState::MAIN_MENU);
@@ -88,6 +89,7 @@ void GameManager::setCurrentState(GameState state) {
             break;
         case GameState::GAME_OVER: {
 
+            PlayerController::toggleCursor(true);
             //TODO: Improve clean up gameplay state
             for (auto [entity] : ECSManager::view<EnemyTag>(entt::exclude_t<DespawnTag>()).each()) {
                 ECSManager::emplace<DespawnTag>(entity);

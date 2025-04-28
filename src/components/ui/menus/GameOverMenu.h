@@ -26,8 +26,8 @@ public:
      */
     ~GameOverMenu() override;
 private:
-    /**
-     * @brief The banner sprite displayed in the game over menu.
-     */
-    std::unique_ptr<Sprite> banner = nullptr;
+
+    std::unique_ptr<Sprite> bannerBackground = nullptr; ///< The background image for the Game Over menu.
+    std::unique_ptr<Sprite> banner = nullptr; ///< The banner image displayed in the Game Over menu.
+    std::unique_ptr<Sprite> starSprite = nullptr; ///< The star sprite displayed in the Game Over menu.
 };
