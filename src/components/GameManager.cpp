@@ -14,6 +14,7 @@
 #include "components/ECSSystems/UpdateEnemyVelocitySystem.h"
 #include "components/ECSSystems/UpdateGunTransformSystem.h"
 #include "components/ECSSystems/WindowGuardSystem.h"
+#include "components/ECSSystems/CollisionSystem.h"
 #include "components/ECSComponents/Position.h"
 #include "components/ui/Canvas.h"
 #include "components/ui/menus/GameHud.h"
@@ -58,6 +59,7 @@ void GameManager::update(float dt) {
         WindowGuardSystem::update();
         UpdateGunTransformSystem::update();
         DespawnBulletSystem::update();
+        CollisionSystem::update();
     }
 }
 
@@ -90,4 +92,6 @@ void GameManager::setupPlayState() {
         100.0f,
         playerController
     );
+
+    PlayerController::toggleCursor(false);
 }

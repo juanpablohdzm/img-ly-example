@@ -7,6 +7,7 @@
 #include <SDL3/SDL_events.h>
 #include <ranges>
 
+#include "Window.h"
 #include "ECSComponents/Position.h"
 
 
@@ -35,6 +36,10 @@ Position PlayerController::getMousePosition() {
     Position mousePosition{};
     SDL_GetMouseState(&mousePosition.value.x, &mousePosition.value.y);
     return mousePosition;
+}
+
+void PlayerController::toggleCursor(bool isEnabled) {
+    SDL_SetWindowRelativeMouseMode(Window::getWindow(), !isEnabled);
 }
 
 void PlayerController::executeKeyCommand(const SDL_Event& event) {

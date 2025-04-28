@@ -3,6 +3,8 @@
 //
 
 #include "PlayerCharacter.h"
+
+#include <components/ECSComponents/Collider.h>
 #include <SDL3/SDL_keycode.h>
 
 #include "components/PlayerController.h"
@@ -88,6 +90,7 @@ PlayerCharacter::PlayerCharacter(
             ECSManager::emplace<Speed>(bulletEntity, 100.0f);
             ECSManager::emplace<BulletTag>(bulletEntity, BulletTag());
             ECSManager::emplace<Sprite>(bulletEntity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);
+            ECSManager::emplace<Collider>(bulletEntity, 71 * 0.3f, 71 * 0.3f);
         }
     });
 }

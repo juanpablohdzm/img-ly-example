@@ -12,6 +12,7 @@
 #include "components/ECSComponents/Speed.h"
 #include "components/ECSComponents/Target.h"
 #include "components/ECSComponents/Velocity.h"
+#include "components/ECSComponents/Collider.h"
 
 #define ENEMY_SPAWN_LIMIT 1000 ///< The maximum number of enemies that can be spawned.
 #define ENEMY_SPAWN_RATE 1.0f ///< The time interval (in seconds) between enemy spawns.
@@ -69,5 +70,6 @@ struct SpawnEnemySystem {
         ECSManager::emplace<Speed>(entity, 100.0f);
         ECSManager::emplace<Velocity>(entity, Velocity());
         ECSManager::emplace<Target>(entity, Target());
+        ECSManager::emplace<Collider>(entity, 65.0f, 65.0f);
     }
 };

@@ -95,6 +95,15 @@ public:
      */
     static Position getMousePosition();
 
+    /**
+     * @brief Toggles the cursor visibility.
+     *
+     * Enables or disables the cursor based on the provided flag.
+     *
+     * @param isEnabled If true, the cursor is enabled; if false, it is disabled.
+     */
+    static void toggleCursor(bool isEnabled);
+
 private:
     /**
      * @brief Executes the key command associated with an SDL event.

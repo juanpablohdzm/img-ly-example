@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <SDL3/SDL_video.h>
+
 #include "utils/Color.h"
 #include "utils/Singleton.h"
 
@@ -52,6 +54,13 @@ public:
      * @brief Destructor to clean up SDL resources.
      */
     ~Window();
+
+    /**
+     * @brief Gets the window object of SDL.
+     *
+     * @return The SDL_Window pointer.
+     */
+    static SDL_Window * getWindow() {return getInstance()->window;}
 
     /**
      * @brief Gets the width of the window.
