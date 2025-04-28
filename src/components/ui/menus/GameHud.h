@@ -6,6 +6,7 @@
 
 #include "components/ui/Canvas.h"
 
+class Label;
 class Widget;
 
 /**
@@ -46,6 +47,13 @@ public:
      */
     void update() override;
 
+    /**
+     * @brief Updates the score display with the given score.
+     *
+     * @param score The score amount to be displayed
+     */
+    void updateScore(int score) const;
+
 private:
     /**
      * @brief A widget for displaying the score label (e.g., "Score:").
@@ -55,5 +63,5 @@ private:
     /**
      * @brief A widget for displaying the score value.
      */
-    std::unique_ptr<Widget> scoreValue;
+    std::unique_ptr<Label> scoreValue;
 };

@@ -14,7 +14,8 @@
 #include "components/ECSSystems/UpdateEnemyVelocitySystem.h"
 #include "components/ECSSystems/UpdateGunTransformSystem.h"
 #include "components/ECSSystems/WindowGuardSystem.h"
-#include "components/ECSSystems/CollisionSystem.h"
+#include "components/ECSSystems/BulletCollisionSystem.h"
+#include "components/ECSSystems/EnemyCollisionSystem.h"
 #include "components/ECSComponents/Position.h"
 #include "components/ui/Canvas.h"
 #include "components/ui/menus/GameHud.h"
@@ -36,8 +37,12 @@ void GameManager::initialize(PlayerController *pc) {
 
     instance->mainMenuCanvas = std::make_unique<MainMenu>(instance->playerController);
     instance->mainMenuCanvas->initialize();
+
     instance->gameHud = std::make_unique<GameHud>(instance->playerController);
     instance->gameHud->initialize();
+
+    instance->gameOverCanvas = std::make_unique<Canvas>(instance->playerController);
+    instance->gameOverCanvas->initialize();
 
     GameManager::setCurrentState(GameState::MAIN_MENU);
 
@@ -59,7 +64,10 @@ void GameManager::update(float dt) {
         WindowGuardSystem::update();
         UpdateGunTransformSystem::update();
         DespawnBulletSystem::update();
-        CollisionSystem::update();
+        BulletCollisionSystem::update();
+        EnemyCollisionSystem::update();
+    } else if (getCurrentState() == GameState::GAME_OVER) {
+        instance->gameOverCanvas->update();
     }
 }
 
@@ -78,9 +86,38 @@ void GameManager::setCurrentState(GameState state) {
         case GameState::PLAYING:
             instance->setupPlayState();
             break;
+        case GameState::GAME_OVER: {
+
+            //TODO: Improve clean up gameplay state
+            for (auto [entity] : ECSManager::view<EnemyTag>(entt::exclude_t<DespawnTag>()).each()) {
+                ECSManager::emplace<DespawnTag>(entity);
+            }
+            for (auto [entity] : ECSManager::view<BulletTag>(entt::exclude_t<DespawnTag>()).each()) {
+                ECSManager::emplace<DespawnTag>(entity);
+            }
+            instance->playerCharacter.reset();
+            break;
+        }
         default: ;
     }
     instance->currentState = state;
+}
+
+void GameManager::addScorePoint(int amount) {
+    auto* instance = getInstance();
+    if (instance->getCurrentState() != GameState::PLAYING) {
+        return;
+    }
+
+    instance->currentScore += amount;
+    instance->gameHud->updateScore(instance->currentScore);
+}
+
+void GameManager::onPlayerHit() {
+    if (getCurrentState() != GameState::PLAYING) {
+        return;
+    }
+    setCurrentState(GameState::GAME_OVER);
 }
 
 void GameManager::setupPlayState() {

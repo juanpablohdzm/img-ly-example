@@ -5,6 +5,7 @@
 #include "PlayerCharacter.h"
 
 #include <components/ECSComponents/Collider.h>
+#include <components/ECSComponents/Tags/DespawnTag.h>
 #include <SDL3/SDL_keycode.h>
 
 #include "components/PlayerController.h"
@@ -35,6 +36,7 @@ PlayerCharacter::PlayerCharacter(
     ECSManager::emplace<WindowGuard>(entity, width, height);
     ECSManager::emplace<Speed>(entity, speed);
     ECSManager::emplace<Sprite>(entity, spritePath, position, width, height);
+    ECSManager::emplace<Collider>(entity, width, height);
 
     //Create gun pointer
     auto gunEntity = ECSManager::create();
@@ -96,6 +98,13 @@ PlayerCharacter::PlayerCharacter(
 }
 
 PlayerCharacter::~PlayerCharacter() {
+    for (auto [entity] : ECSManager::view<PlayerTag>().each()) {
+        ECSManager::emplace<DespawnTag>(entity);
+    }
+    for (auto [entity] : ECSManager::view<GunTag>().each()) {
+        ECSManager::emplace<DespawnTag>(entity);
+    }
+
     if (!controller) {
         return;
     }

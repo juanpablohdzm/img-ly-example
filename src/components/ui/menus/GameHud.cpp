@@ -46,3 +46,7 @@ void GameHud::initialize() {
 void GameHud::update() {
     Canvas::update();
 }
+
+void GameHud::updateScore(int score) const {
+    scoreValue->updateMessage(std::to_string(score).c_str());
+}

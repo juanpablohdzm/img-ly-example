@@ -13,6 +13,7 @@
 #include "components/ECSComponents/Target.h"
 #include "components/ECSComponents/Velocity.h"
 #include "components/ECSComponents/Collider.h"
+#include "components/ui/Sprite.h"
 
 #define ENEMY_SPAWN_LIMIT 1000 ///< The maximum number of enemies that can be spawned.
 #define ENEMY_SPAWN_RATE 1.0f ///< The time interval (in seconds) between enemy spawns.

@@ -12,9 +12,9 @@
 #include "components/ECSComponents/Tags/DespawnTag.h"
 
 /**
- * @brief System responsible for handling collisions between game entities.
+ * @brief System responsible for handling collisions between bullets and enemies.
  */
-struct CollisionSystem {
+struct BulletCollisionSystem {
   /**
    * @brief Updates collision detection between bullet and enemy entities.
    *
@@ -28,6 +28,7 @@ struct CollisionSystem {
                 if (intersects(position, collider, otherPosition, otherCollider)) {
                     ECSManager::emplace<DespawnTag>(otherEntity, DespawnTag());
                     ECSManager::emplace<DespawnTag>(entity, DespawnTag());
+                    GameManager::addScorePoint(1);
                 }
             }
       }
