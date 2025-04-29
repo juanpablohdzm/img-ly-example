@@ -70,17 +70,14 @@ void App::mainLoop(){
         deltaTime = (currentTime - lastTime)/1000.0f;
 
         Window::clearWindow();
-
-        WindowBackground::update();
-        playerController->update();
-        GameManager::update(deltaTime);
-        MoveSystem::update(deltaTime);
-        UpdateSpritePositionSystem::update();
-        SpriteRenderSystem::update();
-        DespawnEntitiesSystem::update();
-
+            WindowBackground::update();
+            playerController->update();
+            MoveSystem::update(deltaTime);
+            GameManager::update(deltaTime);
+            UpdateSpritePositionSystem::update();
+            SpriteRenderSystem::update();
         Window::presentRender();
-
+        DespawnEntitiesSystem::update();
     }
 
     SDL_Quit();

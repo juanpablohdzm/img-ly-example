@@ -60,13 +60,15 @@ void GameManager::update(float dt) {
     } else if (getCurrentState() == GameState::PLAYING) {
         instance->gameHud->update();
         SpawnEnemySystem::update(dt);
-        UpdateEnemyTargetSystem::update();
-        UpdateEnemyVelocitySystem::update();
-        WindowGuardSystem::update();
+            UpdateEnemyTargetSystem::update();
+            UpdateEnemyVelocitySystem::update();
+            EnemyCollisionSystem::update();
+
         UpdateGunTransformSystem::update();
+            BulletCollisionSystem::update();
+
+        WindowGuardSystem::update();
         DespawnBulletSystem::update();
-        BulletCollisionSystem::update();
-        EnemyCollisionSystem::update();
     } else if (getCurrentState() == GameState::GAME_OVER) {
         instance->gameOverCanvas->update();
     }

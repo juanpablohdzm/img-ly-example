@@ -89,7 +89,7 @@ PlayerCharacter::PlayerCharacter(
             auto bulletEntity = ECSManager::create();
             ECSManager::emplace<Position>(bulletEntity, spawnPosition);
             ECSManager::emplace<Velocity>(bulletEntity, Velocity{mouseDirection});
-            ECSManager::emplace<Speed>(bulletEntity, 100.0f);
+            ECSManager::emplace<Speed>(bulletEntity, 150.0f);
             ECSManager::emplace<BulletTag>(bulletEntity, BulletTag());
             ECSManager::emplace<Sprite>(bulletEntity, "resource/Hangar/Dot_01.png", spawnPosition, 71 * 0.3f, 71 * 0.3f);
             ECSManager::emplace<Collider>(bulletEntity, 71 * 0.3f, 71 * 0.3f);
