@@ -55,13 +55,9 @@ public:
     void updateScore(int score) const;
 
 private:
-    /**
-     * @brief A widget for displaying the score label (e.g., "Score:").
-     */
-    std::unique_ptr<Widget> scoreLabel;
 
-    /**
-     * @brief A widget for displaying the score value.
-     */
-    std::unique_ptr<Label> scoreValue;
+    std::unique_ptr<Widget> scoreLabel; /// < A widget for displaying the score label.
+    std::unique_ptr<Label> scoreValue; /// < A label for displaying the score value.
+    std::unique_ptr<Widget> waveLabel; /// < A widget for displaying the wave label.
+    std::unique_ptr<Label> waveValue; /// < A label for displaying the wave value.
 };

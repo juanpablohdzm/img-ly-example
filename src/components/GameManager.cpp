@@ -58,7 +58,6 @@ void GameManager::update(float dt) {
     if (getCurrentState() == GameState::MAIN_MENU) {
         instance->mainMenuCanvas->update();
     } else if (getCurrentState() == GameState::PLAYING) {
-        instance->gameHud->update();
         SpawnEnemySystem::update(dt);
             UpdateEnemyTargetSystem::update();
             UpdateEnemyVelocitySystem::update();
@@ -69,6 +68,8 @@ void GameManager::update(float dt) {
 
         WindowGuardSystem::update();
         DespawnBulletSystem::update();
+
+        instance->gameHud->update();
     } else if (getCurrentState() == GameState::GAME_OVER) {
         instance->gameOverCanvas->update();
     }
