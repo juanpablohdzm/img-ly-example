@@ -75,6 +75,23 @@ public:
      */
     static void onPlayerHit();
 
+    /**
+     * @brief Get wave number.
+     */
+    static uint8_t getCurrentWave();
+
+    /**
+     * @brief Get enemy count.
+     */
+    static uint8_t getEnemyCount();
+
+    /**
+     * @brief Adds enemies to the current wave.
+     * @param amount Number of enemies to add.
+     * @return The new enemy count.
+     */
+    static uint8_t addEnemyCount(uint8_t amount);
+
 private:
     /**
      * @brief Sets up gameplay elements when entering the PLAYING state.
@@ -90,4 +107,6 @@ private:
     std::unique_ptr<PlayerCharacter> playerCharacter = nullptr; /**< The player character entity */
 
     int currentScore = 0; /**< Current score of the game */
+    uint8_t currentWave = 0; /**< Current wave of enemies */
+    uint8_t enemyCount = 0; /**< Current number of spawned enemies */
 };

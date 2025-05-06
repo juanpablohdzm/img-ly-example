@@ -54,6 +54,13 @@ public:
      */
     void updateScore(int score) const;
 
+    /**
+     * @brief Updates the wave display with the given wave number.
+     *
+     * @param wave The wave number to be displayed
+     */
+    void updateWave(uint8_t wave) const;
+
 private:
 
     std::unique_ptr<Widget> scoreLabel; /// < A widget for displaying the score label.

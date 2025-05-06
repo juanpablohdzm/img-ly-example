@@ -45,7 +45,7 @@ void GameManager::initialize(PlayerController *pc) {
     instance->gameOverCanvas = std::make_unique<GameOverMenu>(instance->playerController);
     instance->gameOverCanvas->initialize();
 
-    GameManager::setCurrentState(GameState::MAIN_MENU);
+    setCurrentState(GameState::MAIN_MENU);
 
 }
 
@@ -82,6 +82,7 @@ void GameManager::setCurrentState(GameState state) {
         return;
     }
 
+    instance->currentState = state;
     switch (state) {
         case GameState::DEFAULT:
             break;
@@ -105,12 +106,11 @@ void GameManager::setCurrentState(GameState state) {
         }
         default: ;
     }
-    instance->currentState = state;
 }
 
 void GameManager::addScorePoint(int amount) {
     auto* instance = getInstance();
-    if (instance->getCurrentState() != GameState::PLAYING) {
+    if (getCurrentState() != GameState::PLAYING) {
         return;
     }
 
@@ -125,6 +125,34 @@ void GameManager::onPlayerHit() {
     setCurrentState(GameState::GAME_OVER);
 }
 
+uint8_t GameManager::getCurrentWave() {
+    const auto* instance = getInstance();
+    if (getCurrentState() != GameState::PLAYING) {
+        return 0;
+    }
+
+    return instance->currentWave;
+}
+
+uint8_t GameManager::getEnemyCount() {
+    const auto* instance = getInstance();
+    if (getCurrentState() != GameState::PLAYING) {
+        return 0;
+    }
+
+    return instance->enemyCount;
+}
+
+uint8_t GameManager::addEnemyCount(uint8_t amount) {
+    auto* instance = getInstance();
+    if (getCurrentState() != GameState::PLAYING) {
+        return 0;
+    }
+
+    instance->enemyCount += amount;
+    return getEnemyCount();
+}
+
 void GameManager::setupPlayState() {
     playerCharacter = std::make_unique<PlayerCharacter>(
         "resource/Hangar/Armor_Icon.png",
@@ -136,4 +164,6 @@ void GameManager::setupPlayState() {
     );
 
     PlayerController::toggleCursor(false);
+    getInstance()->currentWave = 1;
+    getInstance()->gameHud->updateWave(getCurrentWave());
 }

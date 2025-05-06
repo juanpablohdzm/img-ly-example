@@ -15,7 +15,7 @@
 #include "components/ECSComponents/Collider.h"
 #include "components/ui/Sprite.h"
 
-#define ENEMY_SPAWN_LIMIT 1000 ///< The maximum number of enemies that can be spawned.
+#define ENEMY_SPAWN_LIMIT 10 ///< The maximum number of enemies that can be spawned.
 #define ENEMY_SPAWN_RATE 1.0f ///< The time interval (in seconds) between enemy spawns.
 
 /**
@@ -50,8 +50,7 @@ struct SpawnEnemySystem {
         }
         spawnTimer = 0.0f;
 
-        auto enemyView = ECSManager::view<EnemyTag>();
-        if (enemyView.size() >= ENEMY_SPAWN_LIMIT) {
+        if (GameManager::getEnemyCount() >= ENEMY_SPAWN_LIMIT * GameManager::getCurrentWave()) {
             return;
         }
 
@@ -72,5 +71,7 @@ struct SpawnEnemySystem {
         ECSManager::emplace<Velocity>(entity, Velocity());
         ECSManager::emplace<Target>(entity, Target());
         ECSManager::emplace<Collider>(entity, 65.0f, 65.0f);
+
+        GameManager::addEnemyCount(1);
     }
 };

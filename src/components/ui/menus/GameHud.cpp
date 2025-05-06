@@ -79,3 +79,7 @@ void GameHud::update() {
 void GameHud::updateScore(int score) const {
     scoreValue->updateMessage(std::to_string(score).c_str());
 }
+
+void GameHud::updateWave(uint8_t wave) const {
+    waveValue->updateMessage(std::to_string(wave).c_str());
+}
