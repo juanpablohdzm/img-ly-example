@@ -124,7 +124,7 @@ void GameManager::setCurrentWaveState(WaveState state) {
             instance->enemyCount = 0;
             instance->enemyKilled = 0;
             instance->gameHud->updateWave(getCurrentWave());
-            instance->waveTimer.start(3000, [&]() {
+            instance->waveTimer.start(3000, []() {
                 setCurrentWaveState(WaveState::ACTIVE);
                 std::cout << "Wave started!" << std::endl;
             });
