@@ -45,7 +45,7 @@ void GameManager::initialize(PlayerController *pc) {
     instance->gameOverCanvas = std::make_unique<GameOverMenu>(instance->playerController);
     instance->gameOverCanvas->initialize();
 
-    GameManager::setCurrentState(GameState::MAIN_MENU);
+    setCurrentState(GameState::MAIN_MENU);
 
 }
 
@@ -58,10 +58,13 @@ void GameManager::update(float dt) {
     if (getCurrentState() == GameState::MAIN_MENU) {
         instance->mainMenuCanvas->update();
     } else if (getCurrentState() == GameState::PLAYING) {
-        SpawnEnemySystem::update(dt);
-            UpdateEnemyTargetSystem::update();
-            UpdateEnemyVelocitySystem::update();
-            EnemyCollisionSystem::update();
+
+        if (getCurrentWaveState() == WaveState::ACTIVE) {
+            SpawnEnemySystem::update(dt);
+                UpdateEnemyTargetSystem::update();
+                UpdateEnemyVelocitySystem::update();
+                EnemyCollisionSystem::update();
+        }
 
         UpdateGunTransformSystem::update();
             BulletCollisionSystem::update();
@@ -82,6 +85,7 @@ void GameManager::setCurrentState(GameState state) {
         return;
     }
 
+    instance->currentState = state;
     switch (state) {
         case GameState::DEFAULT:
             break;
@@ -105,17 +109,49 @@ void GameManager::setCurrentState(GameState state) {
         }
         default: ;
     }
-    instance->currentState = state;
+}
+
+void GameManager::setCurrentWaveState(WaveState state) {
+    auto* instance = getInstance();
+    if (getCurrentState() != GameState::PLAYING || state == getCurrentWaveState()) {
+        return;
+    }
+
+    instance->currentWaveState = state;
+    switch (state) {
+        case WaveState::PREPARING:
+            instance->currentWave++;
+            instance->enemyCount = 0;
+            instance->enemyKilled = 0;
+            instance->gameHud->updateWave(getCurrentWave());
+            instance->waveTimer.start(3000, []() {
+                setCurrentWaveState(WaveState::ACTIVE);
+                std::cout << "Wave started!" << std::endl;
+            });
+            break;
+        case WaveState::ACTIVE:
+            break;
+        case WaveState::ENDING:
+            setCurrentWaveState(WaveState::PREPARING);
+            break;
+        default: ;
+    }
 }
 
 void GameManager::addScorePoint(int amount) {
     auto* instance = getInstance();
-    if (instance->getCurrentState() != GameState::PLAYING) {
+    if (getCurrentState() != GameState::PLAYING) {
         return;
     }
 
     instance->currentScore += amount;
     instance->gameHud->updateScore(instance->currentScore);
+
+    instance->enemyKilled += amount;
+    if (getEnemyCount() >= getEnemySpawnBatchLimit() * getCurrentWave() &&
+        instance->enemyKilled >= getEnemyCount()) {
+        setCurrentWaveState(WaveState::ENDING);
+    }
 }
 
 void GameManager::onPlayerHit() {
@@ -123,6 +159,15 @@ void GameManager::onPlayerHit() {
         return;
     }
     setCurrentState(GameState::GAME_OVER);
+}
+
+uint GameManager::getCurrentWave() {
+    const auto* instance = getInstance();
+    if (getCurrentState() != GameState::PLAYING) {
+        return 0;
+    }
+
+    return instance->currentWave;
 }
 
 void GameManager::setupPlayState() {
@@ -136,4 +181,5 @@ void GameManager::setupPlayState() {
     );
 
     PlayerController::toggleCursor(false);
+    setCurrentWaveState(WaveState::PREPARING);
 }
