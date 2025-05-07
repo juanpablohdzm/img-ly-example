@@ -148,7 +148,8 @@ void GameManager::addScorePoint(int amount) {
     instance->gameHud->updateScore(instance->currentScore);
 
     instance->enemyKilled += amount;
-    if (getEnemySpawnBatchLimit()* getCurrentWave() == getEnemyCount() && instance->enemyKilled >= getEnemyCount()) {
+    if (getEnemyCount() >= getEnemySpawnBatchLimit() * getCurrentWave() &&
+        instance->enemyKilled >= getEnemyCount()) {
         setCurrentWaveState(WaveState::ENDING);
     }
 }
