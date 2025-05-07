@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "utils/Singleton.h"
+#include "utils/Timer.h"
 
 class GameHud;
 class PlayerCharacter;
@@ -17,6 +18,17 @@ enum class GameState {
     MAIN_MENU,   /**< Main menu screen state */
     PLAYING,      /**< Active gameplay state */
     GAME_OVER, /**< Game over state */
+};
+
+/**
+ * @enum WaveState
+ * @brief Enumerates the possible states of the enemy waves.
+ */
+enum class WaveState {
+    NONE = 0, /**< No wave state */
+    PREPARING, /**< Preparing for the next wave */
+    ACTIVE,       /**< Active wave of enemies */
+    ENDING,       /**< Ending the current wave */
 };
 
 /**
@@ -65,6 +77,18 @@ public:
     static GameState getCurrentState() { return getInstance()->currentState; }
 
     /**
+     * @brief Retrieves the current wave state.
+     * @return The current WaveState.
+     */
+    static void setCurrentWaveState(WaveState state);
+
+    /**
+     * @brief Retrieves the current wave state.
+     * @return The current WaveState.
+     */
+    static WaveState getCurrentWaveState() { return getInstance()->currentWaveState; }
+
+    /**
      * @brief Adds points to the game score.
      * @param amount Number of points to add.
      */
@@ -78,19 +102,20 @@ public:
     /**
      * @brief Get wave number.
      */
-    static uint8_t getCurrentWave();
+    static uint getCurrentWave();
+
+    static consteval uint getEnemySpawnBatchLimit() { return 10;} /**< The maximum number of enemies that can be spawned in a single batch. */
 
     /**
-     * @brief Get enemy count.
+     * @brief Get the number of enemies that have been spawned for the current wave.
      */
-    static uint8_t getEnemyCount();
+    static uint getEnemyCount() { return getInstance()->enemyCount;}
 
     /**
-     * @brief Adds enemies to the current wave.
-     * @param amount Number of enemies to add.
-     * @return The new enemy count.
+     * @brief Add the number of enemies that have been spawned for the current wave.
+     * @param amount The number of enemies to add.
      */
-    static uint8_t addEnemyCount(uint8_t amount);
+    static void addEnemyCount(uint amount) { getInstance()->enemyCount += amount;}
 
 private:
     /**
@@ -100,13 +125,16 @@ private:
 
     PlayerController* playerController;            /**< Controller for player input */
     GameState currentState;                        /**< Current state of the game */
+    WaveState currentWaveState;                    /**< Current state of the enemy wave */
 
     std::unique_ptr<Canvas> mainMenuCanvas = nullptr;      /**< UI canvas for main menu */
     std::unique_ptr<GameHud> gameHud = nullptr;             /**< UI canvas for in-game HUD */
     std::unique_ptr<Canvas> gameOverCanvas = nullptr;       /**< UI canvas for game over screen */
     std::unique_ptr<PlayerCharacter> playerCharacter = nullptr; /**< The player character entity */
 
+    uint enemyCount = 0; /**< Number of enemies spawned in the current wave */
+    uint enemyKilled = 0; /**< Number of enemies killed in the current wave */
     int currentScore = 0; /**< Current score of the game */
-    uint8_t currentWave = 0; /**< Current wave of enemies */
-    uint8_t enemyCount = 0; /**< Current number of spawned enemies */
+    uint currentWave = 0; /**< Current wave of enemies */
+    Timer waveTimer; /**< Timer for managing wave spawn intervals */
 };

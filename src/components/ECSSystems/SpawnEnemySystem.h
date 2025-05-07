@@ -15,7 +15,6 @@
 #include "components/ECSComponents/Collider.h"
 #include "components/ui/Sprite.h"
 
-#define ENEMY_SPAWN_LIMIT 10 ///< The maximum number of enemies that can be spawned.
 #define ENEMY_SPAWN_RATE 1.0f ///< The time interval (in seconds) between enemy spawns.
 
 /**
@@ -50,7 +49,7 @@ struct SpawnEnemySystem {
         }
         spawnTimer = 0.0f;
 
-        if (GameManager::getEnemyCount() >= ENEMY_SPAWN_LIMIT * GameManager::getCurrentWave()) {
+        if (GameManager::getEnemyCount() >= GameManager::getEnemySpawnBatchLimit() * GameManager::getCurrentWave()) {
             return;
         }
 
